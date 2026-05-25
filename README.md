@@ -60,6 +60,20 @@ curl -X POST http://localhost:8080/hr/ask \
 
 ---
 
+## Generate the PDF
+
+```powershell
+# Windows — from repo root
+.\scripts\convert-to-pdf.ps1
+
+# macOS / Linux
+bash scripts/convert-to-pdf.sh
+```
+
+Requires [Pandoc](https://pandoc.org/installing.html) and [MiKTeX](https://miktex.org) (Windows) or `texlive-xetex` (Linux) or MacTeX (macOS). See [`scripts/`](scripts/) for full instructions and engine options.
+
+---
+
 ## Prerequisites
 
 - Java 21+
