@@ -10,8 +10,6 @@ Most Spring AI tutorials assume you have an OpenAI account. This book does not. 
 
 The book is built around one evolving real-world project: **SmartHR Assistant**, an AI-powered HR platform for a fictional company called TechCorp. Each chapter adds a new capability to the same Spring Boot application, so you always have something working and something to build on.
 
-**Read the full book:** [`book.md`](book.md)
-
 ---
 
 ## What's Covered
@@ -57,20 +55,6 @@ curl -s -X POST http://localhost:8080/hr/ask \
   -H "Content-Type: application/json" \
   -d '{"question": "What is the maternity leave policy?"}'
 ```
-
----
-
-## Generate the PDF
-
-```powershell
-# Windows — from repo root
-.\scripts\convert-to-pdf.ps1
-
-# macOS / Linux
-bash scripts/convert-to-pdf.sh
-```
-
-Requires [Pandoc](https://pandoc.org/installing.html) and [MiKTeX](https://miktex.org) (Windows) or `texlive-xetex` (Linux) or MacTeX (macOS). See [`scripts/`](scripts/) for full instructions and engine options.
 
 ---
 
