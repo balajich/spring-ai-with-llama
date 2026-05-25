@@ -406,6 +406,6 @@ Sarah can now point employees to the HR chatbot. Her Monday mornings just got be
 
 ## What's Next
 
-In **Chapter 2**, we go under the hood — learning how tokens control response length, how Spring AI's message architecture works, and how to tune the model per request with `OllamaOptions`.
+In **Chapter 2**, we go under the hood — learning how tokens control response length, how Spring AI's message architecture works, and how to tune the model per request with `ChatOptions`.
 
 *Code for this chapter: [`code/chapter-01-hello-spring-ai/`](../code/chapter-01-hello-spring-ai/)*

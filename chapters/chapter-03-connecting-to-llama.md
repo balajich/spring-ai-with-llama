@@ -18,7 +18,7 @@ The answer is yes — and it only takes one line of config.
 
 - How Ollama manages multiple models on your machine
 - How to switch models via `application.yml` (zero code changes)
-- How to switch models **per-request** using `OllamaOptions`
+- How to switch models **per-request** using Ollama-specific options
 - How to build a model comparison endpoint
 - Which models work best for which HR tasks
 
@@ -62,16 +62,12 @@ Restart the app. Every endpoint now uses `mistral`. No Java changes.
 ## Switching Models Per-Request
 
 ```java
-// Override the default model for a single call
-OllamaOptions modelOptions = OllamaOptions.builder()
-        .model("mistral")
-        .temperature(0.3)
-        .build();
-
+// Override the default model for a single call using Ollama-specific options
+// (full implementation covered in this chapter)
 String answer = chatClient
         .prompt()
         .user(request.question())
-        .options(modelOptions)
+        .options(/* Ollama model options with .model("mistral") */)
         .call()
         .content();
 ```
@@ -99,7 +95,7 @@ public CompareResponse compare(@RequestBody CompareRequest request) {
 private String askWithModel(String question, String model) {
     return chatClient.prompt()
             .user(question)
-            .options(OllamaOptions.builder().model(model).temperature(0.3).build())
+            .options(/* Ollama-specific options with .model(model) — covered in this chapter */)
             .call()
             .content();
 }
@@ -135,7 +131,7 @@ In this chapter you will:
 
 - Manage multiple Ollama models from the command line
 - Switch models with a single config change
-- Override the model per-request using `OllamaOptions`
+- Override the model per-request using Ollama-specific options
 - Build a side-by-side model comparison endpoint
 
 ---

@@ -56,7 +56,7 @@ A single Spring Boot application that grows smarter with every chapter.
 | # | Chapter | Spring AI Concept | Real Feature Built |
 |---|---------|------------------|-------------------|
 | 1 | [Hello, Spring AI!](#chapter-1--hello-spring-ai) | ChatClient, Ollama setup | First working HR Q&A endpoint |
-| 2 | [Core Concepts](#chapter-2--core-concepts-tokens-messages-and-the-ai-abstraction) | Tokens, ChatModel, OllamaOptions | Precise vs Creative HR response modes |
+| 2 | [Core Concepts](#chapter-2--core-concepts-tokens-messages-and-the-ai-abstraction) | Tokens, ChatModel, ChatOptions | Precise vs Creative HR response modes |
 | 3 | Connecting to Llama | Ollama config, model switching | Multi-model support |
 | 4 | Prompt Engineering | PromptTemplate, system messages | TechCorp-branded responses |
 | 5 | Structured Output | BeanOutputConverter | Resume parser → JSON |
@@ -667,13 +667,13 @@ Sarah can now point employees to the HR chatbot. Her Monday mornings just got be
 
 ## What's Next
 
-In **Chapter 2**, we go under the hood — learning how tokens control response length, how Spring AI's message architecture works, and how to tune the model's behaviour per request with `OllamaOptions`.
+In **Chapter 2**, we go under the hood — learning how tokens control response length, how Spring AI's message architecture works, and how to tune the model's behaviour per request with `ChatOptions`.
 
 ```java
 // Chapter 2 preview — per-request options
-OllamaOptions preciseOptions = OllamaOptions.builder()
+ChatOptions preciseOptions = ChatOptions.builder()
         .temperature(0.0)
-        .numPredict(150)
+        .maxTokens(150)
         .build();
 
 chatClient.prompt().user(question).options(preciseOptions).call().content();
@@ -750,14 +750,14 @@ The model generates **one token at a time** — which is why streaming responses
 
 ---
 
-## Controlling Response Length with `numPredict`
+## Controlling Response Length with `maxTokens`
 
-`numPredict` is the Ollama parameter that caps how many tokens the model is allowed to generate:
+`maxTokens` is Spring AI's provider-agnostic name for the token limit. Ollama maps it to its internal `num_predict` parameter:
 
 ```java
-OllamaOptions preciseOptions = OllamaOptions.builder()
+ChatOptions preciseOptions = ChatOptions.builder()
         .temperature(0.0)
-        .numPredict(150)   // stop after 150 output tokens (~100 words)
+        .maxTokens(150)    // stop after 150 output tokens (~100 words)
         .build();
 ```
 
@@ -892,9 +892,9 @@ The `mode` field tells callers which endpoint profile was used (`standard`, `pre
 // PRECISE: policy questions — short, deterministic, capped at ~150 tokens
 @PostMapping("/ask/precise")
 public HrResponse askPrecise(@RequestBody HrRequest request) {
-    OllamaOptions preciseOptions = OllamaOptions.builder()
+    ChatOptions preciseOptions = ChatOptions.builder()
             .temperature(0.0)
-            .numPredict(150)
+            .maxTokens(150)
             .build();
 
     String answer = chatClient
@@ -909,9 +909,9 @@ public HrResponse askPrecise(@RequestBody HrRequest request) {
 // CREATIVE: brainstorming — warm temperature, generous token budget
 @PostMapping("/ask/creative")
 public HrResponse askCreative(@RequestBody HrRequest request) {
-    OllamaOptions creativeOptions = OllamaOptions.builder()
+    ChatOptions creativeOptions = ChatOptions.builder()
             .temperature(0.9)
-            .numPredict(800)
+            .maxTokens(800)
             .build();
 
     String answer = chatClient
@@ -926,7 +926,7 @@ public HrResponse askCreative(@RequestBody HrRequest request) {
 // RAW: bypass ChatClient, use ChatModel directly — exposes Message architecture
 @PostMapping("/ask/raw")
 public HrResponse askRaw(@RequestBody HrRequest request) {
-    var messages = List.of(
+    List<Message> messages = List.of(
             new SystemMessage(SYSTEM_PROMPT),
             new UserMessage(request.question())
     );
@@ -1095,8 +1095,8 @@ You do not need to understand the math. You need to understand the idea: **embed
 | Concept | What It Means | How to Control It |
 |---------|--------------|-------------------|
 | Token | The basic unit of text a model reads/writes | Count with ~0.75 tokens per word |
-| Temperature | How random the output is | `OllamaOptions.builder().temperature(x)` |
-| numPredict | Max tokens in the response | `OllamaOptions.builder().numPredict(x)` |
+| Temperature | How random the output is | `ChatOptions.builder().temperature(x)` |
+| maxTokens | Max tokens in the response | `ChatOptions.builder().maxTokens(x)` |
 | SystemMessage | Developer instructions sent before every user turn | `chatClient.defaultSystem(...)` |
 | UserMessage | The user's actual question | `chatClient.prompt().user(...)` |
 | ChatModel | Low-level Spring AI interface | Inject `ChatModel` directly |
@@ -1112,7 +1112,7 @@ In this chapter you:
 - Understood temperature and why the same question gives different answers
 - Explored Spring AI's message architecture: `SystemMessage`, `UserMessage`, `AssistantMessage`
 - Saw the abstraction layers: `ChatClient` → `ChatModel` → `OllamaChatModel`
-- Built three new HR endpoints with distinct behaviour profiles using `OllamaOptions`
+- Built three new HR endpoints with distinct behaviour profiles using `ChatOptions`
 - Added a `/hr/model/info` endpoint to inspect the active model configuration
 
 Sarah now has consistent, short answers for policy lookups and richer answers for creative tasks. The same system prompt, different options — the model adapts.
@@ -1125,10 +1125,11 @@ In **Chapter 3**, we go deeper into the Ollama connection — learning how to sw
 
 ```java
 // Chapter 3 preview — dynamic model switching
-OllamaOptions modelOptions = OllamaOptions.builder()
-        .model("mistral")          // override the default model per-request
-        .temperature(0.3)
-        .build();
+chatClient.prompt()
+        .user(question)
+        .options(ChatOptions.builder().temperature(0.3).build())
+        .call().content();
+// Chapter 3 will cover Ollama-specific model switching per-request
 ```
 
 *Code for this chapter: [`code/chapter-02-core-concepts/`](code/chapter-02-core-concepts/)*

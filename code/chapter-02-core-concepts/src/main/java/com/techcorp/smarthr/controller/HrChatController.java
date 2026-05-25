@@ -3,11 +3,12 @@ package com.techcorp.smarthr.controller;
 import com.techcorp.smarthr.model.HrRequest;
 import com.techcorp.smarthr.model.HrResponse;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.chat.prompt.Prompt;
-import org.springframework.ai.ollama.api.OllamaOptions;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -49,9 +50,9 @@ public class HrChatController {
     // Use for policy questions that need short, consistent answers
     @PostMapping("/ask/precise")
     public HrResponse askPrecise(@RequestBody HrRequest request) {
-        OllamaOptions preciseOptions = OllamaOptions.builder()
+        ChatOptions preciseOptions = ChatOptions.builder()
                 .temperature(0.0)   // fully deterministic
-                .numPredict(150)    // hard cap at ~150 tokens (~100 words)
+                .maxTokens(150)     // hard cap at ~150 tokens (~100 words)
                 .build();
 
         String answer = chatClient
@@ -67,9 +68,9 @@ public class HrChatController {
     // Use for brainstorming, generating ideas, writing job descriptions
     @PostMapping("/ask/creative")
     public HrResponse askCreative(@RequestBody HrRequest request) {
-        OllamaOptions creativeOptions = OllamaOptions.builder()
+        ChatOptions creativeOptions = ChatOptions.builder()
                 .temperature(0.9)
-                .numPredict(800)
+                .maxTokens(800)
                 .build();
 
         String answer = chatClient
@@ -85,7 +86,7 @@ public class HrChatController {
     // This exposes the underlying Message architecture Spring AI uses internally
     @PostMapping("/ask/raw")
     public HrResponse askRaw(@RequestBody HrRequest request) {
-        var messages = List.of(
+        List<Message> messages = List.of(
                 new SystemMessage(SYSTEM_PROMPT),
                 new UserMessage(request.question())
         );

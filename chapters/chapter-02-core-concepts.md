@@ -61,12 +61,14 @@ The model generates **one token at a time** — which is why streaming responses
 
 ---
 
-## Controlling Response Length with `numPredict`
+## Controlling Response Length with `maxTokens`
+
+`maxTokens` is Spring AI's provider-agnostic name for the token limit. Ollama maps it to its internal `num_predict` parameter:
 
 ```java
-OllamaOptions preciseOptions = OllamaOptions.builder()
+ChatOptions preciseOptions = ChatOptions.builder()
         .temperature(0.0)
-        .numPredict(150)   // stop after 150 output tokens (~100 words)
+        .maxTokens(150)    // stop after 150 output tokens (~100 words)
         .build();
 ```
 
@@ -175,9 +177,9 @@ public record HrResponse(String question, String answer, String mode) {}
 // PRECISE: policy questions — short, deterministic, capped at ~150 tokens
 @PostMapping("/ask/precise")
 public HrResponse askPrecise(@RequestBody HrRequest request) {
-    OllamaOptions preciseOptions = OllamaOptions.builder()
+    ChatOptions preciseOptions = ChatOptions.builder()
             .temperature(0.0)
-            .numPredict(150)
+            .maxTokens(150)
             .build();
 
     String answer = chatClient.prompt().user(request.question())
@@ -188,9 +190,9 @@ public HrResponse askPrecise(@RequestBody HrRequest request) {
 // CREATIVE: brainstorming — warm temperature, generous token budget
 @PostMapping("/ask/creative")
 public HrResponse askCreative(@RequestBody HrRequest request) {
-    OllamaOptions creativeOptions = OllamaOptions.builder()
+    ChatOptions creativeOptions = ChatOptions.builder()
             .temperature(0.9)
-            .numPredict(800)
+            .maxTokens(800)
             .build();
 
     String answer = chatClient.prompt().user(request.question())
@@ -201,7 +203,7 @@ public HrResponse askCreative(@RequestBody HrRequest request) {
 // RAW: bypass ChatClient, use ChatModel directly
 @PostMapping("/ask/raw")
 public HrResponse askRaw(@RequestBody HrRequest request) {
-    var messages = List.of(
+    List<Message> messages = List.of(
             new SystemMessage(SYSTEM_PROMPT),
             new UserMessage(request.question())
     );
@@ -287,8 +289,8 @@ This is how RAG (Chapter 7) finds relevant documents — not by keyword matching
 | Concept | What It Means | How to Control It |
 |---------|--------------|-------------------|
 | Token | Basic unit of text a model reads/writes | ~0.75 tokens per word |
-| Temperature | How random the output is | `OllamaOptions.builder().temperature(x)` |
-| numPredict | Max tokens in the response | `OllamaOptions.builder().numPredict(x)` |
+| Temperature | How random the output is | `ChatOptions.builder().temperature(x)` |
+| maxTokens | Max tokens in the response | `ChatOptions.builder().maxTokens(x)` |
 | SystemMessage | Developer instructions | `chatClient.defaultSystem(...)` |
 | UserMessage | The user's question | `chatClient.prompt().user(...)` |
 | ChatModel | Low-level Spring AI interface | Inject `ChatModel` directly |
@@ -304,7 +306,7 @@ In this chapter you:
 - Understood temperature and why the same question gives different answers
 - Explored Spring AI's message architecture: `SystemMessage`, `UserMessage`, `AssistantMessage`
 - Saw the abstraction layers: `ChatClient` → `ChatModel` → `OllamaChatModel`
-- Built precise, creative, and raw HR endpoints using `OllamaOptions`
+- Built precise, creative, and raw HR endpoints using `ChatOptions`
 
 ---
 
@@ -313,10 +315,11 @@ In this chapter you:
 In **Chapter 3**, we go deeper into the Ollama connection — switching between models (`llama3.2`, `mistral`, `codellama`) at runtime and benchmarking them on real HR questions.
 
 ```java
-OllamaOptions modelOptions = OllamaOptions.builder()
-        .model("mistral")
-        .temperature(0.3)
-        .build();
+// Chapter 3 introduces per-request model switching via Ollama-specific options
+chatClient.prompt()
+        .user(question)
+        .options(ChatOptions.builder().temperature(0.3).build())
+        .call().content();
 ```
 
 *Code for this chapter: [`code/chapter-02-core-concepts/`](../code/chapter-02-core-concepts/)*
