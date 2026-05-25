@@ -102,7 +102,7 @@ private String askWithModel(String question, String model) {
 
 **Test it:**
 ```bash
-curl -X POST http://localhost:8080/hr/ask/compare \
+curl -s -X POST http://localhost:8080/hr/ask/compare \
   -H "Content-Type: application/json" \
   -d '{"question": "What is a good onboarding plan for a new software engineer?",
        "modelA": "llama3.2",

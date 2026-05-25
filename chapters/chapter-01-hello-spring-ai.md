@@ -101,7 +101,7 @@ ollama serve
 Verify it is working:
 
 ```bash
-curl http://localhost:11434/api/tags
+curl -s http://localhost:11434/api/tags
 ```
 
 You should see `llama3.2` in the list.
@@ -309,7 +309,7 @@ mvn spring-boot:run
 
 **Question 1: Vacation policy**
 ```bash
-curl -X POST http://localhost:8080/hr/ask \
+curl -s -X POST http://localhost:8080/hr/ask \
   -H "Content-Type: application/json" \
   -d '{"question": "How many vacation days do new employees get?"}'
 ```

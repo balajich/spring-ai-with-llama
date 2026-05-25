@@ -107,7 +107,7 @@ public HrResponse askPersonalised(@RequestBody PersonalisedRequest request) {
 
 **Test it:**
 ```bash
-curl -X POST http://localhost:8080/hr/ask/personalised \
+curl -s -X POST http://localhost:8080/hr/ask/personalised \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Raj",

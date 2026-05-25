@@ -129,11 +129,11 @@ public String ingest(@RequestParam MultipartFile file) throws IOException {
 **Test it:**
 ```bash
 # Ingest a policy PDF
-curl -X POST http://localhost:8080/hr/policy/ingest \
+curl -s -X POST http://localhost:8080/hr/policy/ingest \
   -F "file=@techcorp-hr-policy.pdf"
 
 # Ask a question grounded in the document
-curl -X POST http://localhost:8080/hr/policy/ask \
+curl -s -X POST http://localhost:8080/hr/policy/ask \
   -d '{"question": "How many weeks of parental leave does TechCorp offer?"}'
 ```
 

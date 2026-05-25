@@ -97,15 +97,15 @@ public void clearSession(@PathVariable String sessionId) {
 **Test a multi-turn conversation:**
 ```bash
 # Turn 1
-curl -X POST http://localhost:8080/hr/onboard/chat \
+curl -s -X POST http://localhost:8080/hr/onboard/chat \
   -d '{"sessionId": "raj-001", "message": "What laptop should I request?"}'
 
 # Turn 2 — bot remembers the laptop context
-curl -X POST http://localhost:8080/hr/onboard/chat \
+curl -s -X POST http://localhost:8080/hr/onboard/chat \
   -d '{"sessionId": "raj-001", "message": "And what software comes pre-installed?"}'
 
 # Turn 3 — still in context
-curl -X POST http://localhost:8080/hr/onboard/chat \
+curl -s -X POST http://localhost:8080/hr/onboard/chat \
   -d '{"sessionId": "raj-001", "message": "How long does setup usually take?"}'
 ```
 

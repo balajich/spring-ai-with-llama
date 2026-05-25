@@ -53,7 +53,7 @@ cd code/chapter-01-hello-spring-ai
 mvn spring-boot:run
 
 # 3. Ask a question
-curl -X POST http://localhost:8080/hr/ask \
+curl -s -X POST http://localhost:8080/hr/ask \
   -H "Content-Type: application/json" \
   -d '{"question": "What is the maternity leave policy?"}'
 ```

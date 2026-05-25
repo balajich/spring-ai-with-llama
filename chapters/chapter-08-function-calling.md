@@ -115,11 +115,11 @@ public HrResponse scheduleChat(@RequestBody ScheduleRequest request) {
 **Test a full scheduling conversation:**
 ```bash
 # Step 1 — request an interview
-curl -X POST http://localhost:8080/hr/schedule/chat \
+curl -s -X POST http://localhost:8080/hr/schedule/chat \
   -d '{"sessionId": "lisa-001", "message": "I need to schedule an interview for Priya Sharma for the senior Java role. Can you check Tuesday 3rd June at 2pm?"}'
 
 # Step 2 — confirm the booking
-curl -X POST http://localhost:8080/hr/schedule/chat \
+curl -s -X POST http://localhost:8080/hr/schedule/chat \
   -d '{"sessionId": "lisa-001", "message": "Yes, go ahead and book it."}'
 ```
 

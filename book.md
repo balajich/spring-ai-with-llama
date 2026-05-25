@@ -115,7 +115,7 @@ mvn spring-boot:run
 ### 4. Ask Your First Question
 
 ```bash
-curl -X POST http://localhost:8080/hr/ask \
+curl -s -X POST http://localhost:8080/hr/ask \
   -H "Content-Type: application/json" \
   -d '{"question": "What is a standard maternity leave policy?"}'
 ```
@@ -328,7 +328,7 @@ ollama serve
 Verify it is working:
 
 ```bash
-curl http://localhost:11434/api/tags
+curl -s http://localhost:11434/api/tags
 ```
 
 You should see `llama3.2` in the list.
@@ -550,7 +550,7 @@ SmartHR Assistant started on port 8080
 
 **Question 1: Vacation policy**
 ```bash
-curl -X POST http://localhost:8080/hr/ask \
+curl -s -X POST http://localhost:8080/hr/ask \
   -H "Content-Type: application/json" \
   -d '{"question": "How many vacation days do new employees get?"}'
 ```
@@ -564,7 +564,7 @@ curl -X POST http://localhost:8080/hr/ask \
 
 **Question 2: Remote work**
 ```bash
-curl -X POST http://localhost:8080/hr/ask \
+curl -s -X POST http://localhost:8080/hr/ask \
   -H "Content-Type: application/json" \
   -d '{"question": "What is the remote work policy?"}'
 ```
@@ -992,7 +992,7 @@ mvn spring-boot:run
 ### Check what model is running
 
 ```bash
-curl http://localhost:8080/hr/model/info
+curl -s http://localhost:8080/hr/model/info
 ```
 
 ```json
@@ -1008,7 +1008,7 @@ curl http://localhost:8080/hr/model/info
 ### Standard (Chapter 1 behaviour)
 
 ```bash
-curl -X POST http://localhost:8080/hr/ask \
+curl -s -X POST http://localhost:8080/hr/ask \
   -H "Content-Type: application/json" \
   -d '{"question": "What is the maternity leave policy?"}'
 ```
@@ -1016,7 +1016,7 @@ curl -X POST http://localhost:8080/hr/ask \
 ### Precise — short, deterministic
 
 ```bash
-curl -X POST http://localhost:8080/hr/ask/precise \
+curl -s -X POST http://localhost:8080/hr/ask/precise \
   -H "Content-Type: application/json" \
   -d '{"question": "What is the maternity leave policy?"}'
 ```
@@ -1034,7 +1034,7 @@ Notice how the answer is capped — two sentences instead of a paragraph.
 ### Creative — brainstorming
 
 ```bash
-curl -X POST http://localhost:8080/hr/ask/creative \
+curl -s -X POST http://localhost:8080/hr/ask/creative \
   -H "Content-Type: application/json" \
   -d '{"question": "Give me 5 ideas for a fun team-building activity for a remote engineering team."}'
 ```
@@ -1042,7 +1042,7 @@ curl -X POST http://localhost:8080/hr/ask/creative \
 ### Raw — using ChatModel directly
 
 ```bash
-curl -X POST http://localhost:8080/hr/ask/raw \
+curl -s -X POST http://localhost:8080/hr/ask/raw \
   -H "Content-Type: application/json" \
   -d '{"question": "How do I submit a leave request?"}'
 ```

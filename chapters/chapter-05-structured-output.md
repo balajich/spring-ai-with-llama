@@ -110,7 +110,7 @@ public ResumeProfile parseResume(@RequestBody ResumeParseRequest request) {
 
 **Test it:**
 ```bash
-curl -X POST http://localhost:8080/hr/resume/parse \
+curl -s -X POST http://localhost:8080/hr/resume/parse \
   -H "Content-Type: application/json" \
   -d '{
     "resumeText": "Priya Sharma | priya@example.com\n5 years Java, Spring Boot, AWS\nSenior Engineer at Infosys\nB.Tech CS IIT Delhi 2018"

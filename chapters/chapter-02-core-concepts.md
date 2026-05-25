@@ -253,15 +253,15 @@ mvn spring-boot:run
 
 ```bash
 # Check model
-curl http://localhost:8080/hr/model/info
+curl -s http://localhost:8080/hr/model/info
 
 # Precise answer
-curl -X POST http://localhost:8080/hr/ask/precise \
+curl -s -X POST http://localhost:8080/hr/ask/precise \
   -H "Content-Type: application/json" \
   -d '{"question": "What is the maternity leave policy?"}'
 
 # Creative brainstorm
-curl -X POST http://localhost:8080/hr/ask/creative \
+curl -s -X POST http://localhost:8080/hr/ask/creative \
   -H "Content-Type: application/json" \
   -d '{"question": "Give me 5 ideas for remote team-building activities."}'
 ```
