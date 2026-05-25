@@ -7,7 +7,7 @@ spring:
       base-url: http://localhost:11434
       chat:
         options:
-          model: llama3.2
+          model: llama3.2 # or llama3.2, phi3:mini, gemma2 ,mistral
           # 0.0 = precise/deterministic, 1.0 = creative
           temperature: 0.3
 

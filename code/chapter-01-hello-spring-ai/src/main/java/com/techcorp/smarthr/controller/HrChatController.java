@@ -37,15 +37,5 @@ public class HrChatController {
         return new HrResponse(request.question(), answer);
     }
 
-    // Convenience GET for quick browser/curl testing
-    // GET /hr/ask?question=What+is+the+leave+policy?
-    @GetMapping("/ask")
-    public HrResponse askGet(@RequestParam String question) {
-        String answer = chatClient
-                .prompt()
-                .user(question)
-                .call()
-                .content();
-        return new HrResponse(question, answer);
-    }
+
 }
