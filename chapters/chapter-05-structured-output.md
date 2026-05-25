@@ -1,5 +1,7 @@
 # Chapter 5 — Structured Output: From Raw Text to Java Objects
 
+> ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
+
 > **What you will build:** A resume parser — Lisa the Hiring Manager pastes raw resume text and gets back a structured `ResumeProfile` Java record with `name`, `email`, `skills`, `experience`, and `education` fields ready to store in a database.
 
 ---

@@ -1,5 +1,7 @@
 # Chapter 3 — Connecting to Llama: Ollama Config and Model Switching
 
+> ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
+
 > **What you will build:** A `/hr/ask/compare` endpoint that sends the same question to two different models and returns both answers side-by-side — so Sarah can see which model performs better for HR queries.
 
 ---

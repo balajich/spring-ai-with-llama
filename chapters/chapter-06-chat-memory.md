@@ -1,5 +1,7 @@
 # Chapter 6 — Chat Memory: Multi-Turn Conversations
 
+> ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
+
 > **What you will build:** An onboarding chatbot for Raj — a stateful `/hr/onboard/chat` endpoint that remembers the full conversation so Raj can ask follow-up questions without repeating himself.
 
 ---

@@ -1,5 +1,7 @@
 # Chapter 15 — Performance and Caching: Handling Scale Efficiently
 
+> ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
+
 > **What you will build:** A bulk job description generator — Lisa uploads a spreadsheet of 50 open roles and the system generates polished job descriptions for all of them concurrently, with caching to avoid regenerating identical prompts.
 
 ---

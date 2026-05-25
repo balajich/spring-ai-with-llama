@@ -1,5 +1,7 @@
 # Chapter 17 — Production Deployment: Docker, Observability, and Going Live
 
+> ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
+
 > **What you will build:** A production-ready SmartHR Assistant — Dockerised, health-checked, observable with Micrometer metrics, running Ollama in a container, and deployed behind a reverse proxy. The complete system Sarah can hand to TechCorp's IT team to run.
 
 ---

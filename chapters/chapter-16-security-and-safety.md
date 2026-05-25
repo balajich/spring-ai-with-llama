@@ -1,5 +1,7 @@
 # Chapter 16 — Security and Safety: Protecting Your AI Application
 
+> ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
+
 > **What you will build:** A hardened version of the SmartHR bot with input sanitisation, prompt injection detection, PII scrubbing from logs, and an allow-list of permitted HR topics so the bot cannot be weaponised by a malicious employee.
 
 ---

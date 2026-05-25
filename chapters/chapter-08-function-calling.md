@@ -1,5 +1,7 @@
 # Chapter 8 — Function Calling: Tool Use and Java Method Binding
 
+> ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
+
 > **What you will build:** An interview scheduling assistant — the AI converses with Lisa the Hiring Manager, checks real calendar availability by calling a Java method, and books interview slots automatically.
 
 ---

@@ -1,5 +1,7 @@
 # Chapter 9 — Multimodality: Images and Text Together
 
+> ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
+
 > **What you will build:** A workplace safety reporter — an employee uploads a photo of a potential workplace hazard and the AI analyses the image, identifies the risk, and auto-generates a formal safety incident report.
 
 ---

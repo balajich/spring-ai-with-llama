@@ -1,5 +1,7 @@
 # Chapter 12 — Semantic Search: Finding Meaning, Not Keywords
 
+> ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
+
 > **What you will build:** A skills-based candidate search — Lisa types "find me a backend developer with cloud and microservices experience" and gets matching candidates even if their CVs say "AWS Lambda" and "distributed systems" instead of those exact words.
 
 ---

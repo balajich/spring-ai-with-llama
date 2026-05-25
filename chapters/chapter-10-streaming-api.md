@@ -1,5 +1,7 @@
 # Chapter 10 — Streaming API: Real-Time Token-by-Token Responses
 
+> ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
+
 > **What you will build:** A live-streaming HR chat interface — instead of waiting 10 seconds for a full response, employees see the answer appearing word-by-word as Llama generates it, just like ChatGPT.
 
 ---

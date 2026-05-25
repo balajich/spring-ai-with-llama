@@ -1,5 +1,7 @@
 # Chapter 11 — Document Intelligence: PDFs, Word Docs, and Web Pages
 
+> ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
+
 > **What you will build:** A contract analyser — Sarah uploads an employment contract PDF and gets back a plain-English summary with key clauses highlighted: probation period, notice period, IP ownership, and any non-standard clauses that need legal review.
 
 ---

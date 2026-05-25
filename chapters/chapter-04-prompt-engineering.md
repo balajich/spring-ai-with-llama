@@ -1,5 +1,7 @@
 # Chapter 4 — Prompt Engineering: PromptTemplate and Dynamic Prompts
 
+> ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
+
 > **What you will build:** A personalised HR response system — Raj asks a question and gets an answer that addresses him by name, references his department, and follows TechCorp's tone guidelines.
 
 ---

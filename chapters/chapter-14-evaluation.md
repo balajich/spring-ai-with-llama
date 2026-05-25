@@ -1,5 +1,7 @@
 # Chapter 14 — Evaluation: Testing and Scoring AI Responses
 
+> ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
+
 > **What you will build:** An automated QA pipeline — a test suite that sends HR questions to the SmartHR bot, uses a second AI call to score each answer on accuracy, relevance, and tone, and fails the build if quality drops below a threshold.
 
 ---

@@ -1,5 +1,7 @@
 # Chapter 13 — AI Agents: Autonomous Workflows and Tool Chaining
 
+> ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
+
 > **What you will build:** A monthly HR report agent — Dev triggers it once and it autonomously gathers headcount data, open positions, recent hires, policy updates, and produces a formatted HR summary report without further instruction.
 
 ---
