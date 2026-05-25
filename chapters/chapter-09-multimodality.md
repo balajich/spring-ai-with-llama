@@ -35,9 +35,14 @@ ollama pull moondream      # lightweight vision model
 ollama pull llama3.2-vision  # Llama 3.2 with vision capability
 ```
 
-```properties
-# application.properties — switch to a vision model
-spring.ai.ollama.chat.options.model=llava
+```yaml
+# application.yml — switch to a vision model
+spring:
+  ai:
+    ollama:
+      chat:
+        options:
+          model: llava
 ```
 
 ---

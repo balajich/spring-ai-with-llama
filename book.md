@@ -183,12 +183,17 @@ Each chapter folder is a self-contained, runnable Spring Boot project.
 
 All examples use `llama3.2` by default. You can switch with one config change:
 
-```properties
-# application.properties
-spring.ai.ollama.chat.options.model=llama3.2      # Default — fast, 4GB RAM
-spring.ai.ollama.chat.options.model=llama3.2:8b   # Better quality, needs 8GB RAM
-spring.ai.ollama.chat.options.model=mistral        # Great alternative
-spring.ai.ollama.chat.options.model=phi3:mini      # Ultra-light, runs on 4GB RAM
+```yaml
+# application.yml — change the model line, no code changes needed
+spring:
+  ai:
+    ollama:
+      chat:
+        options:
+          model: llama3.2       # Default — fast, 4GB RAM
+          # model: llama3.2:8b  # Better quality, needs 8GB RAM
+          # model: mistral       # Great alternative
+          # model: phi3:mini     # Ultra-light, runs on 4GB RAM
 ```
 
 ---
@@ -256,7 +261,7 @@ This chapter builds the foundation. By the end, we will have a Spring Boot app t
 Spring AI is Spring's official abstraction layer for AI models. It does for AI what Spring Data did for databases — it gives you a consistent, framework-native API so you can:
 
 - Switch AI providers (Ollama, OpenAI, Anthropic, Google) by changing config, not code
-- Use familiar Spring patterns (dependency injection, `application.properties`, autoconfiguration)
+- Use familiar Spring patterns (dependency injection, `application.yml`, autoconfiguration)
 - Build AI features without learning Python or a new framework
 
 ```
@@ -349,7 +354,7 @@ code/chapter-01-hello-spring-ai/
     │       ├── HrRequest.java                   ← request body
     │       └── HrResponse.java                  ← response body
     └── resources/
-        └── application.properties               ← Ollama config
+        └── application.yml                      ← Ollama config
 ```
 
 ---
@@ -389,15 +394,23 @@ The only Spring AI dependency we need for Chapter 1 is the Ollama starter:
 
 The BOM (Bill of Materials) manages Spring AI version compatibility across all its modules.
 
-### 2. Configuration (`application.properties`)
+### 2. Configuration (`application.yml`)
 
-```properties
-spring.application.name=SmartHR Assistant
-server.port=8080
+```yaml
+spring:
+  application:
+    name: SmartHR Assistant
 
-spring.ai.ollama.base-url=http://localhost:11434
-spring.ai.ollama.chat.options.model=llama3.2
-spring.ai.ollama.chat.options.temperature=0.3
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        options:
+          model: llama3.2 # or phi3:mini, gemma2, mistral
+          temperature: 0.3
+
+server:
+  port: 8080
 ```
 
 **What is temperature?**
@@ -954,7 +967,7 @@ public class ModelInfoController {
     @GetMapping("/info")
     public ModelInfo info() {
         return new ModelInfo(modelName, ollamaBaseUrl, defaultTemperature, defaultMaxTokens,
-                "Switch model in application.properties — no code changes needed.");
+                "Switch model in application.yml — no code changes needed.");
     }
 
     public record ModelInfo(String model, String ollamaUrl,
@@ -962,16 +975,24 @@ public class ModelInfoController {
 }
 ```
 
-### 4. `application.properties` — expose new defaults
+### 4. `application.yml` — expose new defaults
 
-```properties
-spring.application.name=SmartHR Assistant
-server.port=8080
+```yaml
+spring:
+  application:
+    name: SmartHR Assistant
 
-spring.ai.ollama.base-url=http://localhost:11434
-spring.ai.ollama.chat.options.model=llama3.2
-spring.ai.ollama.chat.options.temperature=0.3
-spring.ai.ollama.chat.options.num-predict=500
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        options:
+          model: llama3.2
+          temperature: 0.3
+          num-predict: 500
+
+server:
+  port: 8080
 ```
 
 `num-predict` is the default max tokens for the standard `/ask` endpoint. The precise and creative endpoints override this per-request.
@@ -1001,7 +1022,7 @@ curl -s http://localhost:8080/hr/model/info
   "ollamaUrl": "http://localhost:11434",
   "defaultTemperature": 0.3,
   "defaultMaxTokens": 500,
-  "hint": "Switch model in application.properties — no code changes needed."
+  "hint": "Switch model in application.yml — no code changes needed."
 }
 ```
 

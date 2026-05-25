@@ -29,7 +29,7 @@ public class ModelInfoController {
                 ollamaBaseUrl,
                 defaultTemperature,
                 defaultMaxTokens,
-                "llama3.2 is active. Switch model in application.properties."
+                "llama3.2 is active. Switch model in application.yml."
         );
     }
 

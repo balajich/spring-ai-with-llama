@@ -175,8 +175,8 @@ management.endpoints.web.exposure.include=health,metrics,prometheus
 # 1. Pull new model while old one is still running
 docker compose exec ollama ollama pull llama3.2:8b
 
-# 2. Update application.properties
-spring.ai.ollama.chat.options.model=llama3.2:8b
+# 2. Update application.yml
+# spring.ai.ollama.chat.options.model: llama3.2:8b
 
 # 3. Rolling restart
 docker compose up -d --no-deps smarthr
@@ -210,7 +210,7 @@ In this final chapter you:
 - Dockerised the SmartHR Assistant and Ollama together
 - Used Docker Compose for the full production stack
 - Added Micrometer metrics for AI call monitoring
-- Configured production `application.properties`
+- Configured production `application.yml`
 - Implemented a zero-downtime model update strategy
 - Completed the production readiness checklist
 

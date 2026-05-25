@@ -17,7 +17,7 @@ The answer is yes — and it only takes one line of config.
 ## What You Will Learn
 
 - How Ollama manages multiple models on your machine
-- How to switch models via `application.properties` (zero code changes)
+- How to switch models via `application.yml` (zero code changes)
 - How to switch models **per-request** using `OllamaOptions`
 - How to build a model comparison endpoint
 - Which models work best for which HR tasks
@@ -45,9 +45,14 @@ ollama rm mistral
 
 ## Switching Models via Config (No Code Changes)
 
-```properties
-# application.properties — change this one line to switch models
-spring.ai.ollama.chat.options.model=mistral
+```yaml
+# application.yml — change this one line to switch models
+spring:
+  ai:
+    ollama:
+      chat:
+        options:
+          model: mistral
 ```
 
 Restart the app. Every endpoint now uses `mistral`. No Java changes.

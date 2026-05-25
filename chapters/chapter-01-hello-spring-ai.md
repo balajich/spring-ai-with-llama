@@ -29,7 +29,7 @@ This chapter builds the foundation. By the end, we will have a Spring Boot app t
 Spring AI is Spring's official abstraction layer for AI models. It does for AI what Spring Data did for databases — it gives you a consistent, framework-native API so you can:
 
 - Switch AI providers (Ollama, OpenAI, Anthropic, Google) by changing config, not code
-- Use familiar Spring patterns (dependency injection, `application.properties`, autoconfiguration)
+- Use familiar Spring patterns (dependency injection, `application.yml`, autoconfiguration)
 - Build AI features without learning Python or a new framework
 
 ```
@@ -122,7 +122,7 @@ code/chapter-01-hello-spring-ai/
     │       ├── HrRequest.java                   ← request body
     │       └── HrResponse.java                  ← response body
     └── resources/
-        └── application.properties               ← Ollama config
+        └── application.yml                      ← Ollama config
 ```
 
 ---
@@ -134,43 +134,69 @@ code/chapter-01-hello-spring-ai/
 The only Spring AI dependency we need for Chapter 1 is the Ollama starter:
 
 ```xml
-<dependencyManagement>
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-bom</artifactId>
-            <version>1.0.0</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-    </dependencies>
-</dependencyManagement>
+<parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>4.1.0-RC1</version>
+    <relativePath/>
+</parent>
+
+<properties>
+    <java.version>21</java.version>
+    <spring-ai.version>2.0.0-M6</spring-ai.version>
+</properties>
 
 <dependencies>
     <dependency>
         <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-web</artifactId>
+        <artifactId>spring-boot-starter-webmvc</artifactId>
     </dependency>
 
     <!-- This one line connects Spring AI to Ollama -->
     <dependency>
         <groupId>org.springframework.ai</groupId>
-        <artifactId>spring-ai-ollama-spring-boot-starter</artifactId>
+        <artifactId>spring-ai-starter-model-ollama</artifactId>
+    </dependency>
+
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-webmvc-test</artifactId>
+        <scope>test</scope>
     </dependency>
 </dependencies>
+
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-bom</artifactId>
+            <version>${spring-ai.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
 ```
 
-The BOM (Bill of Materials) manages Spring AI version compatibility across all its modules.
+The BOM (Bill of Materials) manages Spring AI version compatibility across all its modules. Note the artifact name changed in Spring AI 2.x — it is now `spring-ai-starter-model-ollama` instead of the older `spring-ai-ollama-spring-boot-starter`.
 
-### 2. Configuration (`application.properties`)
+### 2. Configuration (`application.yml`)
 
-```properties
-spring.application.name=SmartHR Assistant
-server.port=8080
+```yaml
+spring:
+  application:
+    name: SmartHR Assistant
 
-spring.ai.ollama.base-url=http://localhost:11434
-spring.ai.ollama.chat.options.model=llama3.2
-spring.ai.ollama.chat.options.temperature=0.3
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        options:
+          model: llama3.2 # or phi3:mini, gemma2, mistral
+          temperature: 0.3
+
+server:
+  port: 8080
 ```
 
 **What is temperature?**

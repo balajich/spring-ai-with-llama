@@ -65,9 +65,12 @@ private JobDescription generateJobDescription(JobRole role) {
 }
 ```
 
-Enable virtual threads in `application.properties`:
-```properties
-spring.threads.virtual.enabled=true
+Enable virtual threads in `application.yml`:
+```yaml
+spring:
+  threads:
+    virtual:
+      enabled: true
 ```
 
 ---

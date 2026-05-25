@@ -154,12 +154,17 @@ services:
       - "5432:5432"
 ```
 
-```properties
-# application.properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/smarthr
-spring.datasource.username=smarthr
-spring.datasource.password=smarthr
-spring.ai.vectorstore.pgvector.initialize-schema=true
+```yaml
+# application.yml
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/smarthr
+    username: smarthr
+    password: smarthr
+  ai:
+    vectorstore:
+      pgvector:
+        initialize-schema: true
 ```
 
 ---
