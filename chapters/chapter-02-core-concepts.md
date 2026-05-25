@@ -63,13 +63,16 @@ The model generates **one token at a time** — which is why streaming responses
 
 ## Controlling Response Length with `maxTokens`
 
-`maxTokens` is Spring AI's provider-agnostic name for the token limit. Ollama maps it to its internal `num_predict` parameter:
+`maxTokens` caps how many tokens the model is allowed to generate. Spring AI's `ChatOptions.builder()` is the provider-agnostic way to set it. Pass the **builder itself** (not the built result) to `.options()` — this is what the `ChatClient` API expects:
 
 ```java
-ChatOptions preciseOptions = ChatOptions.builder()
-        .temperature(0.0)
-        .maxTokens(150)    // stop after 150 output tokens (~100 words)
-        .build();
+chatClient.prompt()
+        .options(ChatOptions.builder()
+                .temperature(0.0)
+                .maxTokens(150))    // note: no .build() — pass the builder directly
+        .user(question)
+        .call()
+        .content();
 ```
 
 This does not make the model dumber — it just forces it to be concise.
@@ -177,26 +180,28 @@ public record HrResponse(String question, String answer, String mode) {}
 // PRECISE: policy questions — short, deterministic, capped at ~150 tokens
 @PostMapping("/ask/precise")
 public HrResponse askPrecise(@RequestBody HrRequest request) {
-    ChatOptions preciseOptions = ChatOptions.builder()
-            .temperature(0.0)
-            .maxTokens(150)
-            .build();
-
-    String answer = chatClient.prompt().user(request.question())
-            .options(preciseOptions).call().content();
+    String answer = chatClient
+            .prompt()
+            .options(ChatOptions.builder()
+                    .temperature(0.0)
+                    .maxTokens(150))    // pass the builder — no .build()
+            .user(request.question())
+            .call()
+            .content();
     return new HrResponse(request.question(), answer, "precise");
 }
 
 // CREATIVE: brainstorming — warm temperature, generous token budget
 @PostMapping("/ask/creative")
 public HrResponse askCreative(@RequestBody HrRequest request) {
-    ChatOptions creativeOptions = ChatOptions.builder()
-            .temperature(0.9)
-            .maxTokens(800)
-            .build();
-
-    String answer = chatClient.prompt().user(request.question())
-            .options(creativeOptions).call().content();
+    String answer = chatClient
+            .prompt()
+            .options(ChatOptions.builder()
+                    .temperature(0.9)
+                    .maxTokens(800))
+            .user(request.question())
+            .call()
+            .content();
     return new HrResponse(request.question(), answer, "creative");
 }
 
@@ -318,7 +323,7 @@ In **Chapter 3**, we go deeper into the Ollama connection — switching between 
 // Chapter 3 introduces per-request model switching via Ollama-specific options
 chatClient.prompt()
         .user(question)
-        .options(ChatOptions.builder().temperature(0.3).build())
+        .options(ChatOptions.builder().temperature(0.3))
         .call().content();
 ```
 

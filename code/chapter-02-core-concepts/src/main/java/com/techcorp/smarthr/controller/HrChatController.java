@@ -50,15 +50,12 @@ public class HrChatController {
     // Use for policy questions that need short, consistent answers
     @PostMapping("/ask/precise")
     public HrResponse askPrecise(@RequestBody HrRequest request) {
-        ChatOptions preciseOptions = ChatOptions.builder()
-                .temperature(0.0)   // fully deterministic
-                .maxTokens(150)     // hard cap at ~150 tokens (~100 words)
-                .build();
-
         String answer = chatClient
                 .prompt()
+                .options(ChatOptions.builder()
+                        .temperature(0.0)   // fully deterministic
+                        .maxTokens(150))    // hard cap at ~150 tokens (~100 words)
                 .user(request.question())
-                .options(preciseOptions)
                 .call()
                 .content();
         return new HrResponse(request.question(), answer, "precise");
@@ -68,15 +65,12 @@ public class HrChatController {
     // Use for brainstorming, generating ideas, writing job descriptions
     @PostMapping("/ask/creative")
     public HrResponse askCreative(@RequestBody HrRequest request) {
-        ChatOptions creativeOptions = ChatOptions.builder()
-                .temperature(0.9)
-                .maxTokens(800)
-                .build();
-
         String answer = chatClient
                 .prompt()
+                .options(ChatOptions.builder()
+                        .temperature(0.9)
+                        .maxTokens(800))
                 .user(request.question())
-                .options(creativeOptions)
                 .call()
                 .content();
         return new HrResponse(request.question(), answer, "creative");
