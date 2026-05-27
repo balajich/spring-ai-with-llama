@@ -31,3 +31,5 @@ target/
 *.iml
 .vscode/
 *.DS_Store
+generate_banner.py
+linkedin-banner.png

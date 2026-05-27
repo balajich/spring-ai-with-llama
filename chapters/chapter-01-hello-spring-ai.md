@@ -404,6 +404,54 @@ Sarah can now point employees to the HR chatbot. Her Monday mornings just got be
 
 ---
 
+## Where This Chatbot Falls Short
+
+The assistant works — but take a close look at that first response:
+
+```json
+{
+  "answer": "At TechCorp, new employees typically receive 15 days of paid vacation per year during their first year of employment."
+}
+```
+
+**That number is invented.** Llama has never seen TechCorp's employee handbook. It answered based on patterns from its public training data — millions of generic HR articles scraped from the internet. It sounded confident and professional, but it could be completely wrong for TechCorp.
+
+This is the core problem with the Chapter 1 approach:
+
+| Shortcoming | What happens | Real impact |
+|---|---|---|
+| **Responses from public data** | The model answers from general internet knowledge, not TechCorp's actual policies | Employees get plausible-sounding but potentially wrong information |
+| **Hallucinated specifics** | Policy numbers, dates, and thresholds are guessed | "15 days" — TechCorp may actually give 20 |
+| **No TechCorp context** | The model knows nothing about TechCorp's org chart, systems, or internal processes | Questions like "Who approves my leave?" get generic answers |
+| **No memory between calls** | Each question is independent — the model forgets previous exchanges | Users cannot ask follow-up questions naturally |
+| **No audit trail** | There is no record of what the model told employees | HR cannot verify or correct bad advice |
+
+### A Concrete Example
+
+Ask the chatbot something TechCorp-specific:
+
+```bash
+curl -s -X POST http://localhost:8080/hr/ask \
+  -H "Content-Type: application/json" \
+  -d '{"question": "What is TechCorp'\''s parental leave policy?"}'
+```
+
+The model will answer confidently. It might say 12 weeks. It might say 16 weeks. Whatever it says, it is a guess — because the system prompt tells Llama it is an HR assistant for TechCorp, but it has never actually read TechCorp's parental leave policy document.
+
+The system prompt shapes tone and persona. It does not give the model knowledge it does not have.
+
+### The Fix Coming in Later Chapters
+
+The solution is **Retrieval-Augmented Generation (RAG)**: instead of asking the model to remember policies, you retrieve the relevant policy text from a document store and inject it directly into the prompt at query time.
+
+```
+Employee question → Search TechCorp policy docs → Inject matching text → Ask Llama
+```
+
+That is Chapter 4. But before we get there, Chapter 2 covers how the model processes text (tokens) and how to control its response behaviour precisely — both of which you will need to build RAG well.
+
+---
+
 ## What's Next
 
 In **Chapter 2**, we go under the hood — learning how tokens control response length, how Spring AI's message architecture works, and how to tune the model per request with `ChatOptions`.
