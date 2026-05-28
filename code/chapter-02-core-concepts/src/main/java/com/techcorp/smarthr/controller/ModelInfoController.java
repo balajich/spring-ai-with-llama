@@ -1,5 +1,6 @@
 package com.techcorp.smarthr.controller;
 
+import com.techcorp.smarthr.model.ModelInfo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,11 +34,4 @@ public class ModelInfoController {
         );
     }
 
-    public record ModelInfo(
-            String model,
-            String ollamaUrl,
-            double defaultTemperature,
-            int defaultMaxTokens,
-            String hint
-    ) {}
 }
