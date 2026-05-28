@@ -89,15 +89,5 @@ public class HrChatController {
         String answer = response.getResult().getOutput().getText();
         return new HrResponse(request.question(), answer, "raw");
     }
-
-    // Convenience GET
-    @GetMapping("/ask")
-    public HrResponse askGet(@RequestParam String question) {
-        String answer = chatClient
-                .prompt()
-                .user(question)
-                .call()
-                .content();
-        return new HrResponse(question, answer, "standard");
-    }
+   
 }
