@@ -7,7 +7,6 @@ Feature: Chapter 02 — Core Concepts
   #   POST /hr/ask/precise     — precise mode   (temp 0.0, max 150 tokens)
   #   POST /hr/ask/creative    — creative mode  (temp 0.9, max 800 tokens)
   #   POST /hr/ask/raw         — raw mode       (ChatModel directly, no ChatClient)
-  #   GET  /hr/ask?question=   — convenience GET (same as standard POST)
   #   GET  /hr/model/info      — returns active model config
   #
   # Response shape for ask endpoints:
@@ -114,23 +113,6 @@ Feature: Chapter 02 — Core Concepts
     And match response.question == 'What is the sick leave policy?'
     And match response.mode == 'raw'
 
-  # ── GET /hr/ask — convenience GET endpoint ───────────────────────────────────
-
-  Scenario: GET /hr/ask — convenience endpoint returns standard mode
-    Given path '/hr/ask'
-    And param question = 'What is the maternity leave policy?'
-    When method GET
-    Then status 200
-    And match response == { question: '#string', answer: '#string', mode: '#string' }
-    And match response.mode == 'standard'
-    And assert response.answer.length > 0
-
-  Scenario: GET /hr/ask — question param is echoed back in response
-    Given path '/hr/ask'
-    And param question = 'How do I apply for a leave of absence?'
-    When method GET
-    Then status 200
-    And match response.question == 'How do I apply for a leave of absence?'
 
   # ── GET /hr/model/info — active model configuration ─────────────────────────
 
