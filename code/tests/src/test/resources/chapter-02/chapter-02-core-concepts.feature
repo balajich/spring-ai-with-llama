@@ -7,19 +7,11 @@ Feature: Chapter 02 — Core Concepts
   #   POST /hr/ask/precise     — precise mode   (temp 0.0, max 150 tokens)
   #   POST /hr/ask/creative    — creative mode  (temp 0.9, max 800 tokens)
   #   POST /hr/ask/raw         — raw mode       (ChatModel directly, no ChatClient)
-  #   GET  /hr/model/info      — returns active model config
   #
-  # Response shape for ask endpoints:
-  #   { "question": "<string>", "answer": "<string>", "mode": "<string>" }
-  #
-  # Response shape for model info:
-  #   { "model": "<string>", "ollamaUrl": "<string>",
-  #     "defaultTemperature": <number>, "defaultMaxTokens": <number>,
-  #     "hint": "<string>" }
+  # Response shape: { "question": "<string>", "answer": "<string>", "mode": "<string>" }
   #
   # Test strategy:
   #   - AI answers are non-deterministic — validate structure & mode value.
-  #   - Model info fields are config-driven — validate types and ranges.
   # ──────────────────────────────────────────────────────────────────────────
 
   Background:
@@ -113,40 +105,6 @@ Feature: Chapter 02 — Core Concepts
     And match response.question == 'What is the sick leave policy?'
     And match response.mode == 'raw'
 
-
-  # ── GET /hr/model/info — active model configuration ─────────────────────────
-
-  Scenario: GET /hr/model/info — returns valid model configuration object
-    Given path '/hr/model/info'
-    When method GET
-    Then status 200
-    And match response == { model: '#string', ollamaUrl: '#string', defaultTemperature: '#number', defaultMaxTokens: '#number', hint: '#string' }
-
-  Scenario: GET /hr/model/info — ollamaUrl points to localhost
-    Given path '/hr/model/info'
-    When method GET
-    Then status 200
-    And match response.ollamaUrl contains 'localhost'
-
-  Scenario: GET /hr/model/info — temperature is within valid range 0.0 to 1.0
-    Given path '/hr/model/info'
-    When method GET
-    Then status 200
-    And assert response.defaultTemperature >= 0.0
-    And assert response.defaultTemperature <= 1.0
-
-  Scenario: GET /hr/model/info — defaultMaxTokens is a positive integer
-    Given path '/hr/model/info'
-    When method GET
-    Then status 200
-    And assert response.defaultMaxTokens > 0
-
-  Scenario: GET /hr/model/info — hint field is a non-empty string
-    Given path '/hr/model/info'
-    When method GET
-    Then status 200
-    And match response.hint == '#notnull'
-    And assert response.hint.length > 0
 
   # ── Scenario Outline — all four POST modes return their correct mode value ───
 
