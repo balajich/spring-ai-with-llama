@@ -1,6 +1,6 @@
 # Chapter 2 — Core Concepts: Tokens, Messages, and the AI Abstraction
 
-> **What you will build:** Two new HR endpoints — `/hr/ask/precise` for short, consistent policy answers and `/hr/ask/creative` for open-ended brainstorming. Plus a `/hr/model/info` endpoint that exposes the active model configuration.
+> **What you will build:** Three new HR endpoints — `/hr/ask/precise` for short, consistent policy answers, `/hr/ask/creative` for open-ended brainstorming, and `/hr/ask/raw` to call the model directly using Spring AI's lower-level `ChatModel` API.
 
 ---
 
@@ -157,8 +157,7 @@ code/chapter-02-core-concepts/
 └── src/main/java/com/techcorp/smarthr/
     ├── SmartHrAssistantApplication.java
     ├── controller/
-    │   ├── HrChatController.java       ← adds /ask/precise, /ask/creative, /ask/raw
-    │   └── ModelInfoController.java    ← NEW: /hr/model/info
+    │   └── HrChatController.java       ← adds /ask/precise, /ask/creative, /ask/raw
     └── model/
         ├── HrRequest.java
         └── HrResponse.java             ← updated: adds "mode" field
@@ -227,28 +226,6 @@ public HrChatController(ChatClient.Builder builder, ChatModel chatModel) {
 }
 ```
 
-### `ModelInfoController`
-
-```java
-@RestController
-@RequestMapping("/hr/model")
-public class ModelInfoController {
-
-    @Value("${spring.ai.ollama.chat.options.model}")
-    private String modelName;
-
-    @Value("${spring.ai.ollama.base-url}")
-    private String ollamaBaseUrl;
-
-    @GetMapping("/info")
-    public ModelInfo info() {
-        return new ModelInfo(modelName, ollamaBaseUrl);
-    }
-
-    public record ModelInfo(String model, String ollamaUrl) {}
-}
-```
-
 ---
 
 ## Run and Test
@@ -259,9 +236,6 @@ mvn spring-boot:run
 ```
 
 ```bash
-# Check model
-curl -s http://localhost:8080/hr/model/info
-
 # Precise answer
 curl -s -X POST http://localhost:8080/hr/ask/precise \
   -H "Content-Type: application/json" \
