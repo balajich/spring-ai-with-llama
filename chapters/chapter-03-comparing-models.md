@@ -1,8 +1,4 @@
-# Chapter 3 — Connecting to Llama: Ollama Config and Model Switching
-
-> ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
-
-> **What you will build:** A `/hr/ask/compare` endpoint that sends the same question to two different models and returns both answers side-by-side — so Sarah can see which model performs better for HR queries.
+# Chapter 3 — Running and Comparing Multiple Models with Ollama
 
 ---
 
@@ -142,4 +138,4 @@ In this chapter you will:
 
 In **Chapter 4**, we tackle prompt engineering — using `PromptTemplate` to inject dynamic data (employee name, department, role) into prompts so the HR assistant gives personalised, TechCorp-branded responses.
 
-*Code for this chapter: [`code/chapter-03-connecting-to-llama/`](../code/chapter-03-connecting-to-llama/)*
+*Code for this chapter: [`code/chapter-03-comparing-models/`](../code/chapter-03-comparing-models/)*
