@@ -18,7 +18,7 @@ The book is built around one evolving real-world project: **SmartHR Assistant**,
 |---------|-------|---------|--------|
 | 1 | Hello, Spring AI! | ChatClient, Ollama setup | ✅ Complete |
 | 2 | Core Concepts | Tokens, Messages, ChatOptions | ✅ Complete |
-| 3 | Connecting to Llama | Model switching, Ollama config | 🚧 Work in progress |
+| 3 | Running and Comparing Multiple Models with Ollama | Model switching, side-by-side comparison | ✅ Complete |
 | 4 | Prompt Engineering | PromptTemplate, system messages | 🚧 Work in progress |
 | 5 | Structured Output | BeanOutputConverter, JSON responses | 🚧 Work in progress |
 | 6 | Chat Memory | Multi-turn conversations | 🚧 Work in progress |
