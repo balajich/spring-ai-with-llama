@@ -35,6 +35,7 @@ if [[ -z "$CHAPTER" ]]; then
     echo "    $0 chapter-01   ->  chapter-01-hr-chat.feature"
     echo "    $0 chapter-02   ->  chapter-02-core-concepts.feature"
     echo "    $0 chapter-03   ->  chapter-03-comparing-models.feature"
+    echo "    $0 chapter-04   ->  chapter-04-prompt-engineering.feature"
     echo ""
     exit 1
 fi
@@ -54,10 +55,14 @@ case "$CHAPTER" in
         APP_MODULE="chapter-03-comparing-models"
         TEST_CLASS="Chapter03Test"
         ;;
+    chapter-04)
+        APP_MODULE="chapter-04-prompt-engineering"
+        TEST_CLASS="Chapter04Test"
+        ;;
     *)
         echo ""
         echo "  ERROR: Unknown chapter '$CHAPTER'"
-        echo "  Available: chapter-01, chapter-02, chapter-03"
+        echo "  Available: chapter-01, chapter-02, chapter-03, chapter-04"
         echo ""
         exit 1
         ;;
