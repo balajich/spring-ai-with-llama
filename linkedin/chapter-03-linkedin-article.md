@@ -154,6 +154,9 @@ Chapter 4 covers **Prompt Engineering** — using `PromptTemplate` to inject dyn
 
 ---
 
-The full code for this chapter is open source. Drop a comment if you have questions or want to see a specific model comparison.
+Full source code for all chapters is on GitHub — if you find it useful, please drop a ⭐ it helps others discover the series:
+[github.com/balajich/spring-ai-with-llama](https://github.com/balajich/spring-ai-with-llama)
+
+Drop a comment if you have questions or want to see a specific model comparison.
 
 *#SpringAI #Java #SpringBoot #Ollama #Llama #OpenSource #AI #LLM #BackendDevelopment*
