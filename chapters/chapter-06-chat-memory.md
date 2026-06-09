@@ -1,9 +1,5 @@
 # Chapter 6 — Chat Memory: Multi-Turn Conversations
 
-> ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
-
-> **What you will build:** An onboarding chatbot for Raj — a stateful `/hr/onboard/chat` endpoint that remembers the full conversation so Raj can ask follow-up questions without repeating himself.
-
 ---
 
 ## The Problem We Are Solving
@@ -141,5 +137,11 @@ In this chapter you will:
 ## What's Next
 
 In **Chapter 7**, we build the most powerful feature yet — RAG (Retrieval Augmented Generation). Sarah uploads TechCorp's policy documents and employees can ask questions that are answered from the actual company policies, not from Llama's general training.
+
+---
+
+## References
+
+- [Spring AI — Chat Memory](https://docs.spring.io/spring-ai/reference/api/chat-memory.html)
 
 *Code for this chapter: [`code/chapter-06-chat-memory/`](../code/chapter-06-chat-memory/)*
