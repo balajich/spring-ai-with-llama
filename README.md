@@ -21,7 +21,7 @@ The book is built around one evolving real-world project: **SmartHR Assistant**,
 | 3 | Running and Comparing Multiple Models with Ollama                 | Model switching, side-by-side comparison       | ✅ Complete |
 | 4 | Prompt Engineering                                                | PromptTemplate, system messages                | ✅ Complete |
 | 5 | Structured Output-Asking the AI to Serve JSON Instead of Raw Text | BeanOutputConverter, JSON responses | ✅ Complete |
-| 6 | Chat Memory                                                       | Multi-turn conversations                       | 🚧 Work in progress |
+| 6 | Chat Memory                                                       | Multi-turn conversations                       | ✅ Complete |
 | 7 | RAG                                                               | Vector stores, embeddings, document Q&A        | 🚧 Work in progress |
 | 8 | Function Calling                                                  | Tool use, Java method binding                  | 🚧 Work in progress |
 | 9 | Multimodality                                                     | Images and text, vision models                 | 🚧 Work in progress |
