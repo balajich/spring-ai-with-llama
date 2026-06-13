@@ -1,7 +1,5 @@
 # Chapter 7 — RAG: Retrieval Augmented Generation
 
-> ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
-
 > **What you will build:** A policy document Q&A system — Sarah uploads TechCorp's HR policy PDFs and employees get answers that cite the actual company policy, not generic AI guesses.
 
 ---
