@@ -23,16 +23,18 @@ The book is built around one evolving real-world project: **SmartHR Assistant**,
 | 5 | Structured Output-Asking the AI to Serve JSON Instead of Raw Text | BeanOutputConverter, JSON responses | ✅ Complete |
 | 6 | Chat Memory                                                       | Multi-turn conversations                       | ✅ Complete |
 | 7 | RAG                                                               | Vector stores, embeddings, document Q&A        | ✅ Complete |
-| 8 | Function Calling                                                  | Tool use, Java method binding                  | 🚧 Work in progress |
-| 9 | Multimodality                                                     | Images and text, vision models                 | 🚧 Work in progress |
-| 10 | Streaming API                                                     | Real-time token-by-token responses             | 🚧 Work in progress |
-| 11 | Document Intelligence                                             | PDFs, Word docs, web pages                     | 🚧 Work in progress |
-| 12 | Semantic Search                                                   | Embeddings, vector similarity                  | 🚧 Work in progress |
-| 13 | AI Agents                                                         | Autonomous workflows, tool chaining            | 🚧 Work in progress |
-| 14 | Evaluation                                                        | Testing and scoring AI responses               | 🚧 Work in progress |
-| 15 | Performance and Caching                                           | Virtual threads, response caching              | 🚧 Work in progress |
-| 16 | Security and Safety                                               | Prompt injection, PII scrubbing                | 🚧 Work in progress |
-| 17 | Production Deployment                                             | Docker, Ollama container, observability        | 🚧 Work in progress |
+| 8 | Persistent Vector Store with PgVector                             | PostgreSQL + pgvector, HNSW index              | ✅ Complete |
+| 9 | Graph RAG with Neo4j                                              | Graph database, policy relationships, Graph RAG | ✅ Complete |
+| 10 | Function Calling                                                  | Tool use, Java method binding                  | 🚧 Work in progress |
+| 11 | Multimodality                                                     | Images and text, vision models                 | 🚧 Work in progress |
+| 12 | Streaming API                                                     | Real-time token-by-token responses             | 🚧 Work in progress |
+| 13 | Document Intelligence                                             | PDFs, Word docs, web pages                     | 🚧 Work in progress |
+| 14 | Semantic Search                                                   | Embeddings, vector similarity                  | 🚧 Work in progress |
+| 15 | AI Agents                                                         | Autonomous workflows, tool chaining            | 🚧 Work in progress |
+| 16 | Evaluation                                                        | Testing and scoring AI responses               | 🚧 Work in progress |
+| 17 | Performance and Caching                                           | Virtual threads, response caching              | 🚧 Work in progress |
+| 18 | Security and Safety                                               | Prompt injection, PII scrubbing                | 🚧 Work in progress |
+| 19 | Production Deployment                                             | Docker, Ollama container, observability        | 🚧 Work in progress |
 
 ---
 

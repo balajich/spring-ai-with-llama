@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: SmartHR Assistant
+
+  neo4j:
+    uri: bolt://localhost:7687
+    authentication:
+      username: neo4j
+      password: smarthr
+
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        options:
+          model: llama3.2
+          temperature: 0.3
+          num-predict: 500
+      embedding:
+        options:
+          model: nomic-embed-text
+    vectorstore:
+      neo4j:
+        initialize-schema: true
+        embedding-dimension: 768
+        distance-type: COSINE
+
+server:
+  port: 8080
