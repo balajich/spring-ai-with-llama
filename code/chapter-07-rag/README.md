@@ -25,6 +25,39 @@ ollama pull nomic-embed-text
 
 Two models are needed because they do fundamentally different jobs:
 
+<svg viewBox="0 0 640 280" xmlns="http://www.w3.org/2000/svg" role="img" font-family="'Segoe UI', system-ui, sans-serif">
+  <title>RAG High-Level Architecture</title>
+  <desc>Spring AI in the JVM calls nomic-embed-text for embeddings and llama3.2 for answers, both running in Ollama.</desc>
+  <rect width="640" height="280" fill="#f8f9fa" rx="12"/>
+  <rect x="40" y="80" width="180" height="120" rx="10" fill="white" stroke="#e67e22" stroke-width="2"/>
+  <text x="130" y="108" text-anchor="middle" font-size="13" font-weight="700" fill="#7a3b00">Spring AI</text>
+  <text x="130" y="128" text-anchor="middle" font-size="11" fill="#999">JVM</text>
+  <text x="130" y="155" text-anchor="middle" font-size="10" fill="#555">QuestionAnswerAdvisor</text>
+  <text x="130" y="171" text-anchor="middle" font-size="10" fill="#555">SimpleVectorStore</text>
+  <text x="130" y="187" text-anchor="middle" font-size="10" fill="#555">ChatClient</text>
+  <rect x="420" y="40" width="180" height="200" rx="10" fill="white" stroke="#adb5bd" stroke-width="2"/>
+  <text x="510" y="72" text-anchor="middle" font-size="13" font-weight="700" fill="#333">Ollama</text>
+  <text x="510" y="90" text-anchor="middle" font-size="11" fill="#999">localhost:11434</text>
+  <rect x="440" y="104" width="140" height="52" rx="8" fill="#e0f0ff" stroke="#5ba3d9" stroke-width="1.5"/>
+  <text x="510" y="126" text-anchor="middle" font-size="11" font-weight="700" fill="#1a5f96">nomic-embed-text</text>
+  <text x="510" y="144" text-anchor="middle" font-size="10" fill="#2d6fa4">Embedding Model</text>
+  <rect x="440" y="172" width="140" height="52" rx="8" fill="#e8f5e9" stroke="#5aaa6b" stroke-width="1.5"/>
+  <text x="510" y="194" text-anchor="middle" font-size="11" font-weight="700" fill="#1b6b2f">llama3.2</text>
+  <text x="510" y="212" text-anchor="middle" font-size="10" fill="#2a7d40">Generative Model</text>
+  <path d="M 220 118 L 440 130" fill="none" stroke="#5ba3d9" stroke-width="1.8" stroke-dasharray="6,3" marker-end="url(#arr-blue)"/>
+  <text x="330" y="110" text-anchor="middle" font-size="10" fill="#1a5f96">embed text</text>
+  <path d="M 440 142 L 220 132" fill="none" stroke="#5ba3d9" stroke-width="1.8" marker-end="url(#arr-blue)"/>
+  <text x="330" y="152" text-anchor="middle" font-size="10" fill="#1a5f96">float[ ]</text>
+  <path d="M 220 162 L 440 186" fill="none" stroke="#5aaa6b" stroke-width="1.8" stroke-dasharray="6,3" marker-end="url(#arr-green)"/>
+  <text x="330" y="168" text-anchor="middle" font-size="10" fill="#1b6b2f">prompt + context</text>
+  <path d="M 440 200 L 220 176" fill="none" stroke="#5aaa6b" stroke-width="1.8" marker-end="url(#arr-green)"/>
+  <text x="330" y="204" text-anchor="middle" font-size="10" fill="#1b6b2f">answer</text>
+  <defs>
+    <marker id="arr-blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#5ba3d9"/></marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#5aaa6b"/></marker>
+  </defs>
+</svg>
+
 - **`llama3.2`** — the generative model. It reads the retrieved policy chunks and composes a natural language answer.
 - **`nomic-embed-text`** — the embedding model. It converts text into a float array (a vector) that captures semantic meaning. This runs in Ollama; Spring AI cannot produce embeddings on its own.
 

@@ -1,0 +1,89 @@
+TechCorp HR Policy Manual — Version 2024.1
+
+=== ANNUAL LEAVE ===
+
+All full-time employees are entitled to 20 days of paid annual leave per calendar year.
+Part-time employees receive leave on a pro-rata basis.
+Leave must be approved by your line manager at least 5 business days in advance.
+Unused leave of up to 5 days may be carried over to the following year.
+Leave encashment is not permitted except upon resignation or termination.
+
+=== SICK LEAVE ===
+
+Employees are entitled to 10 days of paid sick leave per year.
+A medical certificate is required for absences exceeding 2 consecutive days.
+Sick leave does not carry over to the following year.
+Extended illness beyond 10 days is covered under TechCorp's income protection policy.
+
+=== PARENTAL LEAVE ===
+
+Primary caregivers are entitled to 16 weeks of fully paid parental leave.
+Secondary caregivers are entitled to 4 weeks of fully paid parental leave.
+Leave may commence up to 4 weeks before the expected due date.
+Employees must give at least 8 weeks notice before taking parental leave.
+Parental leave can be extended by up to 12 months unpaid upon request.
+
+=== REMOTE WORK POLICY ===
+
+Employees may work remotely up to 3 days per week with manager approval.
+At least 2 days per week must be worked from a TechCorp office.
+Remote work arrangements are reviewed quarterly.
+Employees are responsible for maintaining a safe and productive home working environment.
+A home office allowance of $500 per year is provided to eligible remote workers.
+
+=== PERFORMANCE REVIEWS ===
+
+Performance reviews are conducted twice a year: in June and December.
+Each review includes a self-assessment and a manager assessment.
+Ratings are: Exceeds Expectations, Meets Expectations, Needs Improvement.
+Salary reviews are aligned with the December performance cycle.
+Employees rated Needs Improvement twice consecutively enter a Performance Improvement Plan (PIP).
+
+=== LEARNING AND DEVELOPMENT ===
+
+Every employee receives an annual learning budget of $1,500.
+This budget covers courses, conferences, certifications, and books.
+Requests must be submitted through the TechCorp Learning Portal.
+Time off for approved training is granted without impacting annual leave.
+TechCorp offers an internal mentorship programme matching junior and senior staff.
+
+=== CODE OF CONDUCT ===
+
+All employees must treat colleagues, clients, and partners with respect.
+Harassment, bullying, or discrimination of any kind is not tolerated.
+Violations should be reported to HR or through the anonymous Ethics Hotline.
+TechCorp has a zero-tolerance policy for fraud, bribery, or corruption.
+Employees must keep confidential company information secure at all times.
+
+=== IT AND EQUIPMENT ===
+
+New employees receive a laptop on their first day from the IT department.
+Standard issue laptops are MacBook Pro (engineers) or Dell Latitude (operations).
+Peripherals (monitor, keyboard, mouse) are available upon request.
+Personal devices used for work must be registered with IT Security.
+All company devices must have full-disk encryption enabled.
+Employees must not install unlicensed software on company devices.
+
+=== ONBOARDING ===
+
+New employees complete a structured 30-day onboarding programme.
+Week 1 focuses on company orientation, tools setup, and meeting the team.
+Weeks 2–4 involve shadowing, hands-on projects, and completing mandatory compliance training.
+Each new hire is assigned a dedicated onboarding buddy for the first 90 days.
+Onboarding is managed through the TechCorp HRIS portal.
+
+=== EXPENSES AND REIMBURSEMENT ===
+
+Business expenses must be submitted within 30 days of the expense date.
+Receipts are required for all expenses above $25.
+Travel bookings must be made through the approved TechCorp travel portal.
+Alcohol is not reimbursable unless pre-approved for a client entertainment event.
+Reimbursement is processed within 10 business days of approval.
+
+=== HEALTH AND WELLBEING ===
+
+TechCorp provides private health insurance for all employees from day one.
+An Employee Assistance Programme (EAP) offers free confidential counselling.
+Employees have access to a subsidised gym membership scheme.
+Mental health days are included within the sick leave entitlement.
+A wellbeing allowance of $300 per year is available for fitness or mindfulness activities.

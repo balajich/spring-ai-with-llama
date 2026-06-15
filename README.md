@@ -14,25 +14,41 @@ The book is built around one evolving real-world project: **SmartHR Assistant**,
 
 ## What's Covered
 
-| Chapter | Topic                                                             | Concept                                        | Status |
-|---------|-------------------------------------------------------------------|------------------------------------------------|--------|
-| 1 | Hello, Spring AI!                                                 | ChatClient, Ollama setup                       | ✅ Complete |
-| 2 | Core Concepts                                                     | Tokens, Messages, ChatOptions                  | ✅ Complete |
-| 3 | Running and Comparing Multiple Models with Ollama                 | Model switching, side-by-side comparison       | ✅ Complete |
-| 4 | Prompt Engineering                                                | PromptTemplate, system messages                | ✅ Complete |
-| 5 | Structured Output-Asking the AI to Serve JSON Instead of Raw Text | BeanOutputConverter, JSON responses | ✅ Complete |
-| 6 | Chat Memory                                                       | Multi-turn conversations                       | ✅ Complete |
-| 7 | RAG                                                               | Vector stores, embeddings, document Q&A        | ✅ Complete |
-| 8 | Function Calling                                                  | Tool use, Java method binding                  | 🚧 Work in progress |
-| 9 | Multimodality                                                     | Images and text, vision models                 | 🚧 Work in progress |
-| 10 | Streaming API                                                     | Real-time token-by-token responses             | 🚧 Work in progress |
-| 11 | Document Intelligence                                             | PDFs, Word docs, web pages                     | 🚧 Work in progress |
-| 12 | Semantic Search                                                   | Embeddings, vector similarity                  | 🚧 Work in progress |
-| 13 | AI Agents                                                         | Autonomous workflows, tool chaining            | 🚧 Work in progress |
-| 14 | Evaluation                                                        | Testing and scoring AI responses               | 🚧 Work in progress |
-| 15 | Performance and Caching                                           | Virtual threads, response caching              | 🚧 Work in progress |
-| 16 | Security and Safety                                               | Prompt injection, PII scrubbing                | 🚧 Work in progress |
-| 17 | Production Deployment                                             | Docker, Ollama container, observability        | 🚧 Work in progress |
+| Chapter | Topic | Concept | Status |
+|---------|-------|---------|--------|
+| 1 | Hello, Spring AI! | ChatClient, Ollama setup | ✅ Complete |
+| 2 | Core Concepts | Tokens, Messages, ChatOptions | ✅ Complete |
+| 3 | Running and Comparing Multiple Models with Ollama | Model switching, side-by-side comparison | ✅ Complete |
+| 4 | Prompt Engineering | PromptTemplate, system messages | ✅ Complete |
+| 5 | Structured Output — Asking the AI to Serve JSON Instead of Raw Text | BeanOutputConverter, JSON responses | ✅ Complete |
+| 6 | Chat Memory | Multi-turn conversations, session IDs | ✅ Complete |
+| 7 | RAG with SimpleVectorStore | Embeddings, in-memory vector store, document Q&A | ✅ Complete |
+| 8 | Persistent Vector Store with PgVector | PostgreSQL + pgvector, HNSW index, idempotent ingestion | ✅ Complete |
+| 9 | Graph RAG with Neo4j | Graph database, policy relationships, cross-topic retrieval | ✅ Complete |
+| 10 | Function Calling | Tool use, Java method binding | 🚧 In progress |
+| 11 | Multimodality | Images and text, vision models | 🚧 In progress |
+| 12 | Streaming API | Real-time token-by-token responses | 🚧 In progress |
+| 13 | Document Intelligence | PDFs, Word docs, web pages | 🚧 In progress |
+| 14 | Semantic Search | Embeddings, vector similarity | 🚧 In progress |
+| 15 | AI Agents | Autonomous workflows, tool chaining | 🚧 In progress |
+| 16 | Evaluation | Testing and scoring AI responses | 🚧 In progress |
+| 17 | Performance and Caching | Virtual threads, response caching | 🚧 In progress |
+| 18 | Security and Safety | Prompt injection, PII scrubbing | 🚧 In progress |
+| 19 | Production Deployment | Docker, Ollama container, observability | 🚧 In progress |
+
+---
+
+## Vector Store Progression (Chapters 7 → 8 → 9)
+
+One of the key themes of this book is showing how Spring AI's `VectorStore` interface lets you swap backends with a single bean change:
+
+| Chapter | Store | Persistence | Search | Extra Setup |
+|---------|-------|-------------|--------|-------------|
+| 7 | `SimpleVectorStore` | In-memory — lost on restart | O(N) brute-force | None |
+| 8 | `PgVectorStore` | PostgreSQL — survives restarts | O(log N) HNSW index | Docker |
+| 9 | `Neo4jVectorStore` | Neo4j — graph + vector | O(log N) + graph traversal | Docker |
+
+The controller, `QuestionAnswerAdvisor`, and API endpoints are **identical across all three chapters**.
 
 ---
 
@@ -44,7 +60,14 @@ Each chapter has its own self-contained, runnable Spring Boot project under `cod
 code/
 ├── chapter-01-hello-spring-ai/
 ├── chapter-02-core-concepts/
-└── ...
+├── chapter-03-comparing-models/
+├── chapter-04-prompt-engineering/
+├── chapter-05-structured-output/
+├── chapter-06-chat-memory/
+├── chapter-07-rag/
+├── chapter-08-pgvector/          ← requires Docker (PostgreSQL + pgvector)
+├── chapter-09-neo4j/             ← requires Docker (Neo4j)
+└── tests/                        ← Karate BDD API tests for all chapters
 ```
 
 ### Quick Start (Chapter 1)
@@ -64,10 +87,35 @@ curl -s -X POST http://localhost:8080/hr/ask \
   -d '{"question": "What is the maternity leave policy?"}'
 ```
 
+### Running Tests
+
+From the `code/tests/` directory:
+
+```bash
+./run-tests.sh chapter-01
+./run-tests.sh chapter-07
+./run-tests.sh chapter-08   # requires Docker: docker-compose up -d in chapter-08-pgvector/
+./run-tests.sh chapter-09   # requires Docker: docker-compose up -d in chapter-09-neo4j/
+```
+
 ---
 
 ## Prerequisites
 
-- Java 21+
-- Maven 3.8+
-- [Ollama](https://ollama.ai) with `llama3.2` pulled
+| Tool | Required for | Install |
+|------|-------------|---------|
+| Java 21+ | All chapters | [adoptium.net](https://adoptium.net) |
+| Maven 3.8+ | All chapters | [maven.apache.org](https://maven.apache.org) |
+| Ollama | All chapters | [ollama.ai](https://ollama.ai) |
+| Docker | Chapters 8, 9 | [docker.com](https://docker.com) |
+
+```bash
+ollama pull llama3.2          # chapters 1–9
+ollama pull nomic-embed-text  # chapters 7–9 (embedding model)
+```
+
+---
+
+## Source Code
+
+Full source code for all chapters: [github.com/balajich/spring-ai-with-llama](https://github.com/balajich/spring-ai-with-llama)

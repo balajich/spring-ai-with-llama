@@ -39,6 +39,8 @@ if [[ -z "$CHAPTER" ]]; then
     echo "    $0 chapter-05   ->  chapter-05-structured-output.feature"
     echo "    $0 chapter-06   ->  chapter-06-chat-memory.feature"
     echo "    $0 chapter-07   ->  chapter-07-rag.feature"
+    echo "    $0 chapter-08   ->  chapter-08-pgvector.feature"
+    echo "    $0 chapter-09   ->  chapter-09-neo4j.feature"
     echo ""
     exit 1
 fi
@@ -74,10 +76,18 @@ case "$CHAPTER" in
         APP_MODULE="chapter-07-rag"
         TEST_CLASS="Chapter07Test"
         ;;
+    chapter-08)
+        APP_MODULE="chapter-08-pgvector"
+        TEST_CLASS="Chapter08Test"
+        ;;
+    chapter-09)
+        APP_MODULE="chapter-09-neo4j"
+        TEST_CLASS="Chapter09Test"
+        ;;
     *)
         echo ""
         echo "  ERROR: Unknown chapter '$CHAPTER'"
-        echo "  Available: chapter-01, chapter-02, chapter-03, chapter-04, chapter-05, chapter-06, chapter-07"
+        echo "  Available: chapter-01, chapter-02, chapter-03, chapter-04, chapter-05, chapter-06, chapter-07, chapter-08, chapter-09"
         echo ""
         exit 1
         ;;
