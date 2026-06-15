@@ -9,6 +9,7 @@ import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.ai.vectorstore.neo4j.Neo4jVectorStore;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
@@ -23,18 +24,21 @@ public class RagConfig {
 
     @Bean
     public VectorStore vectorStore(EmbeddingModel embeddingModel, Driver driver) {
-        Neo4jVectorStore store = Neo4jVectorStore.builder(driver, embeddingModel)
+        return Neo4jVectorStore.builder(driver, embeddingModel)
                 .initializeSchema(true)
                 .build();
-        ingestPolicy(store, driver);
-        return store;
     }
 
-    private void ingestPolicy(Neo4jVectorStore store, Driver driver) {
-        TikaDocumentReader reader = new TikaDocumentReader(policyResource);
-        List<Document> chunks = new TokenTextSplitter().apply(reader.read());
-        store.add(chunks);
-        addPolicyRelationships(driver);
+    // Runs after Spring has fully initialised all beans (including Neo4jVectorStore
+    // afterPropertiesSet()) so the schema and type registration are complete.
+    @Bean
+    public ApplicationRunner ingestPolicy(VectorStore vectorStore, Driver driver) {
+        return args -> {
+            TikaDocumentReader reader = new TikaDocumentReader(policyResource);
+            List<Document> chunks = new TokenTextSplitter().apply(reader.read());
+            vectorStore.add(chunks);
+            addPolicyRelationships(driver);
+        };
     }
 
     // Connect related policy sections as graph edges so Graph RAG can traverse them.
