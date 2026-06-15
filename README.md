@@ -119,3 +119,4 @@ ollama pull nomic-embed-text  # chapters 7–9 (embedding model)
 ## Source Code
 
 Full source code for all chapters: [github.com/balajich/spring-ai-with-llama](https://github.com/balajich/spring-ai-with-llama)
+- Please leave a star if you found it helpful. 
