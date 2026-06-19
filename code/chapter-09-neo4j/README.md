@@ -31,7 +31,7 @@ docker-compose up -d
 ```
 
 Open the Neo4j Browser at **http://localhost:7474** to visually explore the policy graph.
-Login: `neo4j` / `smarthr`
+Login: `neo4j` / `smarthr123`
 
 ### 3. Start Ollama
 
