@@ -1,6 +1,6 @@
 package com.techcorp.smarthr.controller;
 
-import com.techcorp.smarthr.model.IngestResponse;
+import com.techcorp.smarthr.model.PolicyIngestResponse;
 import com.techcorp.smarthr.model.PolicyAskRequest;
 import com.techcorp.smarthr.model.PolicyIngestRequest;
 import com.techcorp.smarthr.model.PolicyResponse;
@@ -47,10 +47,10 @@ public class PolicyController {
     }
 
     @PostMapping("/ingest")
-    public IngestResponse ingest(@RequestBody PolicyIngestRequest request) {
+    public PolicyIngestResponse ingest(@RequestBody PolicyIngestRequest request) {
         List<Document> docs = List.of(new Document(request.text()));
         List<Document> chunks = splitter.apply(docs);
         vectorStore.add(chunks);
-        return new IngestResponse(chunks.size(), "Ingested " + chunks.size() + " chunk(s) into the policy store.");
+        return new PolicyIngestResponse(chunks.size(), "Ingested " + chunks.size() + " chunk(s) into the policy store.");
     }
 }
