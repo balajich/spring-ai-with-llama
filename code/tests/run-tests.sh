@@ -8,17 +8,21 @@
 #
 # What it does (in order):
 #   1. Validates the chapter argument
-#   2. Builds the chapter's Spring Boot app  (mvn clean package)
-#   3. Starts the app in the background      (mvn spring-boot:run)
-#   4. Polls port 8080 until the app is ready
-#   5. Runs the matching Karate feature file  (mvn test -Dtest=ChapterXXTest)
-#   6. Stops the app (always — even on test failure or Ctrl-C)
+#   2. Builds every app required for the chapter  (mvn clean package)
+#   3. Starts every app in the background, in order (mvn spring-boot:run)
+#   4. Polls each app's port until it is ready
+#   5. Runs the matching Karate feature file       (mvn test -Dtest=ChapterXXTest)
+#   6. Stops every app (always — even on test failure or Ctrl-C)
 #   7. Exits with the Karate exit code (0 = all passed, non-zero = failure)
+#
+# Most chapters are a single Spring Boot app on port 8080. Chapter 11 is a
+# multi-module project with three apps — EXTRA_MODULES/EXTRA_PORTS below
+# handle that case generically (build + start before the main app, stop after).
 #
 # Requirements:
 #   - Java 21+, Maven 3.8+
 #   - Ollama running locally with llama3.2 pulled (ollama pull llama3.2)
-#   - Nothing else occupying port 8080
+#   - Nothing else occupying the ports the chapter uses
 # =============================================================================
 
 set -euo pipefail
@@ -41,11 +45,20 @@ if [[ -z "$CHAPTER" ]]; then
     echo "    $0 chapter-07   ->  chapter-07-rag.feature"
     echo "    $0 chapter-08   ->  chapter-08-pgvector.feature"
     echo "    $0 chapter-09   ->  chapter-09-neo4j.feature"
+    echo "    $0 chapter-10   ->  chapter-10-function-calling.feature"
+    echo "    $0 chapter-11   ->  chapter-11-mcp.feature (starts calendar-service, mcp-server, mcp-client)"
     echo ""
     exit 1
 fi
 
 # ── Chapter -> module + test class mapping ────────────────────────────────────
+#
+# EXTRA_MODULES / EXTRA_PORTS are parallel arrays of additional apps that must
+# be built and started (in array order) before APP_MODULE, and stopped (in
+# reverse order) after the test run. Leave empty for single-app chapters.
+
+EXTRA_MODULES=()
+EXTRA_PORTS=()
 
 case "$CHAPTER" in
     chapter-01)
@@ -84,10 +97,23 @@ case "$CHAPTER" in
         APP_MODULE="chapter-09-neo4j"
         TEST_CLASS="Chapter09Test"
         ;;
+    chapter-10)
+        APP_MODULE="chapter-10-function-calling"
+        TEST_CLASS="Chapter10Test"
+        ;;
+    chapter-11)
+        # Multi-module project: code/chapter-11-mcp-integration/{calendar-service,mcp-server,mcp-client}
+        # Start order matters: calendar-service first, then mcp-server (calls it),
+        # then mcp-client last (connects to mcp-server, the app under test on :8080).
+        APP_MODULE="chapter-11-mcp-integration/mcp-client"
+        TEST_CLASS="Chapter11Test"
+        EXTRA_MODULES=("chapter-11-mcp-integration/calendar-service" "chapter-11-mcp-integration/mcp-server")
+        EXTRA_PORTS=(8082 8081)
+        ;;
     *)
         echo ""
         echo "  ERROR: Unknown chapter '$CHAPTER'"
-        echo "  Available: chapter-01, chapter-02, chapter-03, chapter-04, chapter-05, chapter-06, chapter-07, chapter-08, chapter-09"
+        echo "  Available: chapter-01, chapter-02, chapter-03, chapter-04, chapter-05, chapter-06, chapter-07, chapter-08, chapter-09, chapter-10, chapter-11"
         echo ""
         exit 1
         ;;
@@ -101,6 +127,9 @@ APP_DIR="$CODE_DIR/$APP_MODULE"
 APP_PORT=8080
 APP_LOG="/tmp/smarthr-${CHAPTER}.log"
 
+EXTRA_PIDS=()
+EXTRA_LOGS=()
+
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
 print_banner() {
@@ -112,6 +141,9 @@ print_banner() {
     echo "  Test     : $TEST_CLASS"
     echo "  App dir  : $APP_DIR"
     echo "  App log  : $APP_LOG"
+    if [[ ${#EXTRA_MODULES[@]} -gt 0 ]]; then
+        echo "  Extra apps: ${EXTRA_MODULES[*]} (ports: ${EXTRA_PORTS[*]})"
+    fi
     echo "============================================================"
     echo ""
 }
@@ -120,6 +152,7 @@ print_banner() {
 # A 404 is fine — it means the server is alive.
 wait_for_port() {
     local port=$1
+    local log=$2
     local max_seconds=90
     local interval=3
     local elapsed=0
@@ -139,7 +172,7 @@ wait_for_port() {
         if [[ $elapsed -ge $max_seconds ]]; then
             echo ""
             echo "  ERROR: App did not respond within ${max_seconds}s."
-            echo "         Check the log: $APP_LOG"
+            echo "         Check the log: $log"
             return 1
         fi
 
@@ -192,20 +225,29 @@ cleanup() {
     local exit_code=$?
     echo ""
     echo "------------------------------------------------------------"
-    echo "  Stopping Spring Boot app..."
+    echo "  Stopping Spring Boot app(s)..."
 
     if [[ -n "$MAVEN_PID" ]]; then
-        # Kill Maven and its entire child process tree
         kill "$MAVEN_PID" 2>/dev/null || true
-        # Give the JVM a moment to shut down gracefully
         sleep 2
     fi
-
-    # Kill any remaining process on the port (the forked JVM may outlive Maven)
     kill_port "$APP_PORT"
-    sleep 1
 
-    echo "  App stopped."
+    # Stop extra apps in reverse start order
+    for (( i=${#EXTRA_PIDS[@]}-1; i>=0; i-- )); do
+        if [[ -n "${EXTRA_PIDS[$i]}" ]]; then
+            kill "${EXTRA_PIDS[$i]}" 2>/dev/null || true
+        fi
+    done
+    if [[ ${#EXTRA_PIDS[@]} -gt 0 ]]; then
+        sleep 2
+        for port in "${EXTRA_PORTS[@]}"; do
+            kill_port "$port"
+        done
+    fi
+
+    sleep 1
+    echo "  App(s) stopped."
     echo "------------------------------------------------------------"
     echo ""
 }
@@ -216,27 +258,58 @@ trap cleanup EXIT
 
 print_banner
 
-# ── 2. Build the chapter app ──────────────────────────────────────────────────
+# ── 2. Build every app ────────────────────────────────────────────────────────
 
-echo "[1/4] Building $APP_MODULE ..."
+STEP=1
+for module in "${EXTRA_MODULES[@]}"; do
+    echo "[${STEP}] Building $module ..."
+    cd "$CODE_DIR/$module"
+    mvn clean package -DskipTests --no-transfer-progress -q
+    echo "    Build OK"
+    STEP=$((STEP + 1))
+done
+
+echo "[${STEP}] Building $APP_MODULE ..."
 cd "$APP_DIR"
 mvn clean package -DskipTests --no-transfer-progress -q
-echo "      Build OK"
+echo "    Build OK"
 echo ""
 
-# ── 3. Start the app in the background ───────────────────────────────────────
+# ── 3. Start every app in order, waiting for each to be ready ────────────────
 
-echo "[2/4] Starting Spring Boot app on port $APP_PORT ..."
-echo "      Log file: $APP_LOG"
+for i in "${!EXTRA_MODULES[@]}"; do
+    module="${EXTRA_MODULES[$i]}"
+    port="${EXTRA_PORTS[$i]}"
+    log="/tmp/smarthr-${CHAPTER}-$(basename "$module").log"
+    EXTRA_LOGS+=("$log")
+
+    echo "Starting $module on port $port ..."
+    echo "  Log file: $log"
+    cd "$CODE_DIR/$module"
+    mvn spring-boot:run --no-transfer-progress > "$log" 2>&1 &
+    EXTRA_PIDS+=("$!")
+    echo "  Maven PID: $!"
+
+    if ! wait_for_port "$port" "$log"; then
+        echo ""
+        echo "  Aborting — $module failed to start. See log: $log"
+        exit 1
+    fi
+    echo ""
+done
+
+echo "Starting $APP_MODULE on port $APP_PORT ..."
+echo "  Log file: $APP_LOG"
+cd "$APP_DIR"
 mvn spring-boot:run --no-transfer-progress > "$APP_LOG" 2>&1 &
 MAVEN_PID=$!
-echo "      Maven PID: $MAVEN_PID"
+echo "  Maven PID: $MAVEN_PID"
 echo ""
 
-# ── 4. Wait until the app is accepting connections ────────────────────────────
+# ── 4. Wait until the main app is accepting connections ───────────────────────
 
-echo "[3/4] Waiting for app to be ready ..."
-if ! wait_for_port "$APP_PORT"; then
+echo "Waiting for $APP_MODULE to be ready ..."
+if ! wait_for_port "$APP_PORT" "$APP_LOG"; then
     echo ""
     echo "  Aborting — app failed to start. See log: $APP_LOG"
     exit 1
@@ -245,7 +318,7 @@ echo ""
 
 # ── 5. Run Karate tests ───────────────────────────────────────────────────────
 
-echo "[4/4] Running Karate tests ($TEST_CLASS) ..."
+echo "Running Karate tests ($TEST_CLASS) ..."
 echo ""
 
 cd "$TESTS_DIR"

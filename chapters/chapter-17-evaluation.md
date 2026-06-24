@@ -1,4 +1,4 @@
-# Chapter 14 — Evaluation: Testing and Scoring AI Responses
+# Chapter 17 — Evaluation: Testing and Scoring AI Responses
 
 > ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
 
@@ -148,6 +148,6 @@ In this chapter you will:
 
 ## What's Next
 
-In **Chapter 15**, we focus on performance — prompt caching, batch processing, and how to handle hundreds of AI requests efficiently without overwhelming Ollama.
+In **Chapter 18**, we focus on performance — prompt caching, batch processing, and how to handle hundreds of AI requests efficiently without overwhelming Ollama.
 
-*Code for this chapter: [`code/chapter-14-evaluation/`](../code/chapter-14-evaluation/)*
+*Code for this chapter: [`code/chapter-17-evaluation/`](../code/chapter-17-evaluation/)*

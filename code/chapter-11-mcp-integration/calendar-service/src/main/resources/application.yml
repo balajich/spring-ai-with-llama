@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: SmartHR Calendar Service
+
+server:
+  port: 8082

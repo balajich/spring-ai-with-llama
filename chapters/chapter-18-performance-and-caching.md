@@ -1,4 +1,4 @@
-# Chapter 15 — Performance and Caching: Handling Scale Efficiently
+# Chapter 18 — Performance and Caching: Handling Scale Efficiently
 
 > ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
 
@@ -154,6 +154,6 @@ In this chapter you will:
 
 ## What's Next
 
-In **Chapter 16**, we harden the SmartHR bot for production — handling prompt injection attacks, sanitising user input, protecting PII, and ensuring the bot cannot be misused by malicious employees.
+In **Chapter 19**, we harden the SmartHR bot for production — handling prompt injection attacks, sanitising user input, protecting PII, and ensuring the bot cannot be misused by malicious employees.
 
-*Code for this chapter: [`code/chapter-15-performance-and-caching/`](../code/chapter-15-performance-and-caching/)*
+*Code for this chapter: [`code/chapter-18-performance-and-caching/`](../code/chapter-18-performance-and-caching/)*

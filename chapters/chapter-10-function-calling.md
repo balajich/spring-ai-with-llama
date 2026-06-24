@@ -1,8 +1,6 @@
-# Chapter 8 — Function Calling: Tool Use and Java Method Binding
+# Chapter 10 — Function Calling: Tool Use and Java Method Binding
 
-> ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
-
-> **What you will build:** An interview scheduling assistant — the AI converses with Lisa the Hiring Manager, checks real calendar availability by calling a Java method, and books interview slots automatically.
+> **What you will build:** An interview scheduling assistant — the AI converses with Lisa the Hiring Manager, checks calendar availability and books interview slots by calling real Java methods, instead of just talking about them.
 
 ---
 
@@ -12,19 +10,19 @@ Lisa asks the SmartHR bot:
 
 > "Can you schedule an interview for the Java developer candidate next Tuesday at 2pm?"
 
-Currently, the bot can only answer questions — it cannot take actions. Lisa still has to open the calendar herself and book it manually.
+Every chatbot so far in this book can only answer questions — it cannot take actions. Lisa still has to open the calendar herself and book it manually.
 
-Function calling lets the AI call Java methods as part of its reasoning. The bot can now *do things*, not just *say things*.
+**Function calling** (also called tool use) lets the AI call Java methods as part of its reasoning. The bot can now *do things*, not just *say things*.
 
 ---
 
 ## What You Will Learn
 
 - What function calling (tool use) is and how it works
-- How to register Java methods as tools in Spring AI
-- How the AI decides when to call a tool vs answer directly
-- How to build a tool-enabled interview scheduling assistant
-- How to handle multi-step tool chains
+- How to expose Java methods as tools with `@Tool` and `@ToolParam`
+- How to register tools on a `ChatClient` with `defaultTools()`
+- How the model decides when to call a tool vs. answer directly
+- How to combine tool calling with chat memory for multi-turn scheduling conversations
 
 ---
 
@@ -42,7 +40,7 @@ Lisa: "Schedule an interview for next Tuesday at 2pm"
           │   calls checkAvailability("2025-06-03", "14:00")
           │         │
           │         ▼
-          │   Java method returns: { "available": true }
+          │   Java method returns: { date: "2025-06-03", time: "14:00", available: true }
           │
           ├── "Tuesday 2pm is free. Booking now."
           │         │
@@ -50,109 +48,155 @@ Lisa: "Schedule an interview for next Tuesday at 2pm"
           │   calls bookInterview("2025-06-03", "14:00", "Java Dev - Priya Sharma")
           │         │
           │         ▼
-          │   Java method returns: { "confirmed": true, "meetingId": "MTG-4821" }
+          │   Java method returns: { meetingId: "MTG-4821AB3F", confirmed: true }
           │
           ▼
-"Interview booked! Tuesday June 3rd at 2:00 PM (Meeting ID: MTG-4821)"
+"Interview booked! Tuesday June 3rd at 2:00 PM (Meeting ID: MTG-4821AB3F)"
 ```
 
-The AI orchestrates the tool calls. You write the Java methods.
+The model orchestrates the tool calls. You write the Java methods. Spring AI handles converting the method signature into a JSON schema, sending it to the model, parsing the model's tool-call request, invoking the method, and feeding the result back into the conversation.
 
 ---
 
-## Registering Tools in Spring AI
+## Exposing Java Methods as Tools
 
 ```java
 @Service
 public class CalendarService {
 
-    @Tool(description = "Check if a time slot is available for an interview")
+    private final Set<String> bookedSlots = ConcurrentHashMap.newKeySet();
+
+    @Tool(description = "Check if a specific date and time slot is available for scheduling an interview")
     public CalendarSlot checkAvailability(
             @ToolParam(description = "Date in yyyy-MM-dd format") String date,
-            @ToolParam(description = "Time in HH:mm format") String time) {
-        // call your real calendar API here
-        boolean available = calendarApi.isAvailable(date, time);
+            @ToolParam(description = "Time in HH:mm 24-hour format") String time) {
+        boolean available = !bookedSlots.contains(key(date, time));
         return new CalendarSlot(date, time, available);
     }
 
-    @Tool(description = "Book an interview slot in the calendar")
+    @Tool(description = "Book an interview slot in the calendar for a candidate. Only call this after confirming the slot is available.")
     public BookingConfirmation bookInterview(
             @ToolParam(description = "Date in yyyy-MM-dd format") String date,
-            @ToolParam(description = "Time in HH:mm format") String time,
-            @ToolParam(description = "Candidate name and role") String candidateInfo) {
-        String meetingId = calendarApi.book(date, time, candidateInfo);
+            @ToolParam(description = "Time in HH:mm 24-hour format") String time,
+            @ToolParam(description = "Candidate name and role being interviewed for") String candidateInfo) {
+        String slotKey = key(date, time);
+        if (!bookedSlots.add(slotKey)) {
+            return new BookingConfirmation(null, date, time, false);
+        }
+        String meetingId = "MTG-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
         return new BookingConfirmation(meetingId, date, time, true);
+    }
+
+    private String key(String date, String time) {
+        return date + "T" + time;
     }
 }
 ```
 
-```java
-// Register the tools with ChatClient
-ChatClient chatClient = ChatClient.builder(chatModel)
-        .defaultTools(calendarService)
-        .defaultSystem(SCHEDULING_SYSTEM_PROMPT)
-        .build();
-```
+`@Tool` marks the method as callable by the model. `@ToolParam` describes each argument so the model knows what to pass.
 
 ---
 
-## What You Will Build — Interview Scheduling Endpoint
+## Registering Tools on the ChatClient
 
 ```java
-// POST /hr/schedule/chat
-public record ScheduleRequest(String sessionId, String message) {}
+@RestController
+@RequestMapping("/hr")
+public class ScheduleController {
 
-@PostMapping("/schedule/chat")
-public HrResponse scheduleChat(@RequestBody ScheduleRequest request) {
-    String answer = chatClient
-            .prompt()
-            .user(request.message())
-            .advisors(a -> a.param(CHAT_MEMORY_CONVERSATION_ID_KEY, request.sessionId()))
-            .call()
-            .content();
-    return new HrResponse(request.message(), answer, "schedule");
+    private static final String SYSTEM_PROMPT = """
+            You are a scheduling assistant for TechCorp's hiring team. You help hiring
+            managers schedule candidate interviews.
+
+            You have tools to check calendar availability and book interview slots.
+            Always check availability before booking. Only book a slot once the hiring
+            manager has explicitly confirmed they want to proceed. Be concise.
+            """;
+
+    private final ChatClient chatClient;
+    private final ChatMemory chatMemory;
+
+    public ScheduleController(ChatClient.Builder builder, CalendarService calendarService) {
+        this.chatMemory = MessageWindowChatMemory.builder()
+                .chatMemoryRepository(new InMemoryChatMemoryRepository())
+                .maxMessages(20)
+                .build();
+
+        this.chatClient = builder
+                .defaultSystem(SYSTEM_PROMPT)
+                .defaultTools(calendarService)
+                .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build())
+                .build();
+    }
+
+    @PostMapping("/schedule/chat")
+    public HrResponse chat(@RequestBody ScheduleRequest request) {
+        String answer = chatClient
+                .prompt()
+                .user(request.message())
+                .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, request.sessionId()))
+                .call()
+                .content();
+        return new HrResponse(request.message(), answer, "schedule");
+    }
+
+    @DeleteMapping("/schedule/chat/{sessionId}")
+    public ResponseEntity<Void> clearSession(@PathVariable String sessionId) {
+        chatMemory.clear(sessionId);
+        return ResponseEntity.noContent().build();
+    }
 }
 ```
 
-**Test a full scheduling conversation:**
-```bash
-# Step 1 — request an interview
-curl -s -X POST http://localhost:8080/hr/schedule/chat \
-  -d '{"sessionId": "lisa-001", "message": "I need to schedule an interview for Priya Sharma for the senior Java role. Can you check Tuesday 3rd June at 2pm?"}'
-
-# Step 2 — confirm the booking
-curl -s -X POST http://localhost:8080/hr/schedule/chat \
-  -d '{"sessionId": "lisa-001", "message": "Yes, go ahead and book it."}'
-```
+Notice this builds directly on **Chapter 6**'s `MessageWindowChatMemory` + `MessageChatMemoryAdvisor` pattern. The only addition is `.defaultTools(calendarService)` — tool calling and chat memory compose cleanly because they are both just advisors/configuration on the same `ChatClient`.
 
 ---
 
-## When Does the AI Call a Tool?
+## Testing a Full Scheduling Conversation
 
-The AI decides based on the tool descriptions you write. Good descriptions are critical:
+```bash
+# Turn 1 — check availability
+curl -s -X POST http://localhost:8080/hr/schedule/chat \
+  -H "Content-Type: application/json" \
+  -d '{"sessionId": "lisa-001", "message": "Can you check if Tuesday 2025-06-03 at 2pm is free for a Java developer interview with Priya Sharma?"}'
+
+# Turn 2 — confirm the booking
+curl -s -X POST http://localhost:8080/hr/schedule/chat \
+  -H "Content-Type: application/json" \
+  -d '{"sessionId": "lisa-001", "message": "Yes, please go ahead and book it."}'
+```
+
+In Turn 1, the model calls `checkAvailability`. In Turn 2, having seen the result and the hiring manager's confirmation, it calls `bookInterview`. Both calls happen transparently inside `chatClient.prompt().call()` — your controller code never touches the tool-calling mechanics.
+
+---
+
+## When Does the Model Call a Tool?
+
+The model decides based entirely on the descriptions you write. Good descriptions are critical:
 
 | Too vague | Better |
 |-----------|--------|
 | "Check calendar" | "Check if a specific date and time slot is available for scheduling an interview" |
-| "Book meeting" | "Create a calendar booking for an interview with a candidate at a specified date and time" |
+| "Book meeting" | "Book an interview slot in the calendar for a candidate. Only call this after confirming the slot is available." |
 
-Write tool descriptions as if you are explaining the function to a junior developer who has never seen your codebase.
+Write tool descriptions as if you are explaining the method to a junior developer who has never seen your codebase. The phrase *"Only call this after confirming the slot is available"* in `bookInterview`'s description is doing real work — it is what keeps the model from skipping straight to booking without checking availability first.
 
 ---
 
 ## Summary
 
-In this chapter you will:
+In this chapter you:
 
-- Understand how function calling lets the AI invoke Java methods
-- Register `@Tool` methods and bind them to a `ChatClient`
-- Build an interview scheduling assistant that checks and books calendar slots
-- Write effective tool descriptions that guide the AI's decisions
+- Understood how function calling lets the model invoke Java methods as part of its reasoning
+- Exposed `CalendarService` methods as tools using `@Tool` and `@ToolParam`
+- Registered tools on a `ChatClient` with `defaultTools()`
+- Combined tool calling with `MessageWindowChatMemory` for a multi-turn scheduling conversation
+- Learned that tool descriptions — not your Java code — are what guide the model's decisions
 
 ---
 
 ## What's Next
 
-In **Chapter 9**, we go multimodal — the AI can now see images. We build a workplace safety inspector where an employee uploads a photo of a potential hazard and the AI analyses it and files a report.
+In **Chapter 11**, we revisit tool calling from a different angle: instead of writing `@Tool` methods inside the app, we expose `CalendarService` as a standalone REST API and wrap it in an MCP (Model Context Protocol) server — so any MCP-compatible LLM client, not just this app, can discover and call the same scheduling tools.
 
-*Code for this chapter: [`code/chapter-08-function-calling/`](../code/chapter-08-function-calling/)*
+*Code for this chapter: [`code/chapter-10-function-calling/`](../code/chapter-10-function-calling/)*

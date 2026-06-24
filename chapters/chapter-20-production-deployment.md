@@ -1,4 +1,4 @@
-# Chapter 17 — Production Deployment: Docker, Observability, and Going Live
+# Chapter 20 — Production Deployment: Docker, Observability, and Going Live
 
 > ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
 
@@ -244,4 +244,4 @@ Chapter 17  → Production deployment ← You are here
 
 Sarah's Monday mornings are no longer about answering the same questions. They are about reviewing what the SmartHR Assistant accomplished overnight.
 
-*Code for this chapter: [`code/chapter-17-production-deployment/`](../code/chapter-17-production-deployment/)*
+*Code for this chapter: [`code/chapter-20-production-deployment/`](../code/chapter-20-production-deployment/)*

@@ -1,4 +1,4 @@
-# Chapter 9 — Multimodality: Images and Text Together
+# Chapter 12 — Multimodality: Images and Text Together
 
 > ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
 
@@ -126,6 +126,6 @@ In this chapter you will:
 
 ## What's Next
 
-In **Chapter 10**, we tackle streaming — instead of waiting for the full response, we stream tokens as they are generated, giving users the live-typing experience they expect from modern AI interfaces.
+In **Chapter 13**, we tackle streaming — instead of waiting for the full response, we stream tokens as they are generated, giving users the live-typing experience they expect from modern AI interfaces.
 
 *Code for this chapter: [`code/chapter-09-multimodality/`](../code/chapter-09-multimodality/)*

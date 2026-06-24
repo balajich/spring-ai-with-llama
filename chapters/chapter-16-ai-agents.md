@@ -1,4 +1,4 @@
-# Chapter 13 — AI Agents: Autonomous Workflows and Tool Chaining
+# Chapter 16 — AI Agents: Autonomous Workflows and Tool Chaining
 
 > ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
 
@@ -149,6 +149,6 @@ In this chapter you will:
 
 ## What's Next
 
-In **Chapter 14**, we tackle evaluation — how do you know if your AI is giving good answers? We build an automated QA pipeline that uses another AI call to judge the quality of the SmartHR bot's responses.
+In **Chapter 17**, we tackle evaluation — how do you know if your AI is giving good answers? We build an automated QA pipeline that uses another AI call to judge the quality of the SmartHR bot's responses.
 
-*Code for this chapter: [`code/chapter-13-ai-agents/`](../code/chapter-13-ai-agents/)*
+*Code for this chapter: [`code/chapter-16-ai-agents/`](../code/chapter-16-ai-agents/)*

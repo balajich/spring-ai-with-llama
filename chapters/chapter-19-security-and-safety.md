@@ -1,4 +1,4 @@
-# Chapter 16 — Security and Safety: Protecting Your AI Application
+# Chapter 19 — Security and Safety: Protecting Your AI Application
 
 > ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
 
@@ -153,13 +153,13 @@ Never log: raw user input, model responses containing PII, session tokens, or AP
 
 | Check | Status |
 |-------|--------|
-| Prompt injection guard | Chapter 16 |
-| Topic allow-list in system prompt | Chapter 16 |
-| PII scrubbing from logs | Chapter 16 |
-| Rate limiting per user | Chapter 15 |
-| Input length limit | Chapter 16 |
-| HTTPS only in production | Chapter 17 |
-| Auth on all endpoints | Chapter 17 |
+| Prompt injection guard | Chapter 19 |
+| Topic allow-list in system prompt | Chapter 19 |
+| PII scrubbing from logs | Chapter 19 |
+| Rate limiting per user | Chapter 18 |
+| Input length limit | Chapter 19 |
+| HTTPS only in production | Chapter 20 |
+| Auth on all endpoints | Chapter 20 |
 
 ---
 
@@ -177,6 +177,6 @@ In this chapter you will:
 
 ## What's Next
 
-In **Chapter 17**, we deploy everything to production — Dockerising the app and Ollama together, setting up health checks, configuring observability with Micrometer, and making the SmartHR Assistant ready for real users.
+In **Chapter 20**, we deploy everything to production — Dockerising the app and Ollama together, setting up health checks, configuring observability with Micrometer, and making the SmartHR Assistant ready for real users.
 
-*Code for this chapter: [`code/chapter-16-security-and-safety/`](../code/chapter-16-security-and-safety/)*
+*Code for this chapter: [`code/chapter-19-security-and-safety/`](../code/chapter-19-security-and-safety/)*

@@ -1,4 +1,4 @@
-# Chapter 10 — Streaming API: Real-Time Token-by-Token Responses
+# Chapter 13 — Streaming API: Real-Time Token-by-Token Responses
 
 > ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
 
@@ -127,6 +127,6 @@ In this chapter you will:
 
 ## What's Next
 
-In **Chapter 11**, we add document intelligence — the ability to ingest PDFs, Word documents, and web pages, making the SmartHR assistant able to read and analyse any document Sarah uploads.
+In **Chapter 14**, we add document intelligence — the ability to ingest PDFs, Word documents, and web pages, making the SmartHR assistant able to read and analyse any document Sarah uploads.
 
-*Code for this chapter: [`code/chapter-10-streaming-api/`](../code/chapter-10-streaming-api/)*
+*Code for this chapter: [`code/chapter-13-streaming-api/`](../code/chapter-13-streaming-api/)*

@@ -1,4 +1,4 @@
-# Chapter 11 — Document Intelligence: PDFs, Word Docs, and Web Pages
+# Chapter 14 — Document Intelligence: PDFs, Word Docs, and Web Pages
 
 > ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
 
@@ -140,6 +140,6 @@ In this chapter you will:
 
 ## What's Next
 
-In **Chapter 12**, we build semantic search — finding job candidates by skills and experience using similarity search, not keyword matching. "Find me a Java developer with cloud experience" works even if no CV contains those exact words.
+In **Chapter 15**, we build semantic search — finding job candidates by skills and experience using similarity search, not keyword matching. "Find me a Java developer with cloud experience" works even if no CV contains those exact words.
 
-*Code for this chapter: [`code/chapter-11-document-intelligence/`](../code/chapter-11-document-intelligence/)*
+*Code for this chapter: [`code/chapter-14-document-intelligence/`](../code/chapter-14-document-intelligence/)*

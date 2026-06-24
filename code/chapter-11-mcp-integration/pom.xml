@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.techcorp</groupId>
+    <artifactId>chapter-11-mcp-integration</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>SmartHR Assistant — Chapter 11: MCP Integration (multi-module)</name>
+    <description>
+        Three Spring Boot apps wired together: calendar-service (existing REST API, :8082),
+        mcp-server (MCP adapter over the REST API, :8081), and mcp-client (the SmartHR
+        scheduling chatbot, :8080).
+    </description>
+
+    <modules>
+        <module>calendar-service</module>
+        <module>mcp-server</module>
+        <module>mcp-client</module>
+    </modules>
+</project>

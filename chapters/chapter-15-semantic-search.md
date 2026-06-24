@@ -1,4 +1,4 @@
-# Chapter 12 — Semantic Search: Finding Meaning, Not Keywords
+# Chapter 15 — Semantic Search: Finding Meaning, Not Keywords
 
 > ⚠️ **Draft** — This chapter is a work in progress. Code snippets have not yet been validated against the running codebase and may need fixes before use.
 
@@ -146,6 +146,6 @@ In this chapter you will:
 
 ## What's Next
 
-In **Chapter 13**, we build a fully autonomous AI agent — a monthly HR report generator that plans its own steps, calls multiple tools, gathers data from different sources, and produces a complete report without human prompting.
+In **Chapter 16**, we build a fully autonomous AI agent — a monthly HR report generator that plans its own steps, calls multiple tools, gathers data from different sources, and produces a complete report without human prompting.
 
-*Code for this chapter: [`code/chapter-12-semantic-search/`](../code/chapter-12-semantic-search/)*
+*Code for this chapter: [`code/chapter-15-semantic-search/`](../code/chapter-15-semantic-search/)*
