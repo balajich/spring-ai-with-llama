@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: SmartHR Calendar MCP Server
+
+  ai:
+    mcp:
+      server:
+        name: smarthr-calendar-mcp-server
+        version: 1.0.0
+        type: SYNC
+
+calendar-service:
+  base-url: http://localhost:8082
+
+server:
+  port: 8081

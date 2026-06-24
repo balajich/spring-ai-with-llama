@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: SmartHR Assistant
+
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        options:
+          model: llama3.2
+          temperature: 0.3
+          num-predict: 500
+
+    mcp:
+      client:
+        name: smarthr-scheduling-client
+        version: 1.0.0
+        type: SYNC
+        sse:
+          connections:
+            calendar:
+              url: http://localhost:8081
+              sse-endpoint: /sse
+
+server:
+  port: 8080
