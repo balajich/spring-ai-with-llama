@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: SmartHR Assistant
+
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 6MB
+
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        options:
+          model: llava
+          temperature: 0.2
+          num-predict: 600
+
+server:
+  port: 8080
