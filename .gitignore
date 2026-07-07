@@ -40,3 +40,7 @@ linkedin-banner.png
 
 # Node dependencies
 node_modules/
+
+# Python files (build/generator scripts)
+**/*.py
+*.py
