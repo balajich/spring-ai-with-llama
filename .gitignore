@@ -37,3 +37,10 @@ linkedin-banner.png
 # JavaScript files (slide build scripts and generated output)
 **/*.js
 *.js
+
+# Node dependencies
+node_modules/
+
+# Python files (build/generator scripts)
+**/*.py
+*.py
