@@ -57,7 +57,7 @@ Llama generates response tokens one at a time:
 Until it decides to stop (or hits your numPredict limit).
 ```
 
-The model generates **one token at a time** — which is why streaming responses appear word-by-word (more on this in Chapter 10).
+The model generates **one token at a time** — which is why streaming responses appear word-by-word (more on this in Chapter 13).
 
 ---
 
