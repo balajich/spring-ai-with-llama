@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: SmartHR Assistant
+
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        options:
+          model: llama3.2
+          temperature: 0.3
+
+server:
+  port: 8080
