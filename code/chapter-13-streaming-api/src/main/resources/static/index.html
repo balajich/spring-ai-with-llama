@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SmartHR — Streaming Chat</title>
+  <style>
+    :root { color-scheme: dark; }
+    body { font-family: system-ui, sans-serif; background: #0a0f1c; color: #e5e9f0;
+           max-width: 720px; margin: 0 auto; padding: 2rem 1.25rem; }
+    h1 { font-size: 1.4rem; }
+    .row { display: flex; gap: .5rem; margin: 1rem 0; }
+    input { flex: 1; padding: .6rem .8rem; border-radius: 8px; border: 1px solid #5b6478;
+            background: #121a2e; color: #e5e9f0; font-size: 1rem; }
+    button { padding: .6rem 1.1rem; border-radius: 8px; border: none; cursor: pointer;
+             background: #f2a93b; color: #0a0f1c; font-weight: 600; font-size: 1rem; }
+    button:disabled { opacity: .5; cursor: default; }
+    #answer { white-space: pre-wrap; line-height: 1.5; background: #121a2e;
+              border: 1px solid #172238; border-radius: 10px; padding: 1rem 1.2rem;
+              min-height: 6rem; }
+    .status { color: #8b98ac; font-size: .85rem; margin-top: .5rem; }
+  </style>
+</head>
+<body>
+  <h1>SmartHR Assistant — live streaming</h1>
+  <div class="row">
+    <input id="q" value="What is TechCorp's parental leave policy?" />
+    <button id="go">Ask</button>
+  </div>
+  <div id="answer"></div>
+  <div class="status" id="status"></div>
+
+  <script>
+    const q = document.getElementById("q");
+    const go = document.getElementById("go");
+    const answer = document.getElementById("answer");
+    const status = document.getElementById("status");
+    let source;
+
+    go.addEventListener("click", () => {
+      if (source) source.close();
+      answer.textContent = "";
+      status.textContent = "streaming…";
+      go.disabled = true;
+
+      source = new EventSource("/hr/ask/stream?question=" + encodeURIComponent(q.value));
+      source.onmessage = (e) => { answer.textContent += e.data; };
+      source.onerror = () => {
+        // SSE fires onerror on normal completion too — treat as done.
+        source.close();
+        status.textContent = "done";
+        go.disabled = false;
+      };
+    });
+  </script>
+</body>
+</html>

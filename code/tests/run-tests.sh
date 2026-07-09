@@ -48,6 +48,7 @@ if [[ -z "$CHAPTER" ]]; then
     echo "    $0 chapter-10   ->  chapter-10-function-calling.feature"
     echo "    $0 chapter-11   ->  chapter-11-mcp.feature (starts calendar-service, mcp-server, mcp-client)"
     echo "    $0 chapter-12   ->  chapter-12-multimodality.feature (requires: ollama pull llava)"
+    echo "    $0 chapter-13   ->  chapter-13-streaming-api.feature"
     echo ""
     exit 1
 fi
@@ -116,10 +117,14 @@ case "$CHAPTER" in
         APP_MODULE="chapter-12-multimodality"
         TEST_CLASS="Chapter12Test"
         ;;
+    chapter-13)
+        APP_MODULE="chapter-13-streaming-api"
+        TEST_CLASS="Chapter13Test"
+        ;;
     *)
         echo ""
         echo "  ERROR: Unknown chapter '$CHAPTER'"
-        echo "  Available: chapter-01, chapter-02, chapter-03, chapter-04, chapter-05, chapter-06, chapter-07, chapter-08, chapter-09, chapter-10, chapter-11, chapter-12"
+        echo "  Available: chapter-01, chapter-02, chapter-03, chapter-04, chapter-05, chapter-06, chapter-07, chapter-08, chapter-09, chapter-10, chapter-11, chapter-12, chapter-13"
         echo ""
         exit 1
         ;;
