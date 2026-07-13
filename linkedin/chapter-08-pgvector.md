@@ -165,4 +165,4 @@ Full source code for all chapters is on GitHub — drop a star if you find it us
 
 ---
 
-*Built with Spring Boot 4.1, Spring AI 2.0, Java 21, Ollama, and PostgreSQL with pgvector — runs entirely on your laptop, no paid APIs.*
+*Built with Spring Boot 4.1, Spring AI 2.0, Java 25, Ollama, and PostgreSQL with pgvector — runs entirely on your laptop, no paid APIs.*

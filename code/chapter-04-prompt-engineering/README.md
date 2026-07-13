@@ -8,7 +8,7 @@ Build a personalised HR assistant that addresses employees by name, department, 
 
 | Tool | Version | Check |
 |------|---------|-------|
-| Java | 21+ | `java -version` |
+| Java | 25+ | `java -version` |
 | Maven | 3.8+ | `mvn -version` |
 | Ollama | latest | `ollama --version` |
 

@@ -108,6 +108,6 @@ Full source code for all chapters is on GitHub — drop a star if you find it us
 
 ---
 
-*Built with Spring Boot 4.1, Spring AI 2.0, Java 21, and Ollama — runs entirely on your laptop, no paid APIs.*
+*Built with Spring Boot 4.1, Spring AI 2.0, Java 25, and Ollama — runs entirely on your laptop, no paid APIs.*
 
-#SpringAI #SpringBoot #Java21 #Ollama #Streaming #SSE #ServerSentEvents #ReactiveProgramming #LLM #GenerativeAI #AIEngineering #LocalAI #JavaDeveloper #Llama
+#SpringAI #SpringBoot #Java25 #Ollama #Streaming #SSE #ServerSentEvents #ReactiveProgramming #LLM #GenerativeAI #AIEngineering #LocalAI #JavaDeveloper #Llama

@@ -44,7 +44,7 @@ Upgrade the SmartHR bot from a Q&A assistant to a doer — the AI calls real Jav
 
 | Tool | Version | Check |
 |------|---------|-------|
-| Java | 21+ | `java -version` |
+| Java | 25+ | `java -version` |
 | Maven | 3.8+ | `mvn -version` |
 | Ollama | latest | `ollama --version` |
 

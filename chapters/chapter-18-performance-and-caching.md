@@ -19,7 +19,7 @@ A naive sequential approach would take 50 × 8 seconds = ~7 minutes. With concur
 ## What You Will Learn
 
 - Why AI calls are slow and where the time goes
-- Concurrent AI calls with virtual threads (Java 21)
+- Concurrent AI calls with virtual threads (Java 25)
 - Response caching for repeated or similar prompts
 - Batch processing patterns for bulk AI tasks
 - Rate limiting to protect Ollama from overload
@@ -41,7 +41,7 @@ The model generates tokens one at a time. There is no way to make a single call 
 
 ## Concurrent Calls with Virtual Threads
 
-Java 21's virtual threads make concurrent AI calls trivial:
+Java 25 virtual threads make concurrent AI calls trivial:
 
 ```java
 @PostMapping("/hr/jobs/generate-bulk")
@@ -145,7 +145,7 @@ public String ask(String question) throws InterruptedException {
 
 In this chapter you will:
 
-- Use Java 21 virtual threads for concurrent AI calls
+- Use Java 25 virtual threads for concurrent AI calls
 - Cache repeated prompt responses with Caffeine
 - Rate-limit Ollama to prevent overload
 - Build a bulk job description generator that processes 50 roles in parallel

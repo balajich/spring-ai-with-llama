@@ -8,7 +8,7 @@ Send the same HR question to two different models side-by-side and compare their
 
 | Tool | Version | Check |
 |------|---------|-------|
-| Java | 21+ | `java -version` |
+| Java | 25+ | `java -version` |
 | Maven | 3.8+ | `mvn -version` |
 | Ollama | latest | `ollama --version` |
 
