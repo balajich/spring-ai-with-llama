@@ -113,7 +113,7 @@ From the `code/tests/` directory:
 
 | Tool | Required for | Install |
 |------|-------------|---------|
-| Java 21+ | All chapters | [adoptium.net](https://adoptium.net) |
+| Java 25+ | All chapters | [adoptium.net](https://adoptium.net) |
 | Maven 3.8+ | All chapters | [maven.apache.org](https://maven.apache.org) |
 | Ollama | All chapters | [ollama.ai](https://ollama.ai) |
 | Docker | Chapters 8, 9 | [docker.com](https://docker.com) |

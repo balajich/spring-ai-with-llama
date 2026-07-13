@@ -20,7 +20,7 @@
 # handle that case generically (build + start before the main app, stop after).
 #
 # Requirements:
-#   - Java 21+, Maven 3.8+
+#   - Java 25+, Maven 3.8+
 #   - Ollama running locally with llama3.2 pulled (ollama pull llama3.2)
 #   - Nothing else occupying the ports the chapter uses
 # =============================================================================

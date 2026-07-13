@@ -137,13 +137,13 @@ The only Spring AI dependency we need for Chapter 1 is the Ollama starter:
 <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>4.1.0-RC1</version>
+    <version>4.1.0</version>
     <relativePath/>
 </parent>
 
 <properties>
-    <java.version>21</java.version>
-    <spring-ai.version>2.0.0-M6</spring-ai.version>
+    <java.version>25</java.version>
+    <spring-ai.version>2.0.0</spring-ai.version>
 </properties>
 
 <dependencies>

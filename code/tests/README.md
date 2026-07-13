@@ -9,7 +9,7 @@ Written with [Karate](https://github.com/karatelabs/karate) — tests read like 
 
 | Requirement | Version | Check |
 |---|---|---|
-| Java | 21+ | `java -version` |
+| Java | 25+ | `java -version` |
 | Maven | 3.8+ | `mvn -version` |
 | Ollama | latest | `ollama --version` |
 | Llama model | llama3.2 | `ollama list` |
@@ -42,7 +42,7 @@ ollama serve
 
 ```
 tests/
-├── pom.xml                                          # Karate Maven project (Java 21, Karate 1.3.1)
+├── pom.xml                                          # Karate Maven project (Java 25, Karate 1.3.1)
 ├── run-tests.sh                                     # Shell script — builds, runs, tests, stops
 └── src/test/
     ├── java/com/techcorp/smarthr/karate/

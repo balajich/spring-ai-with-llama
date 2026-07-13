@@ -207,4 +207,4 @@ Full source code: [github.com/balajich/spring-ai-with-llama](https://github.com/
 
 ---
 
-#SpringAI #SpringBoot #Java21 #Ollama #Neo4j #GraphRAG #RAG #LLM #GenerativeAI #AIEngineering #LocalAI #NoPayAPI #JavaDeveloper #SpringFramework #Llama
+#SpringAI #SpringBoot #Java25 #Ollama #Neo4j #GraphRAG #RAG #LLM #GenerativeAI #AIEngineering #LocalAI #NoPayAPI #JavaDeveloper #SpringFramework #Llama
