@@ -113,10 +113,12 @@ From the `code/tests/` directory:
 
 | Tool | Required for | Install |
 |------|-------------|---------|
-| Java 25+ | All chapters | [adoptium.net](https://adoptium.net) |
-| Maven 3.8+ | All chapters | [maven.apache.org](https://maven.apache.org) |
-| Ollama | All chapters | [ollama.ai](https://ollama.ai) |
+| Java 25.0.3 | All chapters | [adoptium.net](https://adoptium.net) |
+| Maven 3.9.16 | All chapters | [maven.apache.org](https://maven.apache.org) |
+| Ollama 0.31.1 | All chapters | [ollama.ai](https://ollama.ai) |
 | Docker | Chapters 8, 9 | [docker.com](https://docker.com) |
+
+> **Versions:** These tutorials should work on the most recent versions of these tools. They were built and tested on **Java 25.0.3**, **Maven 3.9.16**, and **Ollama 0.31.1**.
 
 ```bash
 ollama pull llama3.2          # chapters 1–11
