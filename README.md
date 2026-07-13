@@ -29,7 +29,7 @@ The book is built around one evolving real-world project: **SmartHR Assistant**,
 | 11 | MCP — Exposing an Existing REST API as Tools | Model Context Protocol, MCP server/client, tool discovery | ✅ Complete |
 | 12 | Multimodality | Images and text, vision models (llava), image-to-structured-report | ✅ Complete |
 | 13 | Streaming API | Real-time token-by-token responses over SSE | ✅ Complete |
-| 14 | Document Intelligence | PDFs, Word docs, web pages | 🚧 In progress |
+| 14 | Document Intelligence | PDF/Word/web readers, contract analyser, direct injection | ✅ Complete |
 | 15 | Semantic Search | Embeddings, vector similarity | 🚧 In progress |
 | 16 | AI Agents | Autonomous workflows, tool chaining | 🚧 In progress |
 | 17 | Evaluation | Testing and scoring AI responses | 🚧 In progress |
@@ -72,6 +72,7 @@ code/
 ├── chapter-11-mcp-integration/   ← multi-module: calendar-service (8082), mcp-server (8081), mcp-client (8080)
 ├── chapter-12-multimodality/     ← requires vision model (ollama pull llava)
 ├── chapter-13-streaming-api/     ← token-by-token streaming over SSE
+├── chapter-14-document-intelligence/  ← PDF/Word/web readers, contract analyser
 └── tests/                        ← Karate BDD API tests for all chapters
 ```
 
@@ -105,6 +106,7 @@ From the `code/tests/` directory:
 ./run-tests.sh chapter-11   # starts calendar-service, mcp-server, AND mcp-client
 ./run-tests.sh chapter-12   # requires vision model: ollama pull llava
 ./run-tests.sh chapter-13
+./run-tests.sh chapter-14
 ```
 
 ---

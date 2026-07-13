@@ -115,7 +115,7 @@ public record ResumeProfile(
         String name,
         String email,
         List<String> skills,
-        int yearsOfExperience,
+        Integer yearsOfExperience,   // boxed, not int — see note below
         String currentRole,
         String education
 ) {}
@@ -150,8 +150,15 @@ public ResumeProfile parseResume(@RequestBody ResumeParseRequest request) {
 
     String response = chatClient
             .prompt()
+            .options(ChatOptions.builder().temperature(0.0))   // deterministic extraction
             .user(u -> u.text("""
-                    Parse this resume and extract structured information.
+                    You are a resume parser. Read the resume below and extract these fields:
+                    - name: the candidate's full name
+                    - email: their email address
+                    - skills: an array of their technical skills
+                    - yearsOfExperience: total years of experience, as a number
+                    - currentRole: their current or most recent job title
+                    - education: their highest qualification
 
                     Resume:
                     {resumeText}
@@ -166,6 +173,11 @@ public ResumeProfile parseResume(@RequestBody ResumeParseRequest request) {
     return converter.convert(response);
 }
 ```
+
+> **Two gotchas worth knowing (both bit us on Spring Boot 4.1 / Spring AI 2.0):**
+>
+> 1. **Use `Integer`, not `int`.** Spring AI 2.0 uses Jackson 3, which throws `MismatchedInputException: Cannot map null into type int` when the model omits a numeric field. A boxed `Integer` accepts `null` gracefully — and a resume genuinely might not state years of experience.
+> 2. **Tell the model each field by name, and set `temperature(0.0)`.** Small local models like `llama3.2` will otherwise sometimes invert keys and values (turning `"Priya Sharma"` into a JSON *key*). Explicit field-by-field guidance plus zero temperature makes extraction deterministic and reliable.
 
 **Test it:**
 ```bash
