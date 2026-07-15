@@ -244,4 +244,4 @@ Chapter 17  → Production deployment ← You are here
 
 Sarah's Monday mornings are no longer about answering the same questions. They are about reviewing what the SmartHR Assistant accomplished overnight.
 
-*Code for this chapter: [`code/chapter-20-production-deployment/`](../code/chapter-20-production-deployment/)*
+*Code for this chapter: [`code/chapter-20-production-deployment/`](../../code/chapter-20-production-deployment/)*

@@ -456,4 +456,4 @@ That is Chapter 4. But before we get there, Chapter 2 covers how the model proce
 
 In **Chapter 2**, we go under the hood — learning how tokens control response length, how Spring AI's message architecture works, and how to tune the model per request with `ChatOptions`.
 
-*Code for this chapter: [`code/chapter-01-hello-spring-ai/`](../code/chapter-01-hello-spring-ai/)*
+*Code for this chapter: [`code/chapter-01-hello-spring-ai/`](../../code/chapter-01-hello-spring-ai/)*

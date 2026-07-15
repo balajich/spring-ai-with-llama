@@ -1,0 +1,66 @@
+[
+  {
+    "candidateId": "C-1001",
+    "name": "Priya Sharma",
+    "role": "JVM Engineer",
+    "seniority": "SENIOR",
+    "location": "London",
+    "resume": "Priya Sharma. JVM engineer with 8 years building server-side systems. Deep experience with Spring Boot, Hibernate and reactive programming. Designed distributed systems running on AWS Lambda and Kubernetes. Led migration of a monolith to microservices. Strong in performance tuning and JVM internals."
+  },
+  {
+    "candidateId": "C-1002",
+    "name": "Marcus Chen",
+    "role": "Frontend Engineer",
+    "seniority": "SENIOR",
+    "location": "Berlin",
+    "resume": "Marcus Chen. Frontend engineer with 7 years crafting user interfaces. Expert in React, TypeScript, CSS architecture and design systems. Focused on accessibility, browser rendering performance and component libraries. Built the design system used across twelve product teams."
+  },
+  {
+    "candidateId": "C-1003",
+    "name": "Aisha Khan",
+    "role": "Server-side Developer",
+    "seniority": "JUNIOR",
+    "location": "London",
+    "resume": "Aisha Khan. Server-side developer, 2 years experience. Builds REST APIs with Node.js and Express. Deploys serverless workloads to Azure Functions and works with managed container platforms. Comfortable with SQL databases and message queues."
+  },
+  {
+    "candidateId": "C-1004",
+    "name": "Tom Baker",
+    "role": "Data Scientist",
+    "seniority": "SENIOR",
+    "location": "Remote",
+    "resume": "Tom Baker. Data scientist with 9 years in machine learning. Python, pandas, scikit-learn and PyTorch. Builds forecasting models and recommendation engines. Strong statistics background, experiment design and A/B testing. Publishes on model interpretability."
+  },
+  {
+    "candidateId": "C-1005",
+    "name": "Elena Rossi",
+    "role": "Java Developer",
+    "seniority": "MID",
+    "location": "Berlin",
+    "resume": "Elena Rossi. Java developer with 4 years experience. Builds microservices with Spring Boot and deploys them to Google Cloud Platform. Works daily with Docker, CI pipelines and PostgreSQL. Interested in domain-driven design and clean architecture."
+  },
+  {
+    "candidateId": "C-1006",
+    "name": "Raj Patel",
+    "role": "QA Automation Engineer",
+    "seniority": "JUNIOR",
+    "location": "Remote",
+    "resume": "Raj Patel. QA automation engineer, 3 years. Writes end-to-end test suites with Selenium and Playwright. Maintains regression packs and integrates tests into build pipelines. Focused on flaky test reduction and test data management."
+  },
+  {
+    "candidateId": "C-1007",
+    "name": "Sofia Alvarez",
+    "role": "Site Reliability Engineer",
+    "seniority": "SENIOR",
+    "location": "London",
+    "resume": "Sofia Alvarez. Site reliability engineer with 10 years running production infrastructure. Terraform, Kubernetes and AWS across multiple regions. Owns observability, incident response and capacity planning. Reduced mean time to recovery by sixty percent."
+  },
+  {
+    "candidateId": "C-1008",
+    "name": "Liam O'Brien",
+    "role": "Mobile Developer",
+    "seniority": "MID",
+    "location": "London",
+    "resume": "Liam O'Brien. Mobile developer with 5 years shipping iOS applications. Swift, SwiftUI and Core Data. Handles App Store releases, offline sync and push notifications. Cares about smooth animations and battery efficiency."
+  }
+]

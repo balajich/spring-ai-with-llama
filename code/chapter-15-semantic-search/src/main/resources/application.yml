@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: SmartHR Assistant
+
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      embedding:
+        options:
+          model: nomic-embed-text     # embeds resumes and queries into vectors
+      chat:
+        options:
+          model: llama3.2             # not used for search, kept for consistency
+
+server:
+  port: 8080

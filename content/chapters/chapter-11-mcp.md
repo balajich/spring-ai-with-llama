@@ -232,4 +232,4 @@ In this chapter you:
 
 In **Chapter 12**, we go multimodal — the AI can now see images. We build a workplace safety inspector where an employee uploads a photo of a potential hazard and the AI analyses it and files a report.
 
-*Code for this chapter: [`code/chapter-11-mcp-integration/`](../code/chapter-11-mcp-integration/)*
+*Code for this chapter: [`code/chapter-11-mcp-integration/`](../../code/chapter-11-mcp-integration/)*

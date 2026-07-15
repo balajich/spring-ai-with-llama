@@ -288,4 +288,4 @@ chatClient.prompt()
         .call().content();
 ```
 
-*Code for this chapter: [`code/chapter-02-core-concepts/`](../code/chapter-02-core-concepts/)*
+*Code for this chapter: [`code/chapter-02-core-concepts/`](../../code/chapter-02-core-concepts/)*

@@ -170,4 +170,4 @@ In this chapter you:
 
 In **Chapter 15**, we return to embeddings — building semantic search so employees can find the right policy or document by *meaning*, not just keywords.
 
-*Code for this chapter: [`code/chapter-14-document-intelligence/`](../code/chapter-14-document-intelligence/)*
+*Code for this chapter: [`code/chapter-14-document-intelligence/`](../../code/chapter-14-document-intelligence/)*

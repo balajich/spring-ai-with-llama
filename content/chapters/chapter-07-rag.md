@@ -225,4 +225,4 @@ In this chapter you will:
 
 In **Chapter 8**, we upgrade the vector store to PostgreSQL with pgvector — persisting policy embeddings across restarts and replacing the O(N) brute-force scan with an efficient HNSW index. The controller and API stay completely unchanged.
 
-*Code for this chapter: [`code/chapter-07-rag/`](../code/chapter-07-rag/)*
+*Code for this chapter: [`code/chapter-07-rag/`](../../code/chapter-07-rag/)*

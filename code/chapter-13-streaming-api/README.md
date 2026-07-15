@@ -162,4 +162,4 @@ chapter-13-streaming-api/
 
 ---
 
-*Full chapter write-up: [`chapters/chapter-13-streaming-api.md`](../../chapters/chapter-13-streaming-api.md)*
+*Full chapter write-up: [`content/chapters/chapter-13-streaming-api.md`](../../content/chapters/chapter-13-streaming-api.md)*

@@ -250,4 +250,4 @@ In this chapter you will:
 
 In **Chapter 10**, we add Function Calling — the SmartHR bot will call actual Java methods mid-conversation to look up real employee data, check calendar availability, and perform actions, not just answer questions.
 
-*Code for this chapter: [`code/chapter-09-neo4j/`](../code/chapter-09-neo4j/)*
+*Code for this chapter: [`code/chapter-09-neo4j/`](../../code/chapter-09-neo4j/)*

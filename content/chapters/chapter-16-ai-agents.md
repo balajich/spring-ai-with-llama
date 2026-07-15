@@ -151,4 +151,4 @@ In this chapter you will:
 
 In **Chapter 17**, we tackle evaluation — how do you know if your AI is giving good answers? We build an automated QA pipeline that uses another AI call to judge the quality of the SmartHR bot's responses.
 
-*Code for this chapter: [`code/chapter-16-ai-agents/`](../code/chapter-16-ai-agents/)*
+*Code for this chapter: [`code/chapter-16-ai-agents/`](../../code/chapter-16-ai-agents/)*

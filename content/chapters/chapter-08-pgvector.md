@@ -244,4 +244,4 @@ In this chapter you will:
 
 In **Chapter 9**, we upgrade again — this time to Neo4j. Beyond persistence, Neo4j is a graph database. Policy sections can be connected by relationships, and Graph RAG can traverse those connections to answer questions that span multiple policy areas — something a flat vector search cannot do.
 
-*Code for this chapter: [`code/chapter-08-pgvector/`](../code/chapter-08-pgvector/)*
+*Code for this chapter: [`code/chapter-08-pgvector/`](../../code/chapter-08-pgvector/)*

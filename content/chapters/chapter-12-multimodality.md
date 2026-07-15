@@ -216,4 +216,4 @@ In this chapter you:
 
 In **Chapter 13**, we tackle streaming — instead of waiting for the full response, we stream tokens as they are generated, giving users the live-typing experience they expect from modern AI interfaces.
 
-*Code for this chapter: [`code/chapter-12-multimodality/`](../code/chapter-12-multimodality/)*
+*Code for this chapter: [`code/chapter-12-multimodality/`](../../code/chapter-12-multimodality/)*

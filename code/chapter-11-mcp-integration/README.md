@@ -243,4 +243,4 @@ chapter-11-mcp-integration/
 
 ---
 
-*Full chapter write-up: [`chapters/chapter-11-mcp.md`](../../chapters/chapter-11-mcp.md)*
+*Full chapter write-up: [`content/chapters/chapter-11-mcp.md`](../../content/chapters/chapter-11-mcp.md)*

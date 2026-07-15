@@ -144,4 +144,4 @@ In **Chapter 7**, we build the most powerful feature yet — RAG (Retrieval Augm
 
 - [Spring AI — Chat Memory](https://docs.spring.io/spring-ai/reference/api/chat-memory.html)
 
-*Code for this chapter: [`code/chapter-06-chat-memory/`](../code/chapter-06-chat-memory/)*
+*Code for this chapter: [`code/chapter-06-chat-memory/`](../../code/chapter-06-chat-memory/)*

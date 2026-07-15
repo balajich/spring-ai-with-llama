@@ -150,4 +150,4 @@ In this chapter you will:
 
 In **Chapter 18**, we focus on performance — prompt caching, batch processing, and how to handle hundreds of AI requests efficiently without overwhelming Ollama.
 
-*Code for this chapter: [`code/chapter-17-evaluation/`](../code/chapter-17-evaluation/)*
+*Code for this chapter: [`code/chapter-17-evaluation/`](../../code/chapter-17-evaluation/)*

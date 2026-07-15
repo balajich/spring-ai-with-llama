@@ -104,6 +104,7 @@ The bot can read documents now. Next it learns to find them by *meaning* — sem
 - [Chapter 12 — Your AI Bot Just Learned to See](https://www.linkedin.com/pulse/chapter-12-your-ai-bot-just-learned-see-balaji-chopparapu-ooulc/)
 - Chapter 13 — Your AI Answers in 8 Seconds. Make It Feel Like 200ms. *(link coming soon)*
 - **Chapter 14 — Your AI Can Now Read the Contract So You Don't Have To** ← you are here
+- Chapter 15 — Your Search Box Is Lying: It Found Nothing, But Four People Matched *(link coming soon)*
 
 Full source code for all chapters is on GitHub — drop a star if you find it useful!
 [github.com/balajich/spring-ai-with-llama](https://github.com/balajich/spring-ai-with-llama)

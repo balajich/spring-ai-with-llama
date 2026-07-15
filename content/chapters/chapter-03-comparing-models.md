@@ -138,4 +138,4 @@ In this chapter you will:
 
 In **Chapter 4**, we tackle prompt engineering — using `PromptTemplate` to inject dynamic data (employee name, department, role) into prompts so the HR assistant gives personalised, TechCorp-branded responses.
 
-*Code for this chapter: [`code/chapter-03-comparing-models/`](../code/chapter-03-comparing-models/)*
+*Code for this chapter: [`code/chapter-03-comparing-models/`](../../code/chapter-03-comparing-models/)*

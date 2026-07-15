@@ -83,7 +83,7 @@ source.onmessage = (event) => {
 source.onerror = () => source.close();
 ```
 
-A working demo page ships at [`src/main/resources/static/index.html`](../code/chapter-13-streaming-api/src/main/resources/static/index.html) — run the app and open [http://localhost:8080](http://localhost:8080) to watch answers type themselves out.
+A working demo page ships at [`src/main/resources/static/index.html`](../../code/chapter-13-streaming-api/src/main/resources/static/index.html) — run the app and open [http://localhost:8080](http://localhost:8080) to watch answers type themselves out.
 
 ---
 
@@ -187,4 +187,4 @@ In this chapter you:
 
 In **Chapter 14**, we add document intelligence — the ability to ingest PDFs, Word documents, and web pages, making the SmartHR assistant able to read and analyse any document Sarah uploads.
 
-*Code for this chapter: [`code/chapter-13-streaming-api/`](../code/chapter-13-streaming-api/)*
+*Code for this chapter: [`code/chapter-13-streaming-api/`](../../code/chapter-13-streaming-api/)*

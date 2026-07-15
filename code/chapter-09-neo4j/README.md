@@ -218,4 +218,4 @@ chapter-09-neo4j/
 
 ---
 
-*Full chapter write-up: [`chapters/chapter-09-neo4j.md`](../../chapters/chapter-09-neo4j.md)*
+*Full chapter write-up: [`content/chapters/chapter-09-neo4j.md`](../../content/chapters/chapter-09-neo4j.md)*

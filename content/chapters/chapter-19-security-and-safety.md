@@ -179,4 +179,4 @@ In this chapter you will:
 
 In **Chapter 20**, we deploy everything to production — Dockerising the app and Ollama together, setting up health checks, configuring observability with Micrometer, and making the SmartHR Assistant ready for real users.
 
-*Code for this chapter: [`code/chapter-19-security-and-safety/`](../code/chapter-19-security-and-safety/)*
+*Code for this chapter: [`code/chapter-19-security-and-safety/`](../../code/chapter-19-security-and-safety/)*

@@ -199,4 +199,4 @@ In this chapter you:
 
 In **Chapter 11**, we revisit tool calling from a different angle: instead of writing `@Tool` methods inside the app, we expose `CalendarService` as a standalone REST API and wrap it in an MCP (Model Context Protocol) server — so any MCP-compatible LLM client, not just this app, can discover and call the same scheduling tools.
 
-*Code for this chapter: [`code/chapter-10-function-calling/`](../code/chapter-10-function-calling/)*
+*Code for this chapter: [`code/chapter-10-function-calling/`](../../code/chapter-10-function-calling/)*

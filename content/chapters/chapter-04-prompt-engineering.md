@@ -144,4 +144,4 @@ In this chapter you will:
 
 In **Chapter 5**, we make the AI return structured Java objects instead of raw text — using `BeanOutputConverter` to parse a resume into a `Resume` record with fields like `name`, `skills`, `experience`, and `education`.
 
-*Code for this chapter: [`code/chapter-04-prompt-engineering/`](../code/chapter-04-prompt-engineering/)*
+*Code for this chapter: [`code/chapter-04-prompt-engineering/`](../../code/chapter-04-prompt-engineering/)*

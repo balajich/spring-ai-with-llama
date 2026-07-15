@@ -220,4 +220,4 @@ In this chapter you will:
 
 In **Chapter 6**, we give the SmartHR bot a memory — using `InMemoryChatMemory` so Raj can have a multi-turn onboarding conversation where the AI remembers what was said earlier in the session.
 
-*Code for this chapter: [`code/chapter-05-structured-output/`](../code/chapter-05-structured-output/)*
+*Code for this chapter: [`code/chapter-05-structured-output/`](../../code/chapter-05-structured-output/)*

@@ -156,4 +156,4 @@ In this chapter you will:
 
 In **Chapter 19**, we harden the SmartHR bot for production — handling prompt injection attacks, sanitising user input, protecting PII, and ensuring the bot cannot be misused by malicious employees.
 
-*Code for this chapter: [`code/chapter-18-performance-and-caching/`](../code/chapter-18-performance-and-caching/)*
+*Code for this chapter: [`code/chapter-18-performance-and-caching/`](../../code/chapter-18-performance-and-caching/)*

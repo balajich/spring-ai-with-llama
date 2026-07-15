@@ -211,4 +211,4 @@ chapter-02-core-concepts/
 
 ---
 
-*Full chapter write-up: [`chapters/chapter-02-core-concepts.md`](../../chapters/chapter-02-core-concepts.md)*
+*Full chapter write-up: [`content/chapters/chapter-02-core-concepts.md`](../../content/chapters/chapter-02-core-concepts.md)*
