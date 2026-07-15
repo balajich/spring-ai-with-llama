@@ -1,6 +1,7 @@
 package com.techcorp.smarthr.controller;
 
 import com.techcorp.smarthr.model.ContractAnalysis;
+import com.techcorp.smarthr.model.SummaryResponse;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.converter.BeanOutputConverter;
@@ -96,8 +97,6 @@ public class DocumentController {
 
         return new SummaryResponse(file.getOriginalFilename(), summary);
     }
-
-    public record SummaryResponse(String filename, String summary) {}
 
     // ── helpers ───────────────────────────────────────────────────────────────
 
