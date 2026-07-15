@@ -179,4 +179,4 @@ chapter-14-document-intelligence/
 
 ---
 
-*Full chapter write-up: [`chapters/chapter-14-document-intelligence.md`](../../chapters/chapter-14-document-intelligence.md)*
+*Full chapter write-up: [`content/chapters/chapter-14-document-intelligence.md`](../../content/chapters/chapter-14-document-intelligence.md)*

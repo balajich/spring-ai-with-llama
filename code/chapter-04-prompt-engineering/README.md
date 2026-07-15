@@ -196,4 +196,4 @@ chapter-04-prompt-engineering/
 
 ---
 
-*Full chapter write-up: [`chapters/chapter-04-prompt-engineering.md`](../../chapters/chapter-04-prompt-engineering.md)*
+*Full chapter write-up: [`content/chapters/chapter-04-prompt-engineering.md`](../../content/chapters/chapter-04-prompt-engineering.md)*

@@ -254,4 +254,4 @@ chapter-07-rag/
 
 ---
 
-*Full chapter write-up: [`chapters/chapter-07-rag.md`](../../chapters/chapter-07-rag.md)*
+*Full chapter write-up: [`content/chapters/chapter-07-rag.md`](../../content/chapters/chapter-07-rag.md)*

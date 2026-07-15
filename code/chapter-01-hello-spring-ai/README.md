@@ -157,4 +157,4 @@ chapter-01-hello-spring-ai/
 
 ---
 
-*Full chapter write-up: [`chapters/chapter-01-hello-spring-ai.md`](../../chapters/chapter-01-hello-spring-ai.md)*
+*Full chapter write-up: [`content/chapters/chapter-01-hello-spring-ai.md`](../../content/chapters/chapter-01-hello-spring-ai.md)*

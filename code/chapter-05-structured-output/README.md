@@ -177,4 +177,4 @@ chapter-05-structured-output/
 
 ---
 
-*Full chapter write-up: [`chapters/chapter-05-structured-output.md`](../../chapters/chapter-05-structured-output.md)*
+*Full chapter write-up: [`content/chapters/chapter-05-structured-output.md`](../../content/chapters/chapter-05-structured-output.md)*

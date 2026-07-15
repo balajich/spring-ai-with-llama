@@ -13,7 +13,7 @@ Test-first, verify-driven authoring of one chapter of *Spring AI with Llama* (th
 
 ## Phase 0 — Recon (before writing anything)
 
-1. **Read the existing draft** `chapters/chapter-NN-*.md`. Drafts carry a `⚠️ Draft` banner and their snippets are **unvalidated** — treat them as intent, not truth. They routinely contain deprecated APIs.
+1. **Read the existing draft** `content/chapters/chapter-NN-*.md`. Drafts carry a `⚠️ Draft` banner and their snippets are **unvalidated** — treat them as intent, not truth. They routinely contain deprecated APIs.
 2. **Verify every artifact/API exists on Maven Central before coding.** Milestone→GA renames are real and silent:
    ```bash
    curl -s "https://repo1.maven.org/maven2/org/springframework/ai/<artifact>/maven-metadata.xml" | grep -oE "<version>2\.0\.0[^<]*</version>" | tail -3
@@ -96,19 +96,19 @@ powershell -Command "Get-Process java -ErrorAction SilentlyContinue | Stop-Proce
 ## Phase 4 — Docs
 
 - **Module `README.md`** — architecture SVG diagram, prerequisites table + the standard version note, endpoints table, curl examples, limitations, common-errors table, project structure. Prereqs are pinned: **Java 25.0.3 · Maven 3.9.16 · Ollama 0.31.1**.
-- **Finalize `chapters/chapter-NN-*.md`** — strip the `⚠️ Draft` banner; rewrite every snippet to match code that actually ran; add a "Try It" section and the tests command.
+- **Finalize `content/chapters/chapter-NN-*.md`** — strip the `⚠️ Draft` banner; rewrite every snippet to match code that actually ran; add a "Try It" section and the tests command.
 - **Root `README.md` — 3 spots:** chapter-table status → ✅ Complete, the `code/` dir listing, and the `run-tests.sh` examples list.
 
 ---
 
 ## Phase 5 — Collateral (only after green)
 
-- **LinkedIn article** → `linkedin/chapter-NN-<slug>.md` — story-led, with the "Series So Far" list using real URLs from `linkedin/links.txt` (unpublished = *(link coming soon)*; current = **bold** + `← you are here`). Footer: *Built with Spring Boot 4.1, Spring AI 2.0, Java 25, and Ollama…*
-- **LinkedIn short post** — a punchy 5-liner + hashtags (chat output, not a file, unless asked).
-- **LinkedIn banner** → `code/chapter-NN-<slug>/linkedin-banner.png` (1200×627, brand style: navy bg, badge pills, split hero title, code card, right-hand chips, footer strip).
-- **YouTube text** — title options, description (front-load the differentiator: local, no API keys), timestamps, tags, SEO keywords. Back-link prior videos from `slides/youtube-links.txt`.
-- **Slide deck** → `slides/build-NN-<slug>.js` → `.pptx`. Use `./theme.js` helpers (`applyMaster`, `addKicker`, `addSectionTitle`, `addCodePanel`, `addNodeDivider`, `addCreditsSlide`). End with Like & Subscribe → Credits. QA programmatically with python-pptx for overflow (>7.5" bottom, >13.3" right) and footer collisions (footer sits at 6.95").
-- **Thumbnail** → `slides/thumbnails/NN-<slug>.png` (1280×720) — append a `THUMBS` entry in `slides/thumbnail.py` and rerun it.
+- **LinkedIn article** → `content/linkedin/chapter-NN-<slug>.md` — story-led, with the "Series So Far" list using real URLs from `content/linkedin/links.txt` (unpublished = *(link coming soon)*; current = **bold** + `← you are here`). Footer: *Built with Spring Boot 4.1, Spring AI 2.0, Java 25, and Ollama…*
+- **LinkedIn short post** → `content/linkedin/chapter-NN-post.md` — punchy hook + 3 short paragraphs + link + hashtags; names the banner to attach.
+- **LinkedIn banner** → `content/linkedin/chapter-NN-banner.png` (1200×627). **Do not hand-roll it**: add a `CHAPTERS` entry in `content/linkedin/build_banners.py` and run `python build_banners.py NN`. (Note: `linkedin-banner.png` is gitignored by exact name — the `chapter-NN-banner.png` naming is what makes it commit.)
+- **YouTube text** — title options, description (front-load the differentiator: local, no API keys), timestamps, tags, SEO keywords. Back-link prior videos from `content/slides/youtube-links.txt`.
+- **Slide deck** → `content/slides/build-NN-<slug>.js` → `.pptx`. Use `./theme.js` helpers (`applyMaster`, `addKicker`, `addSectionTitle`, `addCodePanel`, `addNodeDivider`, `addCreditsSlide`). End with Like & Subscribe → Credits. QA programmatically with python-pptx for overflow (>7.5" bottom, >13.3" right) and footer collisions (footer sits at 6.95").
+- **Thumbnail** → `content/slides/thumbnails/NN-<slug>.png` (1280×720) — append a `THUMBS` entry in `content/slides/thumbnail.py` and rerun it.
 - **Back-patch the previous chapter** — update chapter N-1's "What's Next" and its Series-So-Far list to point at the new chapter.
 
 ---
@@ -120,7 +120,7 @@ Separate repo: **`C:\code\prompttoapps\site`** (plain static HTML — **no build
 ### 6a. Tutorial page
 `tutorials/spring-ai-llama/chapter-NN-<slug>.html`
 
-Pages for all 20 chapters already exist, but **unwritten ones hold the stale draft**. When a chapter is finished you must **refresh the page from the finalized `chapters/chapter-NN-*.md`**:
+Pages for all 20 chapters already exist, but **unwritten ones hold the stale draft**. When a chapter is finished you must **refresh the page from the finalized `content/chapters/chapter-NN-*.md`**:
 
 - Convert the markdown body to HTML and keep the existing site chrome verbatim — `<head>` (title `Chapter N: <Title> &mdash; PromptToApps`, `../../assets/css/style.css`), `<header class="site-header">` nav, and:
   ```html

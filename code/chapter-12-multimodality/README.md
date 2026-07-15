@@ -201,4 +201,4 @@ chapter-12-multimodality/
 
 ---
 
-*Full chapter write-up: [`chapters/chapter-12-multimodality.md`](../../chapters/chapter-12-multimodality.md)*
+*Full chapter write-up: [`content/chapters/chapter-12-multimodality.md`](../../content/chapters/chapter-12-multimodality.md)*

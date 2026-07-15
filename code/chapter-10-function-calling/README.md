@@ -197,4 +197,4 @@ chapter-10-function-calling/
 
 ---
 
-*Full chapter write-up: [`chapters/chapter-10-function-calling.md`](../../chapters/chapter-10-function-calling.md)*
+*Full chapter write-up: [`content/chapters/chapter-10-function-calling.md`](../../content/chapters/chapter-10-function-calling.md)*

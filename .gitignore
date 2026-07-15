@@ -46,4 +46,4 @@ node_modules/
 *.py
 
 # Slide video assets (recordings, exports)
-slides/video/
+content/slides/video/

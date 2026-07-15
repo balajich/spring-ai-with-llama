@@ -243,4 +243,4 @@ chapter-08-pgvector/
 
 ---
 
-*Full chapter write-up: [`chapters/chapter-08-pgvector.md`](../../chapters/chapter-08-pgvector.md)*
+*Full chapter write-up: [`content/chapters/chapter-08-pgvector.md`](../../content/chapters/chapter-08-pgvector.md)*

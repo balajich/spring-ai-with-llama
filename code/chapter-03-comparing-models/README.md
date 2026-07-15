@@ -199,4 +199,4 @@ chapter-03-comparing-models/
 
 ---
 
-*Full chapter write-up: [`chapters/chapter-03-comparing-models.md`](../../chapters/chapter-03-comparing-models.md)*
+*Full chapter write-up: [`content/chapters/chapter-03-comparing-models.md`](../../content/chapters/chapter-03-comparing-models.md)*

@@ -50,6 +50,7 @@ if [[ -z "$CHAPTER" ]]; then
     echo "    $0 chapter-12   ->  chapter-12-multimodality.feature (requires: ollama pull llava)"
     echo "    $0 chapter-13   ->  chapter-13-streaming-api.feature"
     echo "    $0 chapter-14   ->  chapter-14-document-intelligence.feature"
+    echo "    $0 chapter-15   ->  chapter-15-semantic-search.feature (requires: ollama pull nomic-embed-text)"
     echo ""
     exit 1
 fi
@@ -126,10 +127,15 @@ case "$CHAPTER" in
         APP_MODULE="chapter-14-document-intelligence"
         TEST_CLASS="Chapter14Test"
         ;;
+    chapter-15)
+        # Requires the embedding model: ollama pull nomic-embed-text
+        APP_MODULE="chapter-15-semantic-search"
+        TEST_CLASS="Chapter15Test"
+        ;;
     *)
         echo ""
         echo "  ERROR: Unknown chapter '$CHAPTER'"
-        echo "  Available: chapter-01, chapter-02, chapter-03, chapter-04, chapter-05, chapter-06, chapter-07, chapter-08, chapter-09, chapter-10, chapter-11, chapter-12, chapter-13, chapter-14"
+        echo "  Available: chapter-01, chapter-02, chapter-03, chapter-04, chapter-05, chapter-06, chapter-07, chapter-08, chapter-09, chapter-10, chapter-11, chapter-12, chapter-13, chapter-14, chapter-15"
         echo ""
         exit 1
         ;;

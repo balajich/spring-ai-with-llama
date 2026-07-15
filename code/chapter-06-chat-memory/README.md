@@ -178,4 +178,4 @@ chapter-06-chat-memory/
 
 ---
 
-*Full chapter write-up: [`chapters/chapter-06-chat-memory.md`](../../chapters/chapter-06-chat-memory.md)*
+*Full chapter write-up: [`content/chapters/chapter-06-chat-memory.md`](../../content/chapters/chapter-06-chat-memory.md)*

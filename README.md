@@ -30,7 +30,7 @@ The book is built around one evolving real-world project: **SmartHR Assistant**,
 | 12 | Multimodality | Images and text, vision models (llava), image-to-structured-report | ✅ Complete |
 | 13 | Streaming API | Real-time token-by-token responses over SSE | ✅ Complete |
 | 14 | Document Intelligence | PDF/Word/web readers, contract analyser, direct injection | ✅ Complete |
-| 15 | Semantic Search | Embeddings, vector similarity | 🚧 In progress |
+| 15 | Semantic Search | Similarity search, metadata filters, score tuning | ✅ Complete |
 | 16 | AI Agents | Autonomous workflows, tool chaining | 🚧 In progress |
 | 17 | Evaluation | Testing and scoring AI responses | 🚧 In progress |
 | 18 | Performance and Caching | Virtual threads, response caching | 🚧 In progress |
@@ -73,6 +73,7 @@ code/
 ├── chapter-12-multimodality/     ← requires vision model (ollama pull llava)
 ├── chapter-13-streaming-api/     ← token-by-token streaming over SSE
 ├── chapter-14-document-intelligence/  ← PDF/Word/web readers, contract analyser
+├── chapter-15-semantic-search/   ← semantic candidate search (ollama pull nomic-embed-text)
 └── tests/                        ← Karate BDD API tests for all chapters
 ```
 
@@ -107,6 +108,7 @@ From the `code/tests/` directory:
 ./run-tests.sh chapter-12   # requires vision model: ollama pull llava
 ./run-tests.sh chapter-13
 ./run-tests.sh chapter-14
+./run-tests.sh chapter-15   # requires embedding model: ollama pull nomic-embed-text
 ```
 
 ---
@@ -142,7 +144,7 @@ Each chapter also has a companion LinkedIn article walking through the concept i
 - [Chapter 7 — Your AI Is Guessing. RAG Makes It Read the Manual.](https://www.linkedin.com/pulse/chapter-7-your-ai-guessing-rag-makes-read-manual-balaji-chopparapu-ararc/?trackingId=4L5yf1FX4CspOTawv4ddmw%3D%3D)
 - [Chapter 8 — Your Vector Store Shouldn't Forget Everything When You Restart](https://www.linkedin.com/pulse/chapter-8-your-vector-store-shouldnt-forget-when-you-chopparapu-fbd2c/?trackingId=sJN7GdS8osG3cLtvf7i3Bg%3D%3D)
 - [Chapter 9 — Neo4j Graph RAG: When Vector Search Isn't Enough](https://www.linkedin.com/pulse/chapter-9-neo4j-graph-rag-when-vector-search-isnt-balaji-chopparapu-xiutc/?trackingId=ubMaVVYy7Z70TynlVV8IeA%3D%3D)
-- [Chapter 10 — Your AI Bot Can Talk. Now Let It Take Action.](linkedin/chapter-10-function-calling.md) *(publishing soon)*
+- [Chapter 10 — Your AI Bot Can Talk. Now Let It Take Action.](content/linkedin/chapter-10-function-calling.md) *(publishing soon)*
 
 ---
 
