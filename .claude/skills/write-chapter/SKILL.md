@@ -106,9 +106,9 @@ powershell -Command "Get-Process java -ErrorAction SilentlyContinue | Stop-Proce
 - **LinkedIn article** → `content/linkedin/chapter-NN-<slug>.md` — story-led, with the "Series So Far" list using real URLs from `content/linkedin/links.txt` (unpublished = *(link coming soon)*; current = **bold** + `← you are here`). Footer: *Built with Spring Boot 4.1, Spring AI 2.0, Java 25, and Ollama…*
 - **LinkedIn short post** → `content/linkedin/chapter-NN-post.md` — punchy hook + 3 short paragraphs + link + hashtags; names the banner to attach.
 - **LinkedIn banner** → `content/linkedin/chapter-NN-banner.png` (1200×627). **Do not hand-roll it**: add a `CHAPTERS` entry in `content/linkedin/build_banners.py` and run `python build_banners.py NN`. (Note: `linkedin-banner.png` is gitignored by exact name — the `chapter-NN-banner.png` naming is what makes it commit.)
-- **YouTube text** — title options, description (front-load the differentiator: local, no API keys), timestamps, tags, SEO keywords. Back-link prior videos from `content/slides/youtube-links.txt`.
+- **YouTube description** → `content/slides/youtube/chapter-NN-youtube-description.md` — emoji-structured, paste-ready body in a fenced block (YouTube renders emoji but NOT markdown, so keep the paste block plain). Front-load the differentiator (local, no API keys); include WHAT YOU'LL LEARN, RESOURCES (repo/notes/quiz), WATCH THE SERIES IN ORDER (real URLs from `content/slides/youtube/youtube-links.txt`), TECH STACK, TIMESTAMPS, tags.
 - **Slide deck** → `content/slides/build-NN-<slug>.js` → `.pptx`. Use `./theme.js` helpers (`applyMaster`, `addKicker`, `addSectionTitle`, `addCodePanel`, `addNodeDivider`, `addCreditsSlide`). End with Like & Subscribe → Credits. QA programmatically with python-pptx for overflow (>7.5" bottom, >13.3" right) and footer collisions (footer sits at 6.95").
-- **Thumbnail** → `content/slides/thumbnails/NN-<slug>.png` (1280×720) — append a `THUMBS` entry in `content/slides/thumbnail.py` and rerun it.
+- **Thumbnail** → `content/slides/youtube/chapter-NN-youtube-thumbnail.png` (1280×720) — append a `THUMBS` entry in `content/slides/thumbnail.py` and rerun it.
 - **Back-patch the previous chapter** — update chapter N-1's "What's Next" and its Series-So-Far list to point at the new chapter.
 
 ---
@@ -186,7 +186,7 @@ Open `quiz/index.html#springai/chNN` and the tutorial page in a browser; confirm
 - [ ] Draft banner stripped; chapter snippets match code that ran
 - [ ] Root README updated in all 3 spots
 - [ ] LinkedIn article + post + banner
-- [ ] YouTube text + thumbnail
+- [ ] YouTube description (`youtube/chapter-NN-youtube-description.md`) + thumbnail
 - [ ] Slide deck built and QA'd
 - [ ] Previous chapter back-patched
 - [ ] **Website** — tutorial page refreshed from the final markdown **with the draft banner stripped**
