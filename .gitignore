@@ -44,3 +44,6 @@ node_modules/
 # Python files (build/generator scripts)
 **/*.py
 *.py
+
+# Slide video assets (recordings, exports)
+slides/video/
