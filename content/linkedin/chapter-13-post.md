@@ -12,7 +12,7 @@ Chapter 13 of "Spring AI with Llama" fixes it with an almost embarrassingly smal
 
 The insight: streaming doesn't make generation faster. It makes the system *honest* about the progress it's already making.
 
-🔗 Read the full article: *(link coming soon)*
+🔗 Read the full article: https://www.linkedin.com/pulse/chapter-13-your-ai-answers-8-seconds-make-feel-like-200ms-chopparapu-0frsc/
 
 💻 Code: https://github.com/balajich/spring-ai-with-llama
 
