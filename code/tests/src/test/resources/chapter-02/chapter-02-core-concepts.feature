@@ -1,12 +1,11 @@
 Feature: Chapter 02 — Core Concepts
   # ──────────────────────────────────────────────────────────────────────────
-  # Chapter 2 adds four ask modes and a model-info endpoint.
+  # Chapter 2 adds three ask modes tuned with ChatOptions.
   #
   # APIs under test:
   #   POST /hr/ask             — standard mode  (temp 0.3, max 500 tokens)
   #   POST /hr/ask/precise     — precise mode   (temp 0.0, max 150 tokens)
   #   POST /hr/ask/creative    — creative mode  (temp 0.9, max 800 tokens)
-  #   POST /hr/ask/raw         — raw mode       (ChatModel directly, no ChatClient)
   #
   # Response shape: { "question": "<string>", "answer": "<string>", "mode": "<string>" }
   #
@@ -84,29 +83,7 @@ Feature: Chapter 02 — Core Concepts
     And match response.mode == 'creative'
     And match response.answer == '#string'
 
-  # ── POST /hr/ask/raw — uses ChatModel directly ───────────────────────────────
-
-  Scenario: POST /hr/ask/raw — returns raw mode in response
-    Given path '/hr/ask/raw'
-    And header Content-Type = 'application/json'
-    And request { question: '#(standardQuestion)' }
-    When method POST
-    Then status 200
-    And match response == { question: '#string', answer: '#string', mode: '#string' }
-    And match response.mode == 'raw'
-    And assert response.answer.length > 0
-
-  Scenario: POST /hr/ask/raw — question is echoed back in raw mode
-    Given path '/hr/ask/raw'
-    And header Content-Type = 'application/json'
-    And request { question: 'What is the sick leave policy?' }
-    When method POST
-    Then status 200
-    And match response.question == 'What is the sick leave policy?'
-    And match response.mode == 'raw'
-
-
-  # ── Scenario Outline — all four POST modes return their correct mode value ───
+  # ── Scenario Outline — all three POST modes return their correct mode value ──
 
   Scenario Outline: POST <endpoint> — mode field in response equals '<expectedMode>'
     Given path '<endpoint>'
@@ -121,5 +98,4 @@ Feature: Chapter 02 — Core Concepts
       | /hr/ask           | standard     |
       | /hr/ask/precise   | precise      |
       | /hr/ask/creative  | creative     |
-      | /hr/ask/raw       | raw          |
 

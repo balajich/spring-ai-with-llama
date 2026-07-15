@@ -6,7 +6,7 @@ public record ResumeProfile(
         String name,
         String email,
         List<String> skills,
-        int yearsOfExperience,
+        Integer yearsOfExperience,   // boxed: a resume may omit this; null must not crash parsing
         String currentRole,
         String education
 ) {}

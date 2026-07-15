@@ -3,6 +3,7 @@ package com.techcorp.smarthr.controller;
 import com.techcorp.smarthr.model.ResumeParseRequest;
 import com.techcorp.smarthr.model.ResumeProfile;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.converter.BeanOutputConverter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -27,15 +28,15 @@ public class ResumeController {
 
         String response = chatClient
                 .prompt()
+                .options(ChatOptions.builder().temperature(0.0))
                 .user(u -> u.text("""
-                        Extract information from the resume below and return it as a \
-                        plain JSON object containing only the field values.
-
-                        Important:
-                        - Return a flat JSON object with the actual values, NOT a JSON schema.
-                        - Do NOT wrap the result in a "properties" key.
-                        - Do NOT include "$schema", "type", "required", or "additionalProperties".
-                        - Return ONLY the JSON object, no explanation or extra text.
+                        You are a resume parser. Read the resume below and extract these fields:
+                        - name: the candidate's full name
+                        - email: their email address
+                        - skills: an array of their technical skills
+                        - yearsOfExperience: total years of experience, as a number
+                        - currentRole: their current or most recent job title
+                        - education: their highest qualification
 
                         Resume:
                         {resumeText}
