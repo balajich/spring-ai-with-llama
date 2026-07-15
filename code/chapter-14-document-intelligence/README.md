@@ -2,35 +2,7 @@
 
 Give the SmartHR bot the ability to read. Sarah uploads an employment-contract PDF and gets back a structured first-pass legal review — probation period, notice period, IP ownership, and any non-standard clauses that need a lawyer's eyes.
 
-<svg viewBox="0 0 580 300" xmlns="http://www.w3.org/2000/svg" role="img" font-family="'Segoe UI', system-ui, sans-serif">
-  <title>Chapter 14 — Reading documents with Spring AI and Ollama</title>
-  <desc>A contract PDF is read by Spring AI's document readers, injected whole into the prompt, and returned as a structured ContractAnalysis.</desc>
-  <rect width="580" height="300" fill="#f8f9fa" rx="12"/>
-  <rect x="20" y="105" width="120" height="90" rx="10" fill="white" stroke="#c0392b" stroke-width="2"/>
-  <text x="80" y="135" text-anchor="middle" font-size="13" font-weight="700" fill="#7a2018">contract.pdf</text>
-  <text x="80" y="153" text-anchor="middle" font-size="10" fill="#999">multipart upload</text>
-  <text x="80" y="172" text-anchor="middle" font-size="10" fill="#555">employment terms</text>
-  <rect x="180" y="80" width="200" height="140" rx="10" fill="white" stroke="#e67e22" stroke-width="2"/>
-  <text x="280" y="108" text-anchor="middle" font-size="13" font-weight="700" fill="#7a3b00">Spring AI</text>
-  <text x="280" y="126" text-anchor="middle" font-size="10" fill="#999">JVM</text>
-  <text x="280" y="150" text-anchor="middle" font-size="10" fill="#555">PagePdfDocumentReader</text>
-  <text x="280" y="167" text-anchor="middle" font-size="10" fill="#555">direct injection → prompt</text>
-  <text x="280" y="184" text-anchor="middle" font-size="10" fill="#555">BeanOutputConverter</text>
-  <rect x="420" y="105" width="140" height="90" rx="10" fill="white" stroke="#5aaa6b" stroke-width="2"/>
-  <text x="490" y="135" text-anchor="middle" font-size="13" font-weight="700" fill="#1b6b2f">Ollama</text>
-  <text x="490" y="153" text-anchor="middle" font-size="10" fill="#999">llama3.2</text>
-  <text x="490" y="172" text-anchor="middle" font-size="10" fill="#555">reads &amp; reasons</text>
-  <path d="M 140 150 L 180 150" fill="none" stroke="#c0392b" stroke-width="1.8" marker-end="url(#d14a)"/>
-  <path d="M 380 150 L 420 150" fill="none" stroke="#5aaa6b" stroke-width="1.8" marker-end="url(#d14b)"/>
-  <rect x="180" y="245" width="200" height="40" rx="8" fill="#eef0ff" stroke="#5b6abf" stroke-width="1.5"/>
-  <text x="280" y="269" text-anchor="middle" font-size="11" font-weight="700" fill="#2d3494">ContractAnalysis (JSON)</text>
-  <path d="M 280 220 L 280 245" fill="none" stroke="#5b6abf" stroke-width="1.8" marker-end="url(#d14c)"/>
-  <defs>
-    <marker id="d14a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#c0392b"/></marker>
-    <marker id="d14b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#5aaa6b"/></marker>
-    <marker id="d14c" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#5b6abf"/></marker>
-  </defs>
-</svg>
+![Chapter 14 — Reading documents with Spring AI and Ollama](architecture.svg)
 
 ---
 
@@ -172,7 +144,8 @@ chapter-14-document-intelligence/
     │   ├── controller/
     │   │   └── DocumentController.java   ← /hr/contract/analyse + /hr/document/summarise
     │   └── model/
-    │       └── ContractAnalysis.java
+    │       ├── ContractAnalysis.java
+    │       └── SummaryResponse.java
     └── resources/
         └── application.yml
 ```
