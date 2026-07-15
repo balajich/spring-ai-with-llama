@@ -45,5 +45,7 @@ node_modules/
 **/*.py
 *.py
 
-# Slide video assets (recordings, exports)
-content/slides/video/
+# Video recordings / exports (large, not for git)
+content/slides/youtube/video/
+*.mkv
+*.mp4
