@@ -3,15 +3,8 @@ package com.techcorp.smarthr.controller;
 import com.techcorp.smarthr.model.HrRequest;
 import com.techcorp.smarthr.model.HrResponse;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.messages.Message;
-import org.springframework.ai.chat.messages.SystemMessage;
-import org.springframework.ai.chat.messages.UserMessage;
-import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.prompt.ChatOptions;
-import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/hr")
@@ -26,13 +19,11 @@ public class HrChatController {
             """;
 
     private final ChatClient chatClient;
-    private final ChatModel chatModel;
 
-    public HrChatController(ChatClient.Builder builder, ChatModel chatModel) {
+    public HrChatController(ChatClient.Builder builder) {
         this.chatClient = builder
                 .defaultSystem(SYSTEM_PROMPT)
                 .build();
-        this.chatModel = chatModel;
     }
 
     // Chapter 1 endpoint — unchanged
@@ -76,18 +67,4 @@ public class HrChatController {
         return new HrResponse(request.question(), answer, "creative");
     }
 
-    // Chapter 2 — LOW-LEVEL: using ChatModel directly with Message objects
-    // This exposes the underlying Message architecture Spring AI uses internally
-    @PostMapping("/ask/raw")
-    public HrResponse askRaw(@RequestBody HrRequest request) {
-        List<Message> messages = List.of(
-                new SystemMessage(SYSTEM_PROMPT),
-                new UserMessage(request.question())
-        );
-
-        var response = chatModel.call(new Prompt(messages));
-        String answer = response.getResult().getOutput().getText();
-        return new HrResponse(request.question(), answer, "raw");
-    }
-   
 }

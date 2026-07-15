@@ -62,7 +62,6 @@ The app starts on **http://localhost:8080**
 | `POST` | `/hr/ask` | Standard Q&A (temp 0.3, max 500 tokens) |
 | `POST` | `/hr/ask/precise` | Short, deterministic answers (temp 0.0, max 150 tokens) |
 | `POST` | `/hr/ask/creative` | Longer, varied answers (temp 0.9, max 800 tokens) |
-| `POST` | `/hr/ask/raw` | Low-level ChatModel with explicit Message objects |
 | `GET` | `/hr/model/info` | Active model name, URL, temperature, max tokens |
 
 ---
@@ -126,24 +125,6 @@ curl -s -X POST http://localhost:8080/hr/ask/creative \
 
 ---
 
-### Raw — low-level ChatModel (exposes message architecture)
-
-```bash
-curl -s -X POST http://localhost:8080/hr/ask/raw \
-  -H "Content-Type: application/json" \
-  -d '{"question": "When does health insurance start for new hires?"}'
-```
-
-**Response:**
-```json
-{
-  "question": "When does health insurance start for new hires?",
-  "answer": "Health insurance at TechCorp begins on the first day of the month following your start date.",
-  "mode": "raw"
-}
-```
-
----
 
 ### Model info — inspect active configuration
 
@@ -206,7 +187,6 @@ mvn spring-boot:run
 | `/ask` | 0.3 | 500 | General HR Q&A |
 | `/ask/precise` | 0.0 | 150 | Policy facts — short and consistent |
 | `/ask/creative` | 0.9 | 800 | Writing, brainstorming, job descriptions |
-| `/ask/raw` | 0.3 | 500 | Direct ChatModel — exposes message internals |
 
 ---
 

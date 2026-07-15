@@ -1,6 +1,6 @@
 # Chapter 2 — Core Concepts: Tokens, Messages, and the AI Abstraction
 
-> **What you will build:** Three new HR endpoints — `/hr/ask/precise` for short, consistent policy answers, `/hr/ask/creative` for open-ended brainstorming, and `/hr/ask/raw` to call the model directly using Spring AI's lower-level `ChatModel` API.
+> **What you will build:** Two new HR endpoints — `/hr/ask/precise` for short, consistent policy answers, and `/hr/ask/creative` for open-ended brainstorming — tuned with Spring AI's `ChatOptions`.
 
 ---
 
@@ -157,7 +157,7 @@ code/chapter-02-core-concepts/
 └── src/main/java/com/techcorp/smarthr/
     ├── SmartHrAssistantApplication.java
     ├── controller/
-    │   └── HrChatController.java       ← adds /ask/precise, /ask/creative, /ask/raw
+    │   └── HrChatController.java       ← adds /ask/precise, /ask/creative
     └── model/
         ├── HrRequest.java
         └── HrResponse.java             ← updated: adds "mode" field
@@ -173,7 +173,7 @@ code/chapter-02-core-concepts/
 public record HrResponse(String question, String answer, String mode) {}
 ```
 
-### Three new endpoints in `HrChatController`
+### Two new endpoints in `HrChatController`
 
 ```java
 // PRECISE: policy questions — short, deterministic, capped at ~150 tokens
@@ -203,26 +203,13 @@ public HrResponse askCreative(@RequestBody HrRequest request) {
             .content();
     return new HrResponse(request.question(), answer, "creative");
 }
-
-// RAW: bypass ChatClient, use ChatModel directly
-@PostMapping("/ask/raw")
-public HrResponse askRaw(@RequestBody HrRequest request) {
-    List<Message> messages = List.of(
-            new SystemMessage(SYSTEM_PROMPT),
-            new UserMessage(request.question())
-    );
-    var response = chatModel.call(new Prompt(messages));
-    String answer = response.getResult().getOutput().getText();
-    return new HrResponse(request.question(), answer, "raw");
-}
 ```
 
-Both `ChatClient.Builder` and `ChatModel` are injected together:
+`ChatClient.Builder` is injected and configured once with the system prompt:
 
 ```java
-public HrChatController(ChatClient.Builder builder, ChatModel chatModel) {
+public HrChatController(ChatClient.Builder builder) {
     this.chatClient = builder.defaultSystem(SYSTEM_PROMPT).build();
-    this.chatModel = chatModel;
 }
 ```
 
