@@ -167,6 +167,7 @@ Open `quiz/index.html#springai/chNN` and the tutorial page in a browser; confirm
 | Rule | Why |
 |---|---|
 | **Boxed types in records** (`Integer`, `Boolean` — never `int`/`boolean`) | Spring AI 2.0 uses **Jackson 3**; it throws `Cannot map null into type int` when the model omits a field. This broke ch5. |
+| **Jackson 3 package is `tools.jackson.databind`** — not `com.fasterxml.jackson.databind` | Spring Boot 4.1 moved off `com.fasterxml`. Importing the old package fails with `package com.fasterxml.jackson.databind does not exist`. Bit ch15 on `ObjectMapper`. Verify with:<br>`unzip -l <jackson-databind.jar> \| grep ObjectMapper.class` |
 | Structured output: `temperature(0.0)` **and name every field** in the prompt | Small models otherwise invert keys/values (ch5 returned `{"Priya Sharma":"priya@example.com"}`). Avoid negative "do NOT" instructions — they backfire. |
 | `.options(ChatOptions.builder()...)` — **no `.build()`** | `.options()` takes the *builder*, not a built `ChatOptions`. |
 | Run apps on **port 8123** | 8080 is held by the harness's uvicorn preview server (unkillable from Windows). |
