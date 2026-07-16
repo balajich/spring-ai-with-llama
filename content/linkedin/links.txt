@@ -11,4 +11,5 @@ chapter-10,https://www.linkedin.com/pulse/chapter-10-your-ai-bot-can-talk-now-le
 chapter-11,https://www.linkedin.com/pulse/chapter-11-exposing-existing-rest-api-mcp-tools-balaji-chopparapu-ptegc/?trackingId=XPZnicIu%2BcI9hiU3DrfK1A%3D%3D
 chapter-12,https://www.linkedin.com/pulse/chapter-12-your-ai-bot-just-learned-see-balaji-chopparapu-ooulc/
 chapter-13,https://www.linkedin.com/pulse/chapter-13-your-ai-answers-8-seconds-make-feel-like-200ms-chopparapu-0frsc/
+chapter-14,https://www.linkedin.com/pulse/chapter-14-your-ai-can-read-document-answer-exactly-you-chopparapu-k8hac/
 github-repo-link,https://github.com/balajich/spring-ai-with-llama
