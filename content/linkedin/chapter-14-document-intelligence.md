@@ -1,16 +1,16 @@
-# Chapter 14 — Your AI Can Now Read the Contract So You Don't Have To
+# Chapter 14 — Your AI Can Read a Document and Answer in Exactly the Format You Ask For
 
-Sarah reviews every employment contract before it reaches a new hire. Twenty minutes each, scanning PDFs for the same things: What's the probation period? The notice period? Who owns the IP? And — the one that actually matters — is there anything *weird* in here that a lawyer needs to see?
+Sarah reads every employment contract before it reaches a new hire. Twenty minutes each, looking for the same handful of things: the probation period, the notice period, who owns the IP — and anything unusual that a lawyer should see.
 
 > "Can the AI do a first pass for me?"
 
-Chapter 14 of "Spring AI with Llama" builds exactly that: upload a contract PDF, get back a structured review in seconds.
+Chapter 14 of "Spring AI with Llama" builds it: upload the PDF, get back a summary and the exact fields you asked for. In seconds. All on your own laptop.
 
 ---
 
-## Teaching the Bot to Read Files
+## Step 1 — Let the AI read the file
 
-For fourteen chapters the SmartHR bot has only ever seen text you typed into a prompt. Real HR work lives in **documents** — PDFs, Word files, web pages. Spring AI closes that gap with **document readers**:
+For thirteen chapters the bot only ever saw text you typed into a prompt. Real work lives in documents. Spring AI closes that gap with **document readers**:
 
 ```java
 // PDF — one Document per page
@@ -20,29 +20,15 @@ List<Document> pages = new PagePdfDocumentReader(resource).get();
 List<Document> docs = new TikaDocumentReader(resource).get();
 ```
 
-Two lines, and an uploaded file becomes text the model can reason over. No manual parsing, no format-specific libraries.
+Two lines, and an uploaded file becomes text the model can reason over. No manual parsing. No format-specific libraries.
 
 ---
 
-## Direct Injection, Not RAG
+## Step 2 — Ask for the answer in your format
 
-Here's a decision that trips people up. We built RAG back in Chapter 7 — so shouldn't we chunk the contract, embed it, and retrieve the relevant bits?
+This is the part that matters.
 
-**No.** RAG is for finding the few relevant pieces in a *large library*. Here we have *one* document and we want to analyse *all* of it. So we do the opposite: **direct injection** — the entire contract goes into the prompt.
-
-| Direct injection (this chapter) | RAG (Chapter 7) |
-|---|---|
-| One document, analysed fully | Large corpus, searched |
-| Fits the context window | Too big to fit |
-| "Review this contract" | "Find the answer in these 500 docs" |
-
-Knowing *which* tool fits the job is half of building good AI systems.
-
----
-
-## Structured Output Does the Heavy Lifting
-
-A prose summary is nice. A typed object your systems can route, store, and alert on is what actually saves Sarah's twenty minutes. Combine the PDF text with `BeanOutputConverter` (Chapter 5) and the endpoint returns:
+A paragraph of prose is nice to read, but useless to your code. So instead of asking "summarise this contract", you define the shape you want and ask for that:
 
 ```java
 public record ContractAnalysis(
@@ -55,10 +41,11 @@ public record ContractAnalysis(
 ) {}
 ```
 
-Feed it a real contract and out comes:
+Feed it a real contract and out comes exactly that shape:
 
 ```json
 {
+  "summary": "Employment agreement between TechCorp Ltd and Rahul Menon...",
   "probationPeriod": "six (6) months",
   "noticePeriod": "three (3) months",
   "ipOwnership": "the Company",
@@ -67,24 +54,40 @@ Feed it a real contract and out comes:
 }
 ```
 
-The bot didn't just summarise — it **flagged the red flags**. That last field is what turns "read every contract" into "read only the ones the AI escalated."
+The AI didn't just summarise — it **read, understood, and reported back in the structure you specified**, including flagging the clauses that need a human.
+
+And because it's structured, your code can act on it:
+
+```java
+if (report.requiresLegalReview()) {
+    escalateToLegal(report);
+}
+```
+
+That's the whole point. Prose stops at a human reader. A typed object feeds your systems — route it, store it, alert on it. It turns "read every contract" into "read only the ones the AI escalated."
 
 ---
 
-## The Lessons That Carried Over
+## One design note: don't reach for RAG here
 
-Building this on Spring Boot 4.1 / Spring AI 2.0 (GA), two hard-won habits from Chapter 5 paid off immediately:
+We built RAG back in Chapter 7, so the instinct is to chunk the contract, embed it, and retrieve the relevant bits.
 
-- **Boxed, nullable fields** (`Boolean`, not `boolean`) — Spring AI 2.0 uses Jackson 3, which throws when the model omits a field and `null` lands on a primitive. A contract might not state every term; the type system has to allow that.
-- **Name every field in the prompt, and set `temperature(0.0)`** — small local models will otherwise improvise. Explicit guidance plus zero temperature makes extraction boringly reliable, which is exactly what you want for a legal first pass.
+Don't. RAG is for finding a few relevant pieces in a **large library**. Here you have **one document** and you want the model to read **all of it**. So you do the opposite — put the whole contract in the prompt. Same toolbox, different tool.
 
-Same discipline, new document type. That's the compounding payoff of building one app across a whole series.
+---
+
+## Two things that make it reliable
+
+Building this on Spring Boot 4.1 / Spring AI 2.0, two habits from Chapter 5 paid off immediately:
+
+- **Use boxed types** (`Boolean`, not `boolean`). Spring AI 2.0 uses Jackson 3, which throws when the model omits a field and `null` lands on a primitive. A contract might not state every term — the type system has to allow that.
+- **Name every field in the prompt and set `temperature(0.0)`.** Small local models otherwise improvise. Explicit guidance plus zero temperature makes extraction boringly reliable — exactly what you want for a legal first pass.
 
 ---
 
 ## What's Next — Chapter 15: Semantic Search
 
-The bot can read documents now. Next it learns to find them by *meaning* — semantic search over the policy library, so "how much time off after a baby" finds the parental-leave policy even without the word "leave."
+The bot can read documents now. Next it learns to find things by *meaning* — so "how much time off after a baby" finds the parental-leave policy even without the word "leave."
 
 ---
 
@@ -103,7 +106,7 @@ The bot can read documents now. Next it learns to find them by *meaning* — sem
 - [Chapter 11 — Exposing an Existing REST API as MCP Tools](https://www.linkedin.com/pulse/chapter-11-exposing-existing-rest-api-mcp-tools-balaji-chopparapu-ptegc/?trackingId=XPZnicIu%2BcI9hiU3DrfK1A%3D%3D)
 - [Chapter 12 — Your AI Bot Just Learned to See](https://www.linkedin.com/pulse/chapter-12-your-ai-bot-just-learned-see-balaji-chopparapu-ooulc/)
 - [Chapter 13 — Your AI Answers in 8 Seconds. Make It Feel Like 200ms.](https://www.linkedin.com/pulse/chapter-13-your-ai-answers-8-seconds-make-feel-like-200ms-chopparapu-0frsc/)
-- **Chapter 14 — Your AI Can Now Read the Contract So You Don't Have To** ← you are here
+- **Chapter 14 — Your AI Can Read a Document and Answer in Exactly the Format You Ask For** ← you are here
 - Chapter 15 — Your Search Box Is Lying: It Found Nothing, But Four People Matched *(link coming soon)*
 
 Full source code for all chapters is on GitHub — drop a star if you find it useful!
@@ -113,4 +116,4 @@ Full source code for all chapters is on GitHub — drop a star if you find it us
 
 *Built with Spring Boot 4.1, Spring AI 2.0, Java 25, and Ollama — runs entirely on your laptop, no paid APIs.*
 
-#SpringAI #SpringBoot #Java25 #Ollama #DocumentAI #PDF #RAG #LLM #GenerativeAI #AIEngineering #LocalAI #JavaDeveloper #SpringFramework #Llama
+#SpringAI #SpringBoot #Java25 #Ollama #DocumentAI #PDF #LLM #GenerativeAI #AIEngineering #LocalAI #JavaDeveloper #Llama
