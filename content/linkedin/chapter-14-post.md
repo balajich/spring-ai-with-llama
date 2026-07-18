@@ -4,13 +4,15 @@
 
 ---
 
-📄 **Sarah spends 20 minutes reading every contract for red flags. Now the AI does the first pass.**
+📄 **Your AI can read a document — and answer in exactly the format you ask for.**
 
-Chapter 14 of "Spring AI with Llama" teaches the bot to read: upload an employment contract PDF and get back a structured review — probation period, notice period, IP ownership, and any non-standard clauses a lawyer should see.
+Upload an employment contract PDF. The AI reads the whole thing and gives you back a summary plus the specific fields you asked for: probation period, notice period, who owns the IP, and any unusual clauses worth a second look.
 
-The design decision that matters: this is **direct injection, not RAG**. RAG finds the relevant bits in a big library; contract review means reading one document completely. Knowing which tool fits the job is half of building good AI systems.
+The important part: the answer isn't a paragraph. It's structured data — a Java record with `requiresLegalReview: true`. So your code can act on it. Route it, store it, alert on it. No human has to read prose first.
 
-And the output isn't prose — it's a typed record with `requiresLegalReview: true`. That's what turns "read every contract" into "read only the ones the AI escalated".
+That's the difference between an AI that *describes* and an AI your systems can actually *use*.
+
+Chapter 14 of "Spring AI with Llama" — all local, no API keys.
 
 🔗 Read the full article: *(link coming soon)*
 
