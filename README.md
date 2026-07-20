@@ -31,7 +31,7 @@ The book is built around one evolving real-world project: **SmartHR Assistant**,
 | 13 | Streaming API | Real-time token-by-token responses over SSE | ✅ Complete |
 | 14 | Document Intelligence | PDF/Word/web readers, contract analyser, direct injection | ✅ Complete |
 | 15 | Semantic Search | Similarity search, metadata filters, score tuning | ✅ Complete |
-| 16 | AI Agents | Autonomous workflows, tool chaining | 🚧 In progress |
+| 16 | AI Agents | Goal-driven agent, multi-tool chaining, execution trace | ✅ Complete |
 | 17 | Evaluation | Testing and scoring AI responses | 🚧 In progress |
 | 18 | Performance and Caching | Virtual threads, response caching | 🚧 In progress |
 | 19 | Security and Safety | Prompt injection, PII scrubbing | 🚧 In progress |
@@ -74,6 +74,7 @@ code/
 ├── chapter-13-streaming-api/     ← token-by-token streaming over SSE
 ├── chapter-14-document-intelligence/  ← PDF/Word/web readers, contract analyser
 ├── chapter-15-semantic-search/   ← semantic candidate search (ollama pull nomic-embed-text)
+├── chapter-16-ai-agents/         ← goal-driven agent that chains five tools
 └── tests/                        ← Karate BDD API tests for all chapters
 ```
 
@@ -109,6 +110,7 @@ From the `code/tests/` directory:
 ./run-tests.sh chapter-13
 ./run-tests.sh chapter-14
 ./run-tests.sh chapter-15   # requires embedding model: ollama pull nomic-embed-text
+./run-tests.sh chapter-16
 ```
 
 ---
