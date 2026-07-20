@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: SmartHR Assistant
+
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        options:
+          model: llama3.2
+          # Agents chain several tool calls then write a long report — give it room.
+          num-predict: 1200
+
+server:
+  port: 8080

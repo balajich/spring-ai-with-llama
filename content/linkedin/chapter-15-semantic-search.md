@@ -1,4 +1,4 @@
-# Chapter 15 — Your Search Box Is Lying: It Found Nothing, But Four People Matched
+# Chapter 15 — When Keyword Search Fails, Try Semantic Search
 
 Lisa needs a backend developer with cloud experience. She types exactly that into TechCorp's candidate search:
 
@@ -6,77 +6,41 @@ Lisa needs a backend developer with cloud experience. She types exactly that int
 
 **Zero results.**
 
-Not because nobody matches. Four people match. They just didn't use her words:
+Not because nobody matches — four people do. They just wrote it differently: "JVM engineer" and "AWS Lambda", "server-side developer" and "Azure Functions", "Java developer" and "Google Cloud Platform".
 
-- Priya wrote *"JVM engineer"* and *"AWS Lambda"*
-- Aisha wrote *"server-side developer"* and *"Azure Functions"*
-- Elena wrote *"Java developer"* and *"Google Cloud Platform"*
-- Sofia wrote *"SRE"* and *"Terraform"*
-
-Every one of them is exactly who Lisa wanted. Keyword search matched *strings*. Lisa was asking about *meaning*.
+Keyword search looks for the exact words. Lisa was asking about the **meaning**.
 
 ---
 
-## Two Kinds of Question, One Endpoint
+## The Fix: Search by Meaning
 
-Chapter 15 of "Spring AI with Llama" fixes this — and the design insight is the part worth stealing.
+Chapter 15 of "Spring AI with Llama" solves it with semantic search. The idea is simple:
 
-When you index a resume, you make a deliberate split:
+1. Turn every resume into a vector (a list of numbers that captures its meaning).
+2. Turn the search query into a vector the same way.
+3. Return the resumes whose vectors sit closest to the query.
+
+Because it compares *meaning* rather than *spelling*, it finds Priya and Aisha even though their CVs never use the words Lisa typed. In Spring AI it's a few lines:
 
 ```java
-new Document(candidate.resume(), Map.of(   // ← embedded: searched by MEANING
-        "candidateId", candidate.candidateId(),
-        "seniority",   candidate.seniority(),   // ← metadata: matched EXACTLY
-        "location",    candidate.location()
-));
+List<Document> matches = vectorStore.similaritySearch(
+        SearchRequest.builder()
+                .query("backend developer with cloud experience")
+                .topK(4)
+                .build());
 ```
 
-The **resume text** gets embedded into a vector. It answers the fuzzy question: *"who sounds like a cloud engineer?"*
+Run it, and the four hidden candidates come back — ranked by how close their meaning is.
 
-The **metadata** stays literal. It answers the precise question: *"who is SENIOR and in London?"*
-
-Then you ask both at once:
-
-```java
-SearchRequest.builder()
-        .query("cloud infrastructure")                              // semantic
-        .topK(10)
-        .filterExpression("seniority == 'SENIOR' && location == 'London'")  // exact
-        .build();
-```
-
-Fuzzy where you want recall, exact where you want control. That combination is what makes it usable rather than a demo.
+A keyword search would have returned **zero** of them.
 
 ---
 
-## The Part Most Tutorials Get Wrong
+## Two Honest Notes From Building It
 
-Nearly every semantic search tutorial tells you to start with a similarity threshold of **0.75**.
+**It ranks, it doesn't filter.** Semantic search returns *degrees* of similarity, not yes/no. A mobile developer might show up near the bottom of a "backend developer" search — both are software roles, so they're related. That's normal. It narrows the pile to a few worth reading; a human still decides.
 
-Here are the real scores from the running app, for Lisa's query:
-
-```
-0.6327  Elena Rossi     "Java developer ... Google Cloud Platform"
-0.6270  Aisha Khan      "Server-side developer ... Azure Functions"
-0.6087  Liam O'Brien    "Mobile developer ... Swift"        ← honest noise
-0.5924  Priya Sharma    "JVM engineer ... AWS Lambda"
-```
-
-Every genuine match lands between **0.59 and 0.67**. Set that recommended `0.75` threshold and your search returns **absolutely nothing** — and it looks like a bug, not a config choice.
-
-Thresholds aren't universal. They depend on your embedding model, your text length, and how people phrase queries. So this chapter ships with the threshold at `0.0` and returns the raw scores, so you can *see* your distribution before you pick a number.
-
-**Measure first. Then threshold.**
-
----
-
-## Semantic Search Returns Degrees, Not Booleans
-
-Notice Liam — the mobile developer — sitting at rank 3, above Priya.
-
-That's not a defect I hid. It's what semantic search *is*: a ranking by proximity of meaning, not a yes/no filter. "Mobile developer" genuinely shares vocabulary-space with "backend developer" — both are software engineering roles.
-
-Which is why `topK` and a human reviewer both still matter. The AI narrows 800 resumes to 4 worth reading. It doesn't decide who gets hired.
+**Don't blindly copy a threshold.** Tutorials often say "start at 0.75". When I ran mine, the genuine matches scored 0.59–0.67 — that recommended threshold would have returned *nothing* and looked like a bug. Measure your own scores first, then pick a cutoff.
 
 ---
 
@@ -101,8 +65,9 @@ The bot can talk, remember, retrieve, act, see, stream, read documents, and now 
 - [Chapter 11 — Exposing an Existing REST API as MCP Tools](https://www.linkedin.com/pulse/chapter-11-exposing-existing-rest-api-mcp-tools-balaji-chopparapu-ptegc/?trackingId=XPZnicIu%2BcI9hiU3DrfK1A%3D%3D)
 - [Chapter 12 — Your AI Bot Just Learned to See](https://www.linkedin.com/pulse/chapter-12-your-ai-bot-just-learned-see-balaji-chopparapu-ooulc/)
 - [Chapter 13 — Your AI Answers in 8 Seconds. Make It Feel Like 200ms.](https://www.linkedin.com/pulse/chapter-13-your-ai-answers-8-seconds-make-feel-like-200ms-chopparapu-0frsc/)
-- Chapter 14 — Your AI Can Read a Document and Answer in Exactly the Format You Ask For *(link coming soon)*
-- **Chapter 15 — Your Search Box Is Lying: It Found Nothing, But Four People Matched** ← you are here
+- [Chapter 14 — Your AI Can Read a Document and Answer in Exactly the Format You Ask For](https://www.linkedin.com/pulse/chapter-14-your-ai-can-read-document-answer-exactly-you-chopparapu-k8hac/)
+- **Chapter 15 — When Keyword Search Fails, Try Semantic Search** ← you are here
+- Chapter 16 — I Gave the AI a Goal Instead of Instructions. It Wrote Its Own Plan. *(link coming soon)*
 
 Full source code for all chapters is on GitHub — drop a star if you find it useful!
 [github.com/balajich/spring-ai-with-llama](https://github.com/balajich/spring-ai-with-llama)
