@@ -1,3 +1,4 @@
 chapter-00,https://youtu.be/RW9g99Uk_7w?si=fuOY2mptILvoWfdi
 chapter-01,https://youtu.be/FvLBKbXxrdk?si=IPMg9SQEKYOTqcNI
 chapter-02,https://youtu.be/JsAo7xYcaNk?si=JniNd2ZLZzkr12qZ
+chapter-03,https://youtu.be/TZf2U0qOe7I
