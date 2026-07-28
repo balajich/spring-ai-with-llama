@@ -40,10 +40,10 @@ Feature: Chapter 16 — AI Agents: Autonomous Workflows and Tool Chaining
     And match response contains 'getPolicyUpdates'
 
   Scenario: GET /hr/agent/data/{month} — the underlying HR data is present
-    Given path '/hr/agent/data/2025-05'
+    Given path '/hr/agent/data/2026-06'
     When method GET
     Then status 200
-    And match response contains { month: '2025-05' }
+    And match response contains { month: '2026-06' }
     And match response.headcount == '#notnull'
     And match response.openPositions == '#array'
 
@@ -52,7 +52,7 @@ Feature: Chapter 16 — AI Agents: Autonomous Workflows and Tool Chaining
   Scenario: POST /hr/report/generate — returns report plus an execution trace
     Given path '/hr/report/generate'
     And header Content-Type = 'application/json'
-    And request { month: '2025-05' }
+    And request { month: '2026-06' }
     When method POST
     Then status 200
     And match response contains { month: '#string', report: '#string', toolsInvoked: '#array', toolCallCount: '#number' }
@@ -64,7 +64,7 @@ Feature: Chapter 16 — AI Agents: Autonomous Workflows and Tool Chaining
     # The prompt never says which tools to call or in what order.
     Given path '/hr/report/generate'
     And header Content-Type = 'application/json'
-    And request { month: '2025-05' }
+    And request { month: '2026-06' }
     When method POST
     Then status 200
     # more than one distinct tool => it planned a sequence, not a single call
@@ -79,7 +79,7 @@ Feature: Chapter 16 — AI Agents: Autonomous Workflows and Tool Chaining
 
     Given path '/hr/report/generate'
     And header Content-Type = 'application/json'
-    And request { month: '2025-05' }
+    And request { month: '2026-06' }
     When method POST
     Then status 200
     * def invoked = response.toolsInvoked
@@ -87,11 +87,11 @@ Feature: Chapter 16 — AI Agents: Autonomous Workflows and Tool Chaining
     And assert unknown.length == 0
 
   Scenario: POST /hr/report/generate — the agent grounds the report in tool data
-    # Headcount for 2025-05 is 342 in the fixture. A report built from the tools
+    # Headcount for 2026-06 is 342 in the fixture. A report built from the tools
     # should surface a real figure rather than inventing one.
     Given path '/hr/report/generate'
     And header Content-Type = 'application/json'
-    And request { month: '2025-05' }
+    And request { month: '2026-06' }
     When method POST
     Then status 200
     And assert response.report.indexOf('342') >= 0 || response.toolsInvoked.indexOf('getHeadcount') >= 0

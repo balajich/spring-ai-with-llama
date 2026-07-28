@@ -4,7 +4,7 @@ Every month Sarah spends a day building the HR report. Headcount, new hires, ope
 
 So I stopped telling the AI what to do, and told it what I **wanted**:
 
-> "Produce the complete monthly HR report for 2025-05. Gather whatever data you need using your tools first."
+> "Produce the complete monthly HR report for 2026-06. Gather whatever data you need using your tools first."
 
 That's the entire instruction. No step list. No orchestration code.
 
@@ -100,8 +100,8 @@ The bot can now plan and act on its own. Which raises an uncomfortable question:
 - [Chapter 11 — Exposing an Existing REST API as MCP Tools](https://www.linkedin.com/pulse/chapter-11-exposing-existing-rest-api-mcp-tools-balaji-chopparapu-ptegc/?trackingId=XPZnicIu%2BcI9hiU3DrfK1A%3D%3D)
 - [Chapter 12 — Your AI Bot Just Learned to See](https://www.linkedin.com/pulse/chapter-12-your-ai-bot-just-learned-see-balaji-chopparapu-ooulc/)
 - [Chapter 13 — Your AI Answers in 8 Seconds. Make It Feel Like 200ms.](https://www.linkedin.com/pulse/chapter-13-your-ai-answers-8-seconds-make-feel-like-200ms-chopparapu-0frsc/)
-- Chapter 14 — Your AI Can Read a Document and Answer in Exactly the Format You Ask For *(link coming soon)*
-- Chapter 15 — When Keyword Search Fails, Try Semantic Search *(link coming soon)*
+- [Chapter 14 — Your AI Can Read a Document and Answer in Exactly the Format You Ask For](https://www.linkedin.com/pulse/chapter-14-your-ai-can-read-document-answer-exactly-you-chopparapu-k8hac/)
+- [Chapter 15 — When Keyword Search Fails, Try Semantic Search](https://www.linkedin.com/pulse/chapter-15-when-keyword-search-fails-try-semantic-balaji-chopparapu-fn92c/)
 - **Chapter 16 — I Gave the AI a Goal Instead of Instructions. It Wrote Its Own Plan.** ← you are here
 
 Full source code for all chapters is on GitHub — drop a star if you find it useful!

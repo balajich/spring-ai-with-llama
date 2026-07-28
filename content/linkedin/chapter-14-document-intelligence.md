@@ -107,7 +107,7 @@ The bot can read documents now. Next it learns to find things by *meaning* — s
 - [Chapter 12 — Your AI Bot Just Learned to See](https://www.linkedin.com/pulse/chapter-12-your-ai-bot-just-learned-see-balaji-chopparapu-ooulc/)
 - [Chapter 13 — Your AI Answers in 8 Seconds. Make It Feel Like 200ms.](https://www.linkedin.com/pulse/chapter-13-your-ai-answers-8-seconds-make-feel-like-200ms-chopparapu-0frsc/)
 - **Chapter 14 — Your AI Can Read a Document and Answer in Exactly the Format You Ask For** ← you are here
-- Chapter 15 — When Keyword Search Fails, Try Semantic Search *(link coming soon)*
+- [Chapter 15 — When Keyword Search Fails, Try Semantic Search](https://www.linkedin.com/pulse/chapter-15-when-keyword-search-fails-try-semantic-balaji-chopparapu-fn92c/)
 
 Full source code for all chapters is on GitHub — drop a star if you find it useful!
 [github.com/balajich/spring-ai-with-llama](https://github.com/balajich/spring-ai-with-llama)

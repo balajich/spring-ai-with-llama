@@ -12,7 +12,7 @@ Keyword search matches the exact words. Semantic search matches the **meaning** 
 
 Chapter 15 of "Spring AI with Llama" shows how: turn the resumes into vectors, turn the query into a vector, and return the closest matches. A few lines with Spring AI, all running locally.
 
-🔗 Read the full article: *(link coming soon)*
+🔗 Read the full article: https://www.linkedin.com/pulse/chapter-15-when-keyword-search-fails-try-semantic-balaji-chopparapu-fn92c/
 
 💻 Code: https://github.com/balajich/spring-ai-with-llama
 

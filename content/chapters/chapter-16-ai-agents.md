@@ -29,15 +29,15 @@ That is the jump from an assistant to an **agent**.
 Chapter 10 gave the bot one tool and told it when to use it. An agent is different: it receives a **goal** and works out the steps.
 
 ```
-Goal: "Produce the monthly HR report for 2025-05"
+Goal: "Produce the monthly HR report for 2026-06"
         │
         ▼
 The model decides:
-  → getHeadcount("2025-05")
-  → getOpenPositions("2025-05")
-  → getAttrition("2025-05")
-  → getPolicyUpdates("2025-05")
-  → getRecentHires("2025-05")
+  → getHeadcount("2026-06")
+  → getOpenPositions("2026-06")
+  → getAttrition("2026-06")
+  → getPolicyUpdates("2026-06")
+  → getRecentHires("2026-06")
   → I have enough. Write the report.
         │
         ▼
@@ -52,11 +52,11 @@ Finished report
 
 ```
 REASON:  "I need headcount first"
-ACT:     getHeadcount("2025-05")
+ACT:     getHeadcount("2026-06")
 OBSERVE: { total: 342, changeFromLastMonth: 12 }
 
 REASON:  "Now the open roles"
-ACT:     getOpenPositions("2025-05")
+ACT:     getOpenPositions("2026-06")
 OBSERVE: [ "Staff Engineer (critical)", ... ]
 
 … repeat …
@@ -79,14 +79,14 @@ public class HrDataService {
 
     @Tool(description = "Get total employee headcount and the change from last month for a given month")
     public HrSnapshot.Headcount getHeadcount(
-            @ToolParam(description = "Month in yyyy-MM format, e.g. 2025-05") String month) {
+            @ToolParam(description = "Month in yyyy-MM format, e.g. 2026-06") String month) {
         record("getHeadcount");
         return snapshot(month).headcount();
     }
 
     @Tool(description = "Get all currently open job positions for a given month")
     public List<String> getOpenPositions(
-            @ToolParam(description = "Month in yyyy-MM format, e.g. 2025-05") String month) { ... }
+            @ToolParam(description = "Month in yyyy-MM format, e.g. 2026-06") String month) { ... }
 
     // getRecentHires, getAttrition, getPolicyUpdates — same shape
 }
@@ -192,7 +192,7 @@ mvn spring-boot:run
 ```bash
 curl -s -X POST http://localhost:8080/hr/report/generate \
   -H "Content-Type: application/json" \
-  -d '{"month": "2025-05"}'
+  -d '{"month": "2026-06"}'
 ```
 
 Real output (trimmed):
@@ -201,7 +201,7 @@ Real output (trimmed):
 toolsInvoked : getHeadcount, getOpenPositions, getAttrition, getPolicyUpdates, getRecentHires
 toolCallCount: 5
 
-**2025-05 HR Report**
+**2026-06 HR Report**
 **Headcount**   Total employees: 342   Change from last month: +12
 **New Hires**   Priya Sharma - Senior Engineer; Tom Baker - Data Scientist
 ```
