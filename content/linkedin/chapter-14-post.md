@@ -14,7 +14,7 @@ That's the difference between an AI that *describes* and an AI your systems can 
 
 Chapter 14 of "Spring AI with Llama" — all local, no API keys.
 
-🔗 Read the full article: *(link coming soon)*
+🔗 Read the full article: https://www.linkedin.com/pulse/chapter-14-your-ai-can-read-document-answer-exactly-you-chopparapu-k8hac/
 
 💻 Code: https://github.com/balajich/spring-ai-with-llama
 

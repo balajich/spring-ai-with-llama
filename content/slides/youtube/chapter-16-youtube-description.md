@@ -12,7 +12,7 @@
 ```
 🤖 Spring AI with Llama #16 — AI Agents: Give It a Goal, Not Instructions
 
-Every month Sarah spends a day compiling the HR report from five different systems. So we stop telling the AI what to do, and tell it what we want: "Produce the monthly HR report for 2025-05. Gather whatever data you need using your tools first."
+Every month Sarah spends a day compiling the HR report from five different systems. So we stop telling the AI what to do, and tell it what we want: "Produce the monthly HR report for 2026-06. Gather whatever data you need using your tools first."
 
 That's the whole instruction. No step list, no orchestration code. The agent calls five tools in an order it chooses, then writes the report — and we make it show its working, so you can see exactly what it decided to do.
 

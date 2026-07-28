@@ -7,7 +7,7 @@
   <rect x="20" y="120" width="112" height="80" rx="10" fill="white" stroke="#b0568c" stroke-width="2"/>
   <text x="76" y="148" text-anchor="middle" font-size="12" font-weight="700" fill="#7d2a5c">GOAL</text>
   <text x="76" y="167" text-anchor="middle" font-size="10" fill="#555">"HR report</text>
-  <text x="76" y="181" text-anchor="middle" font-size="10" fill="#555">for 2025-05"</text>
+  <text x="76" y="181" text-anchor="middle" font-size="10" fill="#555">for 2026-06"</text>
 
   <rect x="168" y="80" width="176" height="160" rx="10" fill="white" stroke="#e67e22" stroke-width="2"/>
   <text x="256" y="106" text-anchor="middle" font-size="13" font-weight="700" fill="#7a3b00">Agent loop</text>

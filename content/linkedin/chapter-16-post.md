@@ -6,7 +6,7 @@
 
 🤖 **I stopped telling the AI what to do. I told it what I wanted.**
 
-"Produce the monthly HR report for 2025-05. Gather whatever data you need using your tools first."
+"Produce the monthly HR report for 2026-06. Gather whatever data you need using your tools first."
 
 That was the whole instruction. No step list, no orchestration code. It called five different tools — headcount, open roles, attrition, policy updates, new hires — in an order I never specified, then wrote the report.
 

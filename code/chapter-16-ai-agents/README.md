@@ -1,6 +1,6 @@
 # Chapter 16 — AI Agents: Autonomous Workflows and Tool Chaining
 
-Stop giving the AI instructions. Give it a **goal** and five tools, and let it work out the steps: "produce the HR report for 2025-05" → it gathers headcount, hires, open roles, attrition and policy changes on its own, then writes the report.
+Stop giving the AI instructions. Give it a **goal** and five tools, and let it work out the steps: "produce the HR report for 2026-06" → it gathers headcount, hires, open roles, attrition and policy changes on its own, then writes the report.
 
 ![Chapter 16 — An AI agent planning and chaining tool calls](architecture.svg)
 
@@ -66,11 +66,11 @@ An agent that works is not the same as an agent you can trust. Each `@Tool` reco
 
 ```json
 {
-  "month": "2025-05",
+  "month": "2026-06",
   "toolsInvoked": ["getHeadcount","getOpenPositions","getAttrition","getPolicyUpdates","getRecentHires"],
   "toolCallCount": 5,
   "tookMillis": 13937,
-  "report": "**2025-05 HR Report** ..."
+  "report": "**2026-06 HR Report** ..."
 }
 ```
 
@@ -93,7 +93,7 @@ Note the order — it is neither the order the tools are declared in nor the ord
 ```bash
 curl -s -X POST http://localhost:8080/hr/report/generate \
   -H "Content-Type: application/json" \
-  -d '{"month": "2025-05"}'
+  -d '{"month": "2026-06"}'
 ```
 
 Real output (trimmed):
@@ -103,7 +103,7 @@ toolsInvoked : getHeadcount, getOpenPositions, getAttrition, getPolicyUpdates, g
 toolCallCount: 5
 tookMillis   : 13937
 
-**2025-05 HR Report**
+**2026-06 HR Report**
 **Headcount**      Total employees: 342   Change from last month: +12
 **New Hires**      Priya Sharma - Senior Engineer; Tom Baker - Data Scientist
 **Open Positions** Staff Engineer (critical); Data Scientist (critical); HR Business Partner

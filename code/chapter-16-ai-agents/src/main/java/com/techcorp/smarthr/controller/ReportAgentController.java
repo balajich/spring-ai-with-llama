@@ -51,7 +51,7 @@ public class ReportAgentController {
         String month = request.month() == null ? "" : request.month().trim();
         if (month.isBlank() || !MONTH.matcher(month).matches()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "month must be provided in yyyy-MM format, e.g. 2025-05");
+                    "month must be provided in yyyy-MM format, e.g. 2026-06");
         }
 
         hrData.resetLog();                     // start a clean trace
